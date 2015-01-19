@@ -1,0 +1,42 @@
+<ion-view title="Plano Alimentar">
+    <ion-header-bar class="bar-positive" align-title="center">
+    </ion-header-bar>
+    <ion-content>
+        <div id="planoAlimentar">
+            <ion-list id="listaPlano" type="list-inset">
+            <div ng-repeat="refeicao in planoAlimentar.Refeicoes | orderBy: 'TipoRefeicaoId'">
+                    <ion-item class="item-stable" ng-click="abrirRefeicao(refeicao)"
+                              ng-class="{active: isAberto(refeicao)}">
+                        <i class="icon" ng-class="isAberto(refeicao) ? 'ion-minus':'ion-plus'"></i>
+                        {{tiposRefeicao[refeicao.TipoRefeicaoId-1].Descricao}} <span id="spanHora">Hora: {{refeicao.Hora}} </span>
+                    </ion-item>
+                <ion-item class="item-accordation item-text-wrap" ng-repeat="linha in refeicao.ListaAlimentos"
+                              ng-show="isAberto(refeicao)">
+
+                    {{linha.Descricao}}
+
+                    </ion-item>
+                </div>
+            </ion-list>
+            <div id="recomendacoes" class="card">
+                <div class="item item-divider">
+                    Recomendações
+                </div>
+                <div class="item item-text-wrap">
+                    {{recomendacoes}}
+                </div>
+            </div>
+
+            <div class="padding">
+                <button id="btn_Equiv" class="button button-full button-energized" style="color: #000000">Tabela de
+                    Equivalências
+                </button>
+            </div>
+
+        </div>
+    </ion-content>
+</ion-view>
+
+
+
+

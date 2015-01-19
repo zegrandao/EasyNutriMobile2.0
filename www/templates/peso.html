@@ -1,0 +1,47 @@
+<ion-view title="Peso">
+    <ion-header-bar class="bar-positive" align-title="center">
+        <h1 class="title">Peso</h1>
+    </ion-header-bar>
+    <ion-content>
+        <div id="dia">
+            <label class="item item-input">
+                <span class="input-label">Dia</span>
+                <input type="text"
+                       placeholder="Escolha a data"
+                       ng-model="reg.Dia"
+                       name="datepicker"
+                       ng-click="opendateModal()"
+                       readonly>
+            </label>
+        </div>
+        <div>
+            <label class="item item-input">
+                <span class="input-label">Hora</span>
+                <input ng-model="reg.Hora" type="time">
+            </label>
+        </div>
+        <div class="item item-input-inset">
+            <label class="item-input-wrapper">
+                <span class="input-label"> Peso: </span>
+                <input id="campoValor" placeholder="Exemplo: 60.8" type="tel" ng-model="peso.Valor" maxlength="4"
+                       ng-change="tornarVisivel()">
+            </label>
+        </div>
+        <button id="botaoRegistar" type="submit" class="button button-full button-dark"
+                ng-click="registarPeso(peso)" style="display: none">Registar
+        </button>
+        <div class="bar bar-positive">
+            <h3 class="title">Últimos 5 registos</h3>
+        </div>
+        <br/><br/>
+
+        <div>
+            <ion-list type="list-inset">
+                <ion-item ng-repeat="registo in listaPesos | limitTo: 5">
+                    <strong>Valor:</strong>{{registo.Valor}}Kg &nbsp;&nbsp; <strong>Data:</strong> {{registo.DataMed}}
+                    &nbsp;&nbsp; <strong>{{registo.tipoRegisto}}</strong>
+                </ion-item>
+            </ion-list>
+        </div>
+    </ion-content>
+</ion-view>

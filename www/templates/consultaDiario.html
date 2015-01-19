@@ -1,0 +1,40 @@
+<ion-view title="Consultar Diário">
+    <ion-header-bar class="bar-positive" align-title="center">
+    </ion-header-bar>
+    <ion-content>
+
+        <label id="dialabel" class="item item-input" style="float: left">
+            <span class="input-label">Pesquisar Diário:</span>
+                <input type="text" placeholder="Escolha a data"
+                       ng-model="pesquisa.Dia"
+                       name="datepicker"
+                       ng-click="opendateModal()"
+                       ng-change="pesquisarDiarios(pesquisa.Dia)"
+                       readonly>
+            </label>
+
+        <div id="listaConsulta">
+            <ion-list type="list-inset">
+                <div ng-repeat="refeicao in diarioAlimentar.Refeicoes | orderBy: 'TipoRefeicaoId'">
+                    <ion-item class="item-stable" ng-click="abrirRefeicao(refeicao)"
+                              ng-class="{active: isAberto(refeicao)}">
+                        <i class="icon" ng-class="isAberto(refeicao) ? 'ion-minus':'ion-plus'"></i>
+                        {{tiposRefeicao[refeicao.TipoRefeicaoId-1].Descricao}}
+                        <i class="{{refeicao.Sincronizado==false?'icon ion-alert':'&quot;&quot;'}}" style="float: right"><b>{{refeicao.Sincronizado==false?'Não sincronizado':''}}</b></i>
+                        <button class="button button-small button-icon icon ion-trash-a" style="float: right"
+                                ng-click="myPopup(refeicao)"></button>
+                        <button class="button button-small button-icon icon ion-edit" style="float: right"
+                                ng-click="editar(refeicao)"></button>
+
+                    </ion-item>
+                    <ion-item class="item-accordation item-text-wrap" ng-repeat="linha in refeicao.LinhasRefeicao"
+                              ng-show="isAberto(refeicao)">
+                        {{linha.Alimentos.Nome +' - '+linha.Quant + ' ' + findUnidade(linha)}}
+                    </ion-item>
+                </div>
+            </ion-list>
+        </div>
+    </ion-content>
+</ion-view>
+
+

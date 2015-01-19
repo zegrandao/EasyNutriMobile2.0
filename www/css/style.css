@@ -1,0 +1,167 @@
+label #labelQuant {
+    border: none !important;
+
+}
+
+#listaAlimSelecionados, #xyx, #linhaRef, #linhaPlano {
+    border: none !important;
+}
+
+#labelQuant {
+    width: 15% !important;
+    clear: right !important;
+}
+
+#input1 {
+    width: auto !important;
+}
+
+#alim, #linhaPlano {
+    width: 100% !important;
+}
+
+#selectPorcoes {
+    width: auto !important;
+}
+
+#listaPesquisa ion-list div {
+    margin: 0px !important;
+    margin-left: 15px !important;
+    margin-bottom: 5px !important;
+}
+
+#planoAlimentar .list .list-inset {
+    margin: 0 !important;
+}
+
+#listaPlano .list .list-inset {
+    margin: 0;
+}
+
+#listaPlano .list.list-inset {
+    margin: 0;
+}
+
+#btn_Equiv {
+    display: none;
+}
+
+#hr {
+    color: #145fd7;
+    border: 0;
+    background-color: #145fd7;
+    height: 5px;
+}
+
+#spanHora {
+    float: right;
+}
+
+#dialabel {
+    margin-bottom: 2px;
+}
+
+#listaConsulta {
+    width: 100% !important;
+    clear: left !important;
+}
+
+#tabela {
+    background-attachment: scroll;
+}
+
+#img {
+    width: 100%;
+    align-content: center;
+}
+
+#btn1 {
+    float: left !important;
+    top: 0 !important;
+}
+
+#btn2 {
+    float: right !important;
+    top: 0 !important;
+}
+
+#btn3 {
+    float: left !important;
+    position: relative !important;
+    bottom: 0 !important;
+}
+
+#btn4 {
+    float: right !important;
+    position: relative !important;
+    bottom: 0 !important;
+}
+
+.custom_bar_e {
+    height: auto !important;
+    width: 45% !important;
+    display: inline-block !important;
+    left: 55% !important;
+    align-content: center !important;
+}
+
+.custom_bar_d {
+    height: auto !important;
+    width: 45% !important;
+    align-content: center;
+    display: inline-block !important;
+}
+
+#home {
+    width: 100%;
+    height: 100%;
+    background-color: #FCFCFC;
+}
+
+.i {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.c {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+}
+
+#div1 {
+    border: solid 2px;
+    vertical-align: middle;
+    top: 50%;
+    width: 10%;
+    margin-right: 45%;
+    margin-left: 45%;
+    border-color: blue;
+}
+
+.x {
+
+}
+
+#loginBtn {
+    bottom: 0 !important;
+    position: absolute !important;
+    margin: 0 !important;
+}
+
+#spanNot {
+    font-weight: bold;
+}
+
+.y .ion-alert {
+    color: orange;
+    font-weight: bold;
+}

@@ -1,0 +1,22 @@
+<ion-view title="Definições">
+    <ion-header-bar class="bar-positive" align-title="center">
+    </ion-header-bar>
+    <ion-content>
+        <div class="list">
+            <li class="item" ng-click="abrirMudarPasswordModal()">
+                Mudar Password
+            </li>
+            <label class="item item-input">
+                <span class="input-label">Página Inicial: </span>
+                <select ng-model="pagina" ng-options="pagina.Id as pagina.nomePagina for pagina in arrayPaginas"
+                        ng-change="alterarHome(pagina)">
+                </select>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Número Pretendido:</span>
+                <input ng-model="numero" ng-change="alterarNumero(numero)" type="number"
+                       placeholder="Introduza o número de alimentos que quer que apareçam na pesquisa entre 5 e 15">
+            </label>
+        </div>
+    </ion-content>
+</ion-view>

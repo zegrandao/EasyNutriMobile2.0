@@ -1,0 +1,19 @@
+<ion-view title="Notificações">
+    <ion-header-bar class="bar-positive" align-title="center">
+        <h1 class="title">Notificações</h1>
+    </ion-header-bar>
+    <ion-content>
+        <div>
+            <ion-list type="list-inset">
+                <ion-item class="item-icon-right y" ng-click="setNotificacao(notificacao)"
+                          ng-repeat="notificacao in listaNotificacoes">
+                   <span id="{{notificacao.Lido==0?'spanNot':'&quot;&quot;'}}">Assunto: {{notificacao.Assunto}}
+                    <i class="{{notificacao.Lido==0?'icon ion-email':'&quot;&quot;'}}"></i>
+                   </span>
+
+
+                </ion-item>
+            </ion-list>
+        </div>
+    </ion-content>
+</ion-view>

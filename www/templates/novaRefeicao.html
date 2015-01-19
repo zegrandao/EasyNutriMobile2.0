@@ -1,0 +1,76 @@
+<ion-view title="{{titulo}}">
+    <ion-header-bar class="bar-positive" align-title="center">
+    </ion-header-bar>
+    <ion-content>
+        <div>
+            <label class="item item-input">
+                <span class="input-label">Dia</span>
+                <input type="date" placeholder="Escolha a data" ng-model="refeicao.Dia" name="datepicker" ng-click="opendateModal()" readonly>
+            </label>
+        </div>
+        <div class="list">
+            <form id="formRefeicao" action="">
+                <label class="item item-input item-select">
+                    <span class="input-label">Refeição</span>
+                    <select id="selectTipos" ng-model="refeicao.Tipo"
+                            ng-options="tipo.Id as tipo.Descricao for tipo in listaTipos"></select>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Hora</span>
+                    <input ng-model="refeicao.Hora" type="time">
+                </label>
+
+                <div class="bar bar-positive">
+                    <h3 class="title">Lista de Alimentos Consumidos</h3>
+                </div>
+                <br/><br/>
+
+                <div>
+                    <label class="item item-input">
+                        <span class="input-label">Pesquisar</span>
+                        <input id="campoAlimento" ng-model="pesquisa.alimento" type="text" ng-change="tornarVisivel()"
+                               placeholder="Alimento a pesquisar">
+                    </label>
+                </div>
+                <div id="listaPesquisa" style="display: none">
+                    <ion-list type="list-inset">
+                        <ion-item ng-bind="alimento.Nome" ng-click="addAlimentoLista(alimento)"
+                                  ng-repeat="alimento in alimentos | filter: pesquisa.alimento | limitTo: numeroAlimentos | orderBy: pesquisa.alimento">
+                            <!--{{alimento.Nome}}-->
+                        </ion-item>
+                    </ion-list>
+                </div>
+                <hr id="hr" style="display: none">
+                <div id="alimentosRefeicao">
+
+                    <ion-list ng-model="refeicao.listaAlimentos">
+                        <ion-item ng-repeat="alimento in refeicao.listaAlimentos">
+
+                            <div class="item item-input-inset " id="listaAlimSelecionados">
+                                <div id="alim" class="item item-text-wrap item-button-right">
+                                    {{alimento.Nome}}
+                                    <button class="button button-small button-icon icon ion-trash-a" type="button"
+                                            ng-click="apagarItem(alimento)"></button>
+                                </div>
+
+                            </div>
+                            <div class="item item-input-inset" id="xyx">
+                                <label id="labelQuant" class="item-input-wrapper">
+                                    <input id="input1" type="tel" ng-model="alimento.Quantidade"
+                                           placeholder="Quantidade">
+                                </label>
+                                <select id="selectPorcoes" ng-model="alimento.PorcaoId"
+                                        ng-options="porcao.Id as porcao.Descricao for porcao in alimento.Porcoes"></select>
+                            </div>
+
+                        </ion-item>
+                    </ion-list>
+                </div>
+                <button id="botaoRegistar" type="submit" class="button button-full button-dark"
+                        ng-click="acaoBotao(refeicao)" style="display: none">{{textoBotao}}
+                </button>
+            </form>
+        </div>
+    </ion-content>
+</ion-view>
+

@@ -1,0 +1,33 @@
+<div class="modal">
+    <header class="bar bar-header bar-positive">
+        <h1 class="title">{{notificacao.Assunto}}</h1>
+
+        <div class="button button-clear" ng-click="hideModal()">
+            <span class="icon ion-close"></span>
+        </div>
+    </header>
+    <content has-header="true" padding="true">
+        <br><br><br>
+        <div>
+            <label><strong>Data:</strong></label>
+
+            <p>{{notificacao.Data | filter:datetime}}</p>
+        </div>
+        <div>
+            <label><strong>Descrição:</strong></label>
+
+            <p>{{notificacao.Descricao}}</p>
+        </div>
+        <!--<div>-->
+        <!--<p>Data: </p>-->
+        <!--<label>Descrição</label>-->
+        <!--<div ng-model="notificacao.Descricao">Descricao:{{notificacao.Descricao}}</div>-->
+        <!--&lt;!&ndash;<input type="radio" name="rdo" id="yes" checked />&ndash;&gt;-->
+        <!--&lt;!&ndash;<input type="radio" name="rdo" id="no"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="switch">&ndash;&gt;-->
+        <!--&lt;!&ndash;<label for="yes">Yes</label>&ndash;&gt;-->
+        <!--&lt;!&ndash;<label for="no">No</label>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--</div>-->
+    </content>
+</div>
