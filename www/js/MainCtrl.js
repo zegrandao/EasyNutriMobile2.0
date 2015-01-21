@@ -29,10 +29,10 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
                 toastr.success(texto);
                 break;
             case 2:
-                toast.error(texto);
+                toastr.error(texto);
                 break;
             case 3:
-                toast.info(texto);
+                toastr.info(texto);
                 break;
         }
 
@@ -91,8 +91,10 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
                 } else {
                     if ($rootScope.listaNotificacoes.length - $scope.numeroNotificacoes == 1) {
                         toast('Recebeu uma nova notificação!', 3);
+                        $scope.numeroNotificacoes = $rootScope.listaNotificacoes.length;
                     } else if ((total = $rootScope.listaNotificacoes.length - $scope.numeroNotificacoes) > 1) {
                         toast('Recebeu ' + total + ' novas notificações!', 3);
+                        $scope.numeroNotificacoes = $rootScope.listaNotificacoes.length;
                     }
 
                 }
