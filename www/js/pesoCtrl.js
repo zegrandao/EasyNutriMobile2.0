@@ -111,16 +111,46 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
                             }
                         })
                         .error(function (data, status, headers) {
-                            esconderSpinner();
-                            $ionicPopup.alert({
-                                title: 'Erro',
-                                template: 'Erro a processar pedido de pesos!'
-                            })
+                            if (status == 0) {
+                                var listaPesosVelhos = JSON.parse($window.localStorage.getItem('listaPesos'));
+                                var listaPesosNovos = JSON.parse($window.localStorage.getItem('listaPesosNovos'));
+                                if (listaPesosVelhos != null && listaPesosNovos != null) {
+                                    for (var a in listaPesosVelhos) {
+                                        $scope.listaPesos.push(a);
+
+                                    }
+
+                                    for (var pesoNovo in listaPesosNovos) {
+                                        $scope.listaPesos.push(pesoNovo);
+                                    }
+                                    esconderSpinner();
+
+                                } else if (listaPesosVelhos != null && listaPesosNovos == null) {
+                                    $scope.listaPesos = listaPesosVelhos;
+                                    esconderSpinner();
+
+                                } else if (listaPesosVelhos == null && listaPesosNovos != null) {
+                                    $scope.listaPesos = listaPesosNovos;
+                                    esconderSpinner();
+
+                                } else {
+                                    esconderSpinner();
+                                    $ionicPopup.alert({
+                                        title: 'Aviso',
+                                        template: 'Não existem registos de pesos!'
+                                    });
+                                }
+                            } else {
+                                esconderSpinner();
+                                $ionicPopup.alert({
+                                    title: 'Erro',
+                                    template: 'Erro a processar pedido de pesos!'
+                                });
+                            }
                         });
                 } else {
                     var listaPesosVelhos = JSON.parse($window.localStorage.getItem('listaPesos'));
                     var listaPesosNovos = JSON.parse($window.localStorage.getItem('listaPesosNovos'));
-                    alert("entrou no else");
                     if (listaPesosVelhos != null && listaPesosNovos != null) {
                         for (var a in listaPesosVelhos) {
                             $scope.listaPesos.push(a);
@@ -171,12 +201,34 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
                             $scope.getRegistos();
                         })
                         .error(function (data, status, headers) {
-                            esconderSpinner();
-                            console.log(data + status + headers);
-                            $ionicPopup.alert({
-                                title: 'Erro',
-                                template: 'Erro a guardar peso!'
-                            });
+                            if (status == 0) {
+                                var lista = new Array();
+                                if (JSON.parse($window.localStorage.getItem('listaPesosNovos') != null)) {
+                                    lista = JSON.parse($window.localStorage.getItem('listaPesosNovos'));
+                                    lista.push(peso);
+                                    $window.localStorage.setItem('listaPesosNovos', JSON.stringify(eval(lista)));
+                                    $ionicPopup.alert({
+                                        title: 'Sucesso',
+                                        template: 'Peso inserido com sucesso'
+                                    });
+                                } else {
+                                    lista.push(peso);
+                                    $window.localStorage.setItem('listaPesosNovos', JSON.stringify(eval(lista)));
+                                    $ionicPopup.alert({
+                                        title: 'Sucesso',
+                                        template: 'Peso inserido com sucesso'
+                                    });
+                                }
+                                esconderSpinner();
+                                inicializar();
+                                $scope.getRegistos();
+                            } else {
+                                esconderSpinner();
+                                $ionicPopup.alert({
+                                    title: 'Erro',
+                                    template: 'Erro a guardar peso!'
+                                });
+                            }
                         });
                 } else {
                     var lista = new Array();

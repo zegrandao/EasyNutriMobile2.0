@@ -6,7 +6,7 @@
 //var route = angular.module('easyNutri', ['ngRoute']);
 var easyNutri = angular.module('easyNutri', ['ionic', 'pickadate']);
 
-    easyNutri.run(function ($ionicPlatform, $window, $ionicPopup, $rootScope) {
+easyNutri.run(function ($ionicPlatform, $window, $ionicPopup, $rootScope, WebServiceFactory) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -17,9 +17,22 @@ var easyNutri = angular.module('easyNutri', ['ionic', 'pickadate']);
                 StatusBar.styleDefault();
             }
 
+            document.addEventListener("offline", function () {
+                alert('ficou offline');
+                $rootScope.offline = true;
+            }, false);
+
+            document.addEventListener("online", function () {
+                $rootScope.offline = false;
+                WebServiceFactory.sincronizarDados();
+            }, false);
+
             if (window.Connection) {
                 if (navigator.connection.type == Connection.NONE && $window.localStorage.getItem('credencial') == null) {
-                    alert("Não está ligado à rede");
+                    $ionicPopup.alert({
+                        title: "Modo Offline",
+                        content: "Não está ligado à rede!"
+                    })
                     ionic.Platform.exitApp();
                 } else if (navigator.connection.type == Connection.NONE && $window.localStorage.getItem('credencial') != null) {
                     $ionicPopup.confirm({
@@ -32,16 +45,16 @@ var easyNutri = angular.module('easyNutri', ['ionic', 'pickadate']);
                             } else {
                                 $rootScope.offline = true;
                                 $ionicPopup.alert({
-                                   title: 'Aviso',
+                                    title: 'Aviso',
                                     content: 'Todos os dados que insira na aplicação só serão sincronizados quando tiver uma ' +
                                     'ligação à internet com a aplicação a correr'
                                 });
                             }
                         });
-                } else {
+                } else if (navigator.connection.type != Connection.NONE) {
                     $rootScope.offline = false;
                 }
-            }else{
+            } else {
                 $rootScope.offline = false;
             }
         });
@@ -139,6 +152,14 @@ var easyNutri = angular.module('easyNutri', ['ionic', 'pickadate']);
                     'menuContent': {
                         templateUrl: 'templates/peso.html',
                         controller: 'pesoCtrl'
+                    }
+                }
+            }).state('easyNutri.dadosNaoSincronizados', {
+                url: '/dadosNaoSincronizados',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/dadosNaoSincronizados.html',
+                        controller: 'dadosNaoSincCtrl'
                     }
                 }
             });

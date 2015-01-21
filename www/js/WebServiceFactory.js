@@ -2,9 +2,9 @@ angular.module('easyNutri').factory('WebServiceFactory', ['$http', '$window', '$
 
     var WebServiceFactory = {};
     /* url debug */
-//    var urlBase = 'http://192.168.246.64/easynutriapi2/api/';
+    var urlBase = 'http://192.168.246.64/easynutriapi2/api/';
 ///* url produção */
-    var urlBase = 'http://dei.estg.ipleiria.pt/projetos/easynutri/api/api/';
+//    var urlBase = 'http://dei.estg.ipleiria.pt/projetos/easynutri/api/api/';
 
     var checkCredencial = function () {
         if ($rootScope.loggedIn) {

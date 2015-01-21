@@ -30,6 +30,28 @@ easyNutri.controller('planoAlimentarCtrl',
                 $ionicLoading.hide();
             };
 
+            var getPlanoAlimentarOffline = function () {
+                if ($window.localStorage.getItem('planoAlimentar') != null) {
+                    esconderSpinner();
+                    $scope.planoAlimentar = JSON.parse($window.localStorage.getItem('planoAlimentar'));
+                    $scope.recomendacoes = $scope.planoAlimentar.Recomendacoes;
+                    var mostrarTabela = $scope.planoAlimentar.TabelaEqui;
+                    if (mostrarTabela == 1) {
+                        document.getElementById("btn_Equiv").style.display = "inline";
+                    } else {
+                        document.getElementById("btn_Equiv").style.display = "none";
+                    }
+                } else {
+                    esconderSpinner();
+                    $scope.planoAlimentar = "";
+                    document.getElementById('recomendacoes').style.display = 'none';
+                    $ionicPopup.alert({
+                        title: 'Informação',
+                        template: 'Não existe plano alimentar!'
+                    });
+                }
+            };
+
 
             var getPlanoAlimentar = function () {
                 if($rootScope.loggedIn != false){
@@ -61,33 +83,19 @@ easyNutri.controller('planoAlimentarCtrl',
                                 }
                             })
                             .error(function (data, status, headers) {
-                                esconderSpinner();
-                                console.log(data + status + headers);
-                                $ionicPopup.alert({
-                                    title: 'Erro',
-                                    template: 'Não conseguiu ir buscar o plano alimentar!'
-                                });
+                                if (status == 0) {
+                                    getPlanoAlimentarOffline();
+                                } else {
+                                    esconderSpinner();
+                                    console.log(data + status + headers);
+                                    $ionicPopup.alert({
+                                        title: 'Erro',
+                                        template: 'Não conseguiu ir buscar o plano alimentar!'
+                                    });
+                                }
                             });
                     } else {
-                        if ($window.localStorage.getItem('planoAlimentar') != null) {
-                            esconderSpinner();
-                            $scope.planoAlimentar = JSON.parse($window.localStorage.getItem('planoAlimentar'));
-                            $scope.recomendacoes = $scope.planoAlimentar.Recomendacoes;
-                            var mostrarTabela = $scope.planoAlimentar.TabelaEqui;
-                            if (mostrarTabela == 1) {
-                                document.getElementById("btn_Equiv").style.display = "inline";
-                            } else {
-                                document.getElementById("btn_Equiv").style.display = "none";
-                            }
-                        } else {
-                            esconderSpinner();
-                            $scope.planoAlimentar = "";
-                            document.getElementById('recomendacoes').style.display = 'none';
-                            $ionicPopup.alert({
-                                title: 'Informação',
-                                template: 'Não existe plano alimentar!'
-                            });
-                        }
+                        getPlanoAlimentarOffline();
                     }
                 }
             };

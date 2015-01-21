@@ -33,7 +33,6 @@ easyNutri.controller('diarioCtrl',
                             .success(function (data) {
                                 if (data != "null") {
                                     $scope.diarioAlimentar = data;
-                                    console.log(JSON.stringify(data));
                                     esconderSpinner();
                                 } else {
                                     $scope.diarioAlimentar = "";
@@ -46,19 +45,34 @@ easyNutri.controller('diarioCtrl',
 
                             })
                             .error(function (data, status, headers) {
-                                console.log(data + status + headers);
-                                esconderSpinner();
-                                $ionicPopup.alert({
-                                    title: 'Erro',
-                                    template: 'Erro a pesquisar diários alimentares!'
-                                });
+                                if (status == 0) {
+                                    esconderSpinner();
+                                    if ($window.localStorage.getItem('diarioAlimentar') !== null) {
+                                        $scope.diarioAlimentar = JSON.parse($window.localStorage.getItem('diarioAlimentar'));
+                                    } else {
+                                        $ionicPopup.alert({
+                                            title: 'Informação',
+                                            template: 'Não existem registos!'
+                                        });
+                                    }
+                                } else {
+                                    esconderSpinner();
+                                    $ionicPopup.alert({
+                                        title: 'Erro',
+                                        template: 'Erro a pesquisar diários alimentares!'
+                                    });
+                                }
                             });
                     } else {
                         esconderSpinner();
-                        $ionicPopup.alert({
-                            title: 'Erro',
-                            template: 'A aplicação está a funcionar em modo offline!'
-                        });
+                        if ($window.localStorage.getItem('diarioAlimentar') !== null) {
+                            $scope.diarioAlimentar = JSON.parse($window.localStorage.getItem('diarioAlimentar'));
+                        } else {
+                            $ionicPopup.alert({
+                                title: 'Informação',
+                                template: 'Não existem registos!'
+                            });
+                        }
                     }
                 }
             };
@@ -83,7 +97,6 @@ easyNutri.controller('diarioCtrl',
             } else {
                 if ($window.localStorage.getItem('diarioAlimentar') !== null) {
                     $scope.diarioAlimentar = JSON.parse($window.localStorage.getItem('diarioAlimentar'));
-                    $rootScope.diario = JSON.parse($window.localStorage.getItem('diarioAlimentar'));
                 } else {
                     $ionicPopup.alert({
                         title: 'Informação',
@@ -158,6 +171,30 @@ easyNutri.controller('diarioCtrl',
                 $location.path('/easyNutri/editarRefeicao');
             };
 
+            var removerOffline = function (refeicao) {
+                $scope.listaRefeicoesRemovidas = new Array();
+                if ($window.localStorage.getItem('listaRefeicoesRemovidas') != null) {
+                    $scope.diarioAlimentar.Refeicoes.splice($scope.diarioAlimentar.Refeicoes.indexOf(refeicao), 1);
+                    $scope.listaRefeicoesRemovidas = JSON.parse($window.localStorage.getItem('listaRefeicoesRemovidas'));
+                    $scope.listaRefeicoesRemovidas.push(refeicao);
+                    $window.localStorage.setItem('listaRefeicoesRemovidas', JSON.stringify(eval($scope.listaRefeicoesRemovidas)));
+                    esconderSpinner();
+                    $ionicPopup.alert({
+                        title: 'Sucesso',
+                        template: 'Refeição removida com sucesso!'
+                    });
+                } else if ($window.localStorage.getItem('listaRefeicoesRemovidas') == null) {
+                    $scope.diarioAlimentar.Refeicoes.splice($scope.diarioAlimentar.Refeicoes.indexOf(refeicao), 1);
+                    $scope.listaRefeicoesRemovidas.push(refeicao);
+                    $window.localStorage.setItem('listaRefeicoesRemovidas', JSON.stringify(eval($scope.listaRefeicoesRemovidas)));
+                    esconderSpinner();
+                    $ionicPopup.alert({
+                        title: 'Sucesso',
+                        template: 'Refeição removida com sucesso!'
+                    });
+                }
+            };
+
             $scope.remover = function (refeicao) {
                 mostrarSpinner();
                 if (!$rootScope.offline) {
@@ -171,34 +208,18 @@ easyNutri.controller('diarioCtrl',
                             $scope.diarioAlimentar.Refeicoes.splice($scope.diarioAlimentar.Refeicoes.indexOf(refeicao), 1);
                         })
                         .error(function (data, status, headers) {
-                            esconderSpinner();
-                            $ionicPopup.alert({
-                                title: 'Erro',
-                                template: 'Erro a remover refeição!'
-                            });
+                            if (status == 0) {
+                                removerOffline(refeicao);
+                            } else {
+                                esconderSpinner();
+                                $ionicPopup.alert({
+                                    title: 'Erro',
+                                    template: 'Erro a remover refeição!'
+                                });
+                            }
                         });
                 } else {
-                    $scope.listaRefeicoesRemovidas = new Array();
-                    if ($window.localStorage.getItem('listaRefeicoesRemovidas') != null) {
-                        $scope.diarioAlimentar.Refeicoes.splice($scope.diarioAlimentar.Refeicoes.indexOf(refeicao), 1);
-                        $scope.listaRefeicoesRemovidas = JSON.parse($window.localStorage.getItem('listaRefeicoesRemovidas'));
-                        $scope.listaRefeicoesRemovidas.push(refeicao);
-                        $window.localStorage.setItem('listaRefeicoesRemovidas', JSON.stringify(eval($scope.listaRefeicoesRemovidas)));
-                        esconderSpinner();
-                        $ionicPopup.alert({
-                            title: 'Sucesso',
-                            template: 'Refeição removida com sucesso!'
-                        });
-                    } else if($window.localStorage.getItem('listaRefeicoesRemovidas') == null) {
-                        $scope.diarioAlimentar.Refeicoes.splice($scope.diarioAlimentar.Refeicoes.indexOf(refeicao), 1);
-                        $scope.listaRefeicoesRemovidas.push(refeicao);
-                        $window.localStorage.setItem('listaRefeicoesRemovidas', JSON.stringify(eval($scope.listaRefeicoesRemovidas)));
-                        esconderSpinner();
-                        $ionicPopup.alert({
-                            title: 'Sucesso',
-                            template: 'Refeição removida com sucesso!'
-                        });
-                    }
+                    removerOffline(refeicao);
                 }
             };
 
@@ -220,7 +241,6 @@ easyNutri.controller('diarioCtrl',
                     ]
                 });
             }
-
-
-        }]);
+        }
+    ]);
 

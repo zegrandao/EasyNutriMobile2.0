@@ -47,11 +47,34 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
                         }
 
                     }).error(function (data, status, headers) {
-                        console.log(data + status + headers);
-                        $ionicPopup.alert({
-                            title: 'Erro',
-                            template: 'Erro a processar pedido de notificações!'
-                        });
+                        if (status == 0) {
+                            if (JSON.parse($window.localStorage.getItem('listaNotificacoes')) != null) {
+                                $rootScope.listaNotificacoes = JSON.parse($window.localStorage.getItem('listaNotificacoes'));
+                                var contNaoLidas = 0;
+                                for ($i = 0; $i < $rootScope.listaNotificacoes.length; $i++) {
+                                    if ($rootScope.listaNotificacoes[$i].Lido === 0) {
+                                        contNaoLidas++;
+                                    }
+                                }
+
+                                if (contNaoLidas === 0) {
+                                    document.getElementById("badgeNot").style.display = 'none';
+                                } else {
+                                    document.getElementById("badgeNot").style.display = 'inline';
+                                    $scope.numeroNot = contNaoLidas;
+                                }
+                            } else {
+                                $ionicPopup.alert({
+                                    title: 'Aviso',
+                                    template: 'Não existem notificações!'
+                                });
+                            }
+                        } else {
+                            $ionicPopup.alert({
+                                title: 'Erro',
+                                template: 'Erro a processar pedido de notificações!'
+                            });
+                        }
                     });
             }else{
                 if(JSON.parse($window.localStorage.getItem('listaNotificacoes')) != null){
@@ -75,33 +98,6 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
                         template: 'Não existem notificações!'
                     });
                 }
-            }
-        }
-    };
-
-    var checkConnection = function(){
-        if(!$rootScope.offline){
-            if (window.Connection) {
-                if (navigator.connection.type == Connection.NONE && $window.localStorage.getItem('credencial') == null) {
-                    alert("Não está ligado à rede");
-                    ionic.Platform.exitApp();
-                } else if (navigator.connection.type == Connection.NONE && $window.localStorage.getItem('credencial') != null) {
-                    $ionicPopup.confirm({
-                        title: "Modo Offline",
-                        content: "Não está ligado à rede, deseja continuar em modo offline?"
-                    })
-                        .then(function (result) {
-                            if (!result) {
-                                ionic.Platform.exitApp();
-                            } else {
-                                $rootScope.offline = true;
-                            }
-                        });
-                } else {
-                    $rootScope.offline = false;
-                }
-            }else{
-                $rootScope.offline = false;
             }
         }
     };
@@ -136,38 +132,10 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
 
             $interval(function () {
                 getNotificacoes();
-                checkConnection();
             }, 10000);
         }
     }
 
-    var checkConnection = function(){
-        if(!$rootScope.offline){
-            if (window.Connection) {
-                if (navigator.connection.type == Connection.NONE && $window.localStorage.getItem('credencial') == null) {
-                    alert("Não está ligado à rede");
-                    ionic.Platform.exitApp();
-                } else if (navigator.connection.type == Connection.NONE && $window.localStorage.getItem('credencial') != null) {
-                    $ionicPopup.confirm({
-                        title: "Modo Offline",
-                        content: "Não está ligado à rede, deseja continuar em modo offline?"
-                    })
-                        .then(function (result) {
-                            if (!result) {
-                                ionic.Platform.exitApp();
-                            } else {
-                                $rootScope.offline = true;
-                            }
-                        });
-                } else if($rootScope.offline == true && navigator.connection.type === Connection.NONE){
-                    $rootScope.offline = false;
-                    WebServiceFactory.sincronizarDados();
-                }
-            }else{
-                $rootScope.offline = false;
-            }
-        }
-    };
     var logout = function () {
         if ($rootScope.guardarCredenciais) {
             $window.localStorage.removeItem('credencial');

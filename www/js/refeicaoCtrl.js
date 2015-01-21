@@ -92,36 +92,42 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
         //popular página com dados da refeição a editar
         $scope.popularPaginaEditar = function (refeicao) {
             var tipo;
-            var dia = $filter('date')(refeicao.DataRefeicao, 'yyyy-MM-dd');
-            var hora = $filter('date')(refeicao.DataRefeicao, 'HH:mm');
-            $scope.refeicao.Dia = dia;
-            $scope.refeicao.Hora = hora;
-            tipo = TiposRefeicaoFactory.get(refeicao.TipoRefeicaoId);
-            $scope.refeicao.idRefeicao = refeicao.Id;
-            $scope.refeicao.Tipo = tipo.Id;
+            if (!$rootScope.offline) {
+                var dia = $filter('date')(refeicao.DataRefeicao, 'yyyy-MM-dd');
+                var hora = $filter('date')(refeicao.DataRefeicao, 'HH:mm');
+                $scope.refeicao.Dia = dia;
+                $scope.refeicao.Hora = hora;
+                tipo = TiposRefeicaoFactory.get(refeicao.TipoRefeicaoId);
+                $scope.refeicao.idRefeicao = refeicao.Id;
+                $scope.refeicao.Tipo = tipo.Id;
+                for ($i = 0; $i < refeicao.LinhasRefeicao.length; $i++) {
+                    refeicao.LinhasRefeicao[$i].Alimentos.Quantidade = refeicao.LinhasRefeicao[$i].Quant;
+                    refeicao.LinhasRefeicao[$i].Alimentos.Porcoes.push(
+                        {
+                            Descricao: refeicao.LinhasRefeicao[$i].Alimentos.Unidade,
+                            Porcao: 1, IdAlimento: refeicao.LinhasRefeicao[$i].Alimentos.Id, Id: 0
+                        });
 
-            for ($i = 0; $i < refeicao.LinhasRefeicao.length; $i++) {
+                    if (refeicao.LinhasRefeicao[$i].PorcaoId == null) {
+                        refeicao.LinhasRefeicao[$i].Alimentos.PorcaoId = 0;
 
-                refeicao.LinhasRefeicao[$i].Alimentos.Quantidade = refeicao.LinhasRefeicao[$i].Quant;
-
-                refeicao.LinhasRefeicao[$i].Alimentos.Porcoes.push(
-                    {
-                        Descricao: refeicao.LinhasRefeicao[$i].Alimentos.Unidade,
-                        Porcao: 1, IdAlimento: refeicao.LinhasRefeicao[$i].Alimentos.Id, Id: 0
-                    });
-
-
-                if (refeicao.LinhasRefeicao[$i].PorcaoId == null) {
-                    refeicao.LinhasRefeicao[$i].Alimentos.PorcaoId = 0;
-
-                } else {
-                    refeicao.LinhasRefeicao[$i].Alimentos.PorcaoId = refeicao.LinhasRefeicao[$i].PorcaoId;
+                    } else {
+                        refeicao.LinhasRefeicao[$i].Alimentos.PorcaoId = refeicao.LinhasRefeicao[$i].PorcaoId;
+                    }
+                    $scope.refeicao.listaAlimentos.push(refeicao.LinhasRefeicao[$i].Alimentos);
                 }
-
-                $scope.refeicao.listaAlimentos.push(refeicao.LinhasRefeicao[$i].Alimentos);
-
-
+            } else {
+                tipo = tipo = TiposRefeicaoFactory.get(refeicao.Tipo);
+                var dia = $filter('date')(refeicao.Dia, 'yyyy-MM-dd');
+                var hora = $filter('date')(refeicao.Hora, 'HH:mm');
+                $scope.refeicao.Dia = dia;
+                $scope.refeicao.Hora = hora;
+                $scope.refeicao.Tipo = tipo.Id;
+                for ($i = 0; $i < refeicao.listaAlimentos.length; $i++) {
+                    $scope.refeicao.listaAlimentos.push(refeicao.listaAlimentos[$i]);
+                }
             }
+
             mostrarBotao();
         };
 
@@ -139,20 +145,19 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
 
         }
 
-        if (!$rootScope.offline) {
             //popular lista de alimentos pesquisavel
             WebServiceFactory.getAlimentos().success(function (lista) {
                     $scope.alimentos = lista;
                 }).error(function (data, status, headers) {
-                    console.log(data + status + headers);
+                if (status == 0) {
+                    $scope.alimentos = JSON.parse($window.localStorage.getItem('listaAlimentos'));
+                } else {
                     $ionicPopup.alert({
                         title: 'Erro',
                         template: 'Erro a processar pedido dos alimentos!'
                     });
-                });
-        } else {
-            $scope.alimentos = JSON.parse($window.localStorage.getItem('listaAlimentos'));
-        }
+                }
+            });
 
 
         //método para diferenciar a ação do botão entre editar uma refeição e guardar uma nova refeição
@@ -165,13 +170,33 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
 
         };
 
+        var guardarRefeicaoOffline = function (refeicao) {
+            $scope.listaRefeicoesNovasOffline = new Array();
+            if ($window.localStorage.getItem('listaRefeicoesNovas') !== null) {
+                $scope.listaRefeicoesNovasOffline = JSON.parse($window.localStorage.getItem('listaRefeicoesNovas'));
+                $scope.listaRefeicoesNovasOffline.push(refeicao);
+                $window.localStorage.setItem('listaRefeicoesNovas', JSON.stringify(eval($scope.listaRefeicoesNovasOffline)));
+                inicializar();
+                $ionicPopup.alert({
+                    title: 'Sucesso',
+                    template: 'Refeição guardada com sucesso!'
+                });
+            } else if ($window.localStorage.getItem('listaRefeicoesNovas') == null) {
+                $scope.listaRefeicoesNovasOffline.push(refeicao);
+                $window.localStorage.setItem('listaRefeicoesNovas', JSON.stringify(eval($scope.listaRefeicoesNovasOffline)));
+                inicializar();
+                $ionicPopup.alert({
+                    title: 'Sucesso',
+                    template: 'Refeição guardada com sucesso!'
+                });
+            }
+        };
 
         //define metodo para guardar refeicao
         $scope.guardarRefeicao = function (refeicao) {
             console.log("A tentar guardar refeicao: " + refeicao);
             if (isValid(refeicao)) {
                 console.log(JSON.stringify(refeicao));
-                if (!$rootScope.offline) {
                     WebServiceFactory.guardarRefeicao(refeicao)
                         .success(function () {
                             inicializar();
@@ -181,34 +206,41 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
                             });
                         })
                         .error(function (data, status, headers) {
-                            $ionicPopup.alert({
-                                title: 'Erro',
-                                template: 'Erro a guardar refeição!'
-                            });
+                            if (status == 0) {
+                                guardarRefeicaoOffline(refeicao);
+                            } else {
+                                $ionicPopup.alert({
+                                    title: 'Erro',
+                                    template: 'Erro a guardar refeição!'
+                                });
+                            }
                         });
-                } else {
-                    $scope.listaRefeicoesNovasOffline = new Array();
-                    if ($window.localStorage.getItem('listaRefeicoesNovas') !== null) {
-                        $scope.listaRefeicoesNovasOffline = JSON.parse($window.localStorage.getItem('listaRefeicoesNovas'));
-                        refeicao.Sincronizado = false;
-                        $scope.listaRefeicoesNovasOffline.push(refeicao);
-                        $window.localStorage.setItem('listaRefeicoesNovas', JSON.stringify(eval($scope.listaRefeicoesNovasOffline)));
-                        inicializar();
-                        $ionicPopup.alert({
-                            title: 'Sucesso',
-                            template: 'Refeição guardada com sucesso!'
-                        });
-                    } else if($window.localStorage.getItem('listaRefeicoesNovas') == null){
-                        refeicao.Sincronizado = false;
-                        $scope.listaRefeicoesNovasOffline.push(refeicao);
-                        $window.localStorage.setItem('listaRefeicoesNovas', JSON.stringify(eval($scope.listaRefeicoesNovasOffline)));
-                        inicializar();
-                        $ionicPopup.alert({
-                            title: 'Sucesso',
-                            template: 'Refeição guardada com sucesso!'
-                        });
-                    }
-                }
+            }
+        };
+
+        var editarRefeicaoOffline = function (refeicao) {
+            $scope.listaRefeicoesEditadasOffline = new Array();
+            if ($window.localStorage.getItem('listaRefeicoesEditadas') !== null) {
+                $scope.listaRefeicoesEditadasOffline = JSON.parse($window.localStorage.getItem('listaRefeicoesEditadas'));
+                $scope.listaRefeicoesEditadasOffline.push(refeicao);
+                $window.localStorage.setItem('listaRefeicoesEditadas', JSON.stringify(eval($scope.listaRefeicoesEditadasOffline)));
+                $rootScope.editar = false;
+                delete $rootScope.editarRefeicao;
+                $ionicPopup.alert({
+                    title: 'Sucesso',
+                    template: 'Refeição editada com sucesso!'
+                });
+                inicializar();
+            } else if ($window.localStorage.getItem('listaRefeicoesEditadas') == null) {
+                $scope.listaRefeicoesEditadasOffline.push(refeicao);
+                $window.localStorage.setItem('listaRefeicoesEditadas', JSON.stringify(eval($scope.listaRefeicoesEditadasOffline)));
+                $rootScope.editar = false;
+                delete $rootScope.editarRefeicao;
+                $ionicPopup.alert({
+                    title: 'Sucesso',
+                    template: 'Refeição editada com sucesso!'
+                });
+                inicializar();
             }
         };
 
@@ -229,38 +261,18 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
                             $location.path('/easyNutri/consultaDiario');
                         })
                         .error(function (data, status, headers) {
-                            $ionicPopup.alert({
-                                title: 'Erro',
-                                template: 'Erro a editar refeição!'
-                            });
-                            $rootScope.editar = true;
+                            if (status == 0) {
+                                editarRefeicaoOffline(refeicao);
+                            } else {
+                                $ionicPopup.alert({
+                                    title: 'Erro',
+                                    template: 'Erro a editar refeição!'
+                                });
+                                $rootScope.editar = true;
+                            }
                         });
                 } else {
-                    $scope.listaRefeicoesEditadasOffline = new Array();
-                    if ($window.localStorage.getItem('listaRefeicoesEditadas') !== null) {
-                        $scope.listaRefeicoesEditadasOffline = JSON.parse($window.localStorage.getItem('listaRefeicoesEditadas'));
-                        refeicao.Sincronizado = false;
-                        $scope.listaRefeicoesEditadasOffline.push(refeicao);
-                        $window.localStorage.setItem('listaRefeicoesEditadas', JSON.stringify(eval($scope.listaRefeicoesEditadasOffline)));
-                        $rootScope.editar = false;
-                        delete $rootScope.editarRefeicao;
-                        $ionicPopup.alert({
-                            title: 'Sucesso',
-                            template: 'Refeição editada com sucesso!'
-                        });
-                        inicializar();
-                    } else if($window.localStorage.getItem('listaRefeicoesEditadas') == null){
-                        refeicao.Sincronizado = false;
-                        $scope.listaRefeicoesEditadasOffline.push(refeicao);
-                        $window.localStorage.setItem('listaRefeicoesEditadas', JSON.stringify(eval($scope.listaRefeicoesEditadasOffline)));
-                        $rootScope.editar = false;
-                        delete $rootScope.editarRefeicao;
-                        $ionicPopup.alert({
-                            title: 'Sucesso',
-                            template: 'Refeição editada com sucesso!'
-                        });
-                        inicializar();
-                    }
+                    editarRefeicaoOffline(refeicao);
                 }
 
             }
