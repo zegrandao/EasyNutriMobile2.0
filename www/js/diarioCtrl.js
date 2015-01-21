@@ -11,6 +11,40 @@ easyNutri.controller('diarioCtrl',
             $scope.pesquisa.Dia = $filter('date')($scope.pesquisa.Dia, 'yyyy-MM-dd');
             $scope.diarioAlimentar = new Array();
 
+            var toast = function (texto, caso) {
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-bottom-center",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "100",
+                    "timeOut": "3000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+                switch (caso) {
+                    case 1:
+                        toastr.success(texto);
+                        break;
+                    case 2:
+                        toast.error(texto);
+                        break;
+                    case 3:
+                        toast.info(texto);
+                        break;
+                }
+
+            };
+
+
+
             var mostrarSpinner = function () {
                 $ionicLoading.show({
                     content: '<i class="icon ion-load-a"></i>',
@@ -36,10 +70,7 @@ easyNutri.controller('diarioCtrl',
                                 } else {
                                     $scope.diarioAlimentar = "";
                                     esconderSpinner();
-                                    $ionicPopup.alert({
-                                        title: 'Informação',
-                                        template: 'Não existem registos neste dia!'
-                                    });
+                                    toast('Não existem registos!', 3);
                                 }
 
                             })
@@ -49,17 +80,12 @@ easyNutri.controller('diarioCtrl',
                                     if ($window.localStorage.getItem('diarioAlimentar') !== null) {
                                         $scope.diarioAlimentar = JSON.parse($window.localStorage.getItem('diarioAlimentar'));
                                     } else {
-                                        $ionicPopup.alert({
-                                            title: 'Informação',
-                                            template: 'Não existem registos!'
-                                        });
+                                        toast('Não existem registos!', 3);
                                     }
                                 } else {
                                     esconderSpinner();
-                                    $ionicPopup.alert({
-                                        title: 'Erro',
-                                        template: 'Erro a pesquisar diários alimentares!'
-                                    });
+                                    toast('Erro a pesquisar diários alimentares!', 2);
+
                                 }
                             });
                 }
@@ -86,10 +112,7 @@ easyNutri.controller('diarioCtrl',
                 if ($window.localStorage.getItem('diarioAlimentar') !== null) {
                     $scope.diarioAlimentar = JSON.parse($window.localStorage.getItem('diarioAlimentar'));
                 } else {
-                    $ionicPopup.alert({
-                        title: 'Informação',
-                        template: 'Não existem registos!'
-                    });
+                    toast('Não existem registos!', 3);
                 }
             }
 
@@ -147,10 +170,7 @@ easyNutri.controller('diarioCtrl',
                     $scope.pesquisa.Dia = data;
                     $scope.pesquisarDiarios($scope.pesquisa.Dia);
                 } else {
-                    $ionicPopup.alert({
-                        title: 'Aviso',
-                        template: 'Escolheu uma data superior à do sistema'
-                    })
+                    toast('Escolheu uma data superior à data do sistema!', 2);
                 }
 
             };
@@ -169,19 +189,13 @@ easyNutri.controller('diarioCtrl',
                     $scope.listaRefeicoesRemovidas.push(refeicao);
                     $window.localStorage.setItem('listaRefeicoesRemovidas', JSON.stringify(eval($scope.listaRefeicoesRemovidas)));
                     esconderSpinner();
-                    $ionicPopup.alert({
-                        title: 'Sucesso',
-                        template: 'Refeição removida com sucesso!'
-                    });
+                    toast('Refeição removida com sucesso!', 1);
                 } else if ($window.localStorage.getItem('listaRefeicoesRemovidas') == null) {
                     $scope.diarioAlimentar.Refeicoes.splice($scope.diarioAlimentar.Refeicoes.indexOf(refeicao), 1);
                     $scope.listaRefeicoesRemovidas.push(refeicao);
                     $window.localStorage.setItem('listaRefeicoesRemovidas', JSON.stringify(eval($scope.listaRefeicoesRemovidas)));
                     esconderSpinner();
-                    $ionicPopup.alert({
-                        title: 'Sucesso',
-                        template: 'Refeição removida com sucesso!'
-                    });
+                    toast('Refeição removida com sucesso!', 1);
                 }
             };
 
@@ -191,10 +205,7 @@ easyNutri.controller('diarioCtrl',
                     WebServiceFactory.removerRefeicaoWeb(refeicao.Id)
                         .success(function () {
                             esconderSpinner();
-                            $ionicPopup.alert({
-                                title: 'Sucesso',
-                                template: 'Refeição removida com sucesso!'
-                            });
+                            toast('Refeição removida com sucesso!', 1);
                             $scope.diarioAlimentar.Refeicoes.splice($scope.diarioAlimentar.Refeicoes.indexOf(refeicao), 1);
                         })
                         .error(function (data, status, headers) {
@@ -202,10 +213,8 @@ easyNutri.controller('diarioCtrl',
                                 removerOffline(refeicao);
                             } else {
                                 esconderSpinner();
-                                $ionicPopup.alert({
-                                    title: 'Erro',
-                                    template: 'Erro a remover refeição!'
-                                });
+                                toast('Erro a remover refeição!', 2);
+
                             }
                         });
                 } else {

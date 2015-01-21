@@ -18,6 +18,38 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
             $scope.numeroAlimentos = 5;
         }
 
+        var toast = function (texto, caso) {
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-bottom-center",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "100",
+                "timeOut": "3000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+            switch (caso) {
+                case 1:
+                    toastr.success(texto);
+                    break;
+                case 2:
+                    toast.error(texto);
+                    break;
+                case 3:
+                    toast.info(texto);
+                    break;
+            }
+
+        };
+
         //popular tipos de refeicoes disponivies
         $scope.listaTipos = WebServiceFactory.getTiposRefeicao();
 
@@ -92,7 +124,7 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
         //popular página com dados da refeição a editar
         $scope.popularPaginaEditar = function (refeicao) {
             var tipo;
-            WebServiceFactory.getPlanoAlimentar().success(function () {
+            WebServiceFactory.verificarConexao().success(function () {
                 var dia = $filter('date')(refeicao.DataRefeicao, 'yyyy-MM-dd');
                 var hora = $filter('date')(refeicao.DataRefeicao, 'HH:mm');
                 $scope.refeicao.Dia = dia;
@@ -153,10 +185,7 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
                 if (status == 0) {
                     $scope.alimentos = JSON.parse($window.localStorage.getItem('listaAlimentos'));
                 } else {
-                    $ionicPopup.alert({
-                        title: 'Erro',
-                        template: 'Erro a processar pedido dos alimentos!'
-                    });
+                    toast('Erro a processar pedido de alimentos!', 2);
                 }
             });
 
@@ -178,63 +207,30 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
                 $scope.listaRefeicoesNovasOffline.push(refeicao);
                 $window.localStorage.setItem('listaRefeicoesNovas', JSON.stringify(eval($scope.listaRefeicoesNovasOffline)));
                 inicializar();
-                $ionicPopup.alert({
-                    title: 'Sucesso',
-                    template: 'Refeição guardada com sucesso!'
-                });
+                toast('Refeicao guardada com sucesso', 1);
             } else if ($window.localStorage.getItem('listaRefeicoesNovas') == null) {
                 $scope.listaRefeicoesNovasOffline.push(refeicao);
                 $window.localStorage.setItem('listaRefeicoesNovas', JSON.stringify(eval($scope.listaRefeicoesNovasOffline)));
                 inicializar();
-                $ionicPopup.alert({
-                    title: 'Sucesso',
-                    template: 'Refeição guardada com sucesso!'
-                });
+                toast('Refeicao guardada com sucesso', 1);
             }
         };
 
         //define metodo para guardar refeicao
         $scope.guardarRefeicao = function (refeicao) {
-            console.log("A tentar guardar refeicao: " + refeicao);
+
             if (isValid(refeicao)) {
-                console.log(JSON.stringify(refeicao));
-                    WebServiceFactory.guardarRefeicao(refeicao)
+
+                WebServiceFactory.guardarRefeicao(refeicao)
                         .success(function () {
                             inicializar();
-                            toastr.options.hideDuration = 100;
-                            toastr.options.showDuration = 300;
-                            toastr.options.timeOut = 3000;
-                            toastr.options.showMethod = 'fadeIn';
-                            toastr.options.hideMethod = 'fadeOut';
-                            toastr.options.positionClass = 'toast-bottom-center';
-                            toastr.options.onclick = null;
-                            //toastr.options = {
-                            //    "closeButton": false,
-                            //    "debug": false,
-                            //    "newestOnTop": false,
-                            //    "progressBar": false,
-                            //    "positionClass": "toast-bottom-center",
-                            //    "preventDuplicates": false,
-                            //    "onclick": null,
-                            //    "showDuration": "300",
-                            //    "hideDuration": "100",
-                            //    "timeOut": "3000",
-                            //    "extendedTimeOut": "1000",
-                            //    "showEasing": "swing",
-                            //    "hideEasing": "linear",
-                            //    "showMethod": "fadeIn",
-                            //    "hideMethod": "fadeOut"
-                            //};
-                            toastr.success("I do not think that means what you think it means.")
+                        toast('Refeição guardada com sucesso!', 1);
                         })
                         .error(function (data, status, headers) {
                             if (status == 0) {
                                 guardarRefeicaoOffline(refeicao);
                             } else {
-                                $ionicPopup.alert({
-                                    title: 'Erro',
-                                    template: 'Erro a guardar refeição!'
-                                });
+                                toast('Erro a guardar refeição!', 2);
                             }
                         });
             }
@@ -248,20 +244,14 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
                 $window.localStorage.setItem('listaRefeicoesEditadas', JSON.stringify(eval($scope.listaRefeicoesEditadasOffline)));
                 $rootScope.editar = false;
                 delete $rootScope.editarRefeicao;
-                $ionicPopup.alert({
-                    title: 'Sucesso',
-                    template: 'Refeição editada com sucesso!'
-                });
+                toast('Refeição editada com sucesso!', 1);
                 inicializar();
             } else if ($window.localStorage.getItem('listaRefeicoesEditadas') == null) {
                 $scope.listaRefeicoesEditadasOffline.push(refeicao);
                 $window.localStorage.setItem('listaRefeicoesEditadas', JSON.stringify(eval($scope.listaRefeicoesEditadasOffline)));
                 $rootScope.editar = false;
                 delete $rootScope.editarRefeicao;
-                $ionicPopup.alert({
-                    title: 'Sucesso',
-                    template: 'Refeição editada com sucesso!'
-                });
+                toast('Refeição editada com sucesso!', 1);
                 inicializar();
             }
         };
@@ -270,33 +260,22 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
         $scope.editarRefeicao = function (refeicao) {
             console.log("A tentar editar refeicao: " + refeicao);
             if (isValid(refeicao)) {
-                if (!$rootScope.offline) {
                    var idLinha = refeicao.idRefeicao;
                     WebServiceFactory.editarRefeicaoWeb(refeicao, idLinha)
                         .success(function () {
                             $rootScope.editar = false;
                             delete $rootScope.editarRefeicao;
-                            $ionicPopup.alert({
-                                title: 'Sucesso',
-                                template: 'Refeição editada com sucesso!'
-                            });
+                            toast('Refeição editada com sucesso!', 1);
                             $location.path('/easyNutri/consultaDiario');
                         })
                         .error(function (data, status, headers) {
                             if (status == 0) {
                                 editarRefeicaoOffline(refeicao);
                             } else {
-                                $ionicPopup.alert({
-                                    title: 'Erro',
-                                    template: 'Erro a editar refeição!'
-                                });
+                                toast('Erro a editar refeição!', 2);
                                 $rootScope.editar = true;
                             }
                         });
-                } else {
-                    editarRefeicaoOffline(refeicao);
-                }
-
             }
         };
 
@@ -378,10 +357,7 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
                 data = $filter('date')(data, 'yyyy-MM-dd');
                 $scope.refeicao.Dia = data;
             } else {
-                $ionicPopup.alert({
-                    title: 'Aviso',
-                    template: 'Escolheu uma data superior à do sistema'
-                })
+                toast('Escolheu uma data superior à do sistema', 2);
             }
         };
 

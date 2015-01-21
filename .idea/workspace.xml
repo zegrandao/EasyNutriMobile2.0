@@ -2,117 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eee567b1-be46-4b21-a988-eb5f89dddf19" name="Default" comment="gitignore atualixado">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/com.ionic.keyboard/.fetch.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/.fetch.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/.fetch.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/.fetch.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/src/ios/CDVConnection.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/src/ios/CDVConnection.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/src/ios/CDVDevice.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/src/ios/CDVDevice.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/src/ios/CDVLogger.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/src/ios/CDVLogger.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/src/ios/CDVReachability.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/src/ios/CDVReachability.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/CONTRIBUTING.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/CONTRIBUTING.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/CONTRIBUTING.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/www/Connection.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/src/wp/DebugConsole.cs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/src/wp/Device.cs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/src/android/Device.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/src/browser/DeviceProxy.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/src/firefoxos/DeviceProxy.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/src/tizen/DeviceProxy.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/src/windows/DeviceProxy.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/src/windows8/DeviceProxy.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/com.ionic.keyboard/src/ios/IonicKeyboard.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/com.ionic.keyboard/src/android/IonicKeyboard.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/com.ionic.keyboard/src/ios/IonicKeyboard.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/com.ionic.keyboard/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/NOTICE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/NOTICE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/NOTICE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/src/windows8/NetworkInfoProxy.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/src/android/NetworkManager.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/src/browser/NetworkProxy.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/src/firefoxos/NetworkProxy.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/src/tizen/NetworkProxy.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/src/wp/NetworkStatus.cs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/com.ionic.keyboard/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/RELEASENOTES.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/RELEASENOTES.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/RELEASENOTES.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/com.ionic.keyboard/src/ios/UIWebViewExtension.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/com.ionic.keyboard/src/ios/UIWebViewExtension.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/android.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/www/console-via-logger.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/src/ubuntu/console.cpp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/src/ubuntu/console.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/src/ubuntu/device.cpp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/src/ubuntu/device.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/src/ubuntu/device.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/www/device.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/src/blackberry10/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/src/blackberry10/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/doc/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/doc/de/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/doc/es/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/doc/fr/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/doc/it/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/doc/ja/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/doc/ko/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/doc/pl/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/doc/ru/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/doc/zh/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/doc/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/doc/de/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/doc/es/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/doc/fr/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/doc/it/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/doc/ja/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/doc/ko/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/doc/pl/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/doc/ru/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/doc/zh/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/doc/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/doc/de/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/doc/es/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/doc/fr/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/doc/it/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/doc/ja/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/doc/ko/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/doc/pl/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/doc/ru/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/doc/zh/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/com.ionic.keyboard/www/keyboard.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/www/logger.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/www/network.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/src/ubuntu/network_information.cpp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/src/ubuntu/network_information.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/com.ionic.keyboard/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/com.ionic.keyboard/plugin.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.console/plugin.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/plugin.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/tests/plugin.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/plugin.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/tests/plugin.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.device/tests/tests.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/org.apache.cordova.network-information/tests/tests.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/EasyNutriMobile.iml" afterPath="$PROJECT_DIR$/.idea/EasyNutriMobile.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/MainCtrl.js" afterPath="$PROJECT_DIR$/www/js/MainCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/WebServiceFactory.js" afterPath="$PROJECT_DIR$/www/js/WebServiceFactory.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/android.json" afterPath="$PROJECT_DIR$/plugins/android.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/diarioCtrl.js" afterPath="$PROJECT_DIR$/www/js/diarioCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/loginCtrl.js" afterPath="$PROJECT_DIR$/www/js/loginCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/notificacoesCtrl.js" afterPath="$PROJECT_DIR$/www/js/notificacoesCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/refeicaoCtrl.js" afterPath="$PROJECT_DIR$/www/js/refeicaoCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/tabs.html" afterPath="$PROJECT_DIR$/www/templates/tabs.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="EasyNutriMobile.iws" />
     <ignored path=".idea/workspace.xml" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,71 +38,91 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="WebServiceFactory.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="WebServiceFactory.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/WebServiceFactory.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="326" max-vertical-offset="4420">
-              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6600">
+              <caret line="193" column="22" selection-start-line="193" selection-start-column="22" selection-end-line="193" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="consultaDiario.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/templates/consultaDiario.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="782">
-              <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="diarioCtrl.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/diarioCtrl.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2244" max-vertical-offset="4114">
-              <caret line="147" column="35" selection-start-line="147" selection-start-column="35" selection-end-line="147" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dadosNaoSincCtrl.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/dadosNaoSincCtrl.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="1445">
-              <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="refeicaoCtrl.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="refeicaoCtrl.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/refeicaoCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3327" max-vertical-offset="6834">
-              <caret line="208" column="47" selection-start-line="208" selection-start-column="47" selection-end-line="208" selection-end-column="47" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="6713" max-vertical-offset="9475">
+              <caret line="342" column="10" selection-start-line="342" selection-start-column="10" selection-end-line="342" selection-end-column="10" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file leaf-file-name="diarioCtrl.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/diarioCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.15144767" vertical-offset="0" max-vertical-offset="449">
-              <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="6275">
+              <caret line="43" column="14" selection-start-line="13" selection-start-column="12" selection-end-line="43" selection-end-column="14" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config.xml">
+      <file leaf-file-name="MainCtrl.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/www/js/MainCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
-              <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.5389718" vertical-offset="1875" max-vertical-offset="4925">
+              <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tabs.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/tabs.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.294118" vertical-offset="241" max-vertical-offset="1025">
+              <caret line="25" column="85" selection-start-line="25" selection-start-column="85" selection-end-line="25" selection-end-column="85" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="notificacoesCtrl.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/notificacoesCtrl.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="1700">
+              <caret line="53" column="13" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="notificacoes.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/notificacoes.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.558824" vertical-offset="0" max-vertical-offset="600">
+              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mudarPasswordCtrl.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/mudarPasswordCtrl.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2750">
+              <caret line="1" column="44" selection-start-line="1" selection-start-column="44" selection-end-line="1" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mudarPassword.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/mudarPassword.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.2058823" vertical-offset="0" max-vertical-offset="875">
+              <caret line="3" column="62" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -204,35 +130,25 @@
       </file>
     </leaf>
   </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="true" />
+    </FindUsagesManager>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
+    <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/platforms/android/ant-build/AndroidManifest.cordova.xml" />
-        <option value="$PROJECT_DIR$/www/templates/novaRefeicao.html" />
-        <option value="$PROJECT_DIR$/www/js/loginCtrl.js" />
-        <option value="$PROJECT_DIR$/www/templates/mudarPassword.html" />
-        <option value="$PROJECT_DIR$/www/js/mudarPasswordCtrl.js" />
-        <option value="$PROJECT_DIR$/www/js/definicoesCtrl.js" />
-        <option value="$PROJECT_DIR$/www/js/notificacoesCtrl.js" />
-        <option value="$PROJECT_DIR$/www/templates/tabs.html" />
-        <option value="$PROJECT_DIR$/www/js/planoAlimentarCtrl.js" />
-        <option value="$PROJECT_DIR$/platforms/android/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/www/js/WebServiceFactory.js" />
-        <option value="$PROJECT_DIR$/www/templates/definicoes.html" />
-        <option value="$PROJECT_DIR$/www/js/pesoCtrl.js" />
-        <option value="$PROJECT_DIR$/www/templates/dadosNaoSincronizados.html" />
-        <option value="$PROJECT_DIR$/www/js/dadosNaoSincCtrl.js" />
-        <option value="$PROJECT_DIR$/www/js/MainCtrl.js" />
-        <option value="$PROJECT_DIR$/www/index.html" />
-        <option value="$PROJECT_DIR$/www/templates/consultaDiario.html" />
-        <option value="$PROJECT_DIR$/www/js/diarioCtrl.js" />
-        <option value="$PROJECT_DIR$/www/js/app.js" />
-        <option value="$PROJECT_DIR$/www/js/refeicaoCtrl.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/config.xml" />
+        <option value="$PROJECT_DIR$/www/js/WebServiceFactory.js" />
+        <option value="$PROJECT_DIR$/www/js/diarioCtrl.js" />
+        <option value="$PROJECT_DIR$/www/js/refeicaoCtrl.js" />
+        <option value="$PROJECT_DIR$/www/js/loginCtrl.js" />
+        <option value="$PROJECT_DIR$/www/templates/tabs.html" />
+        <option value="$PROJECT_DIR$/www/js/notificacoesCtrl.js" />
+        <option value="$PROJECT_DIR$/www/js/MainCtrl.js" />
       </list>
     </option>
   </component>
@@ -245,10 +161,10 @@
     </gulpfiles>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1552" />
-    <option name="height" value="880" />
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
+    <option name="width" value="1938" />
+    <option name="height" value="1098" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -259,6 +175,9 @@
     <OptionsSetting value="true" id="Edit" />
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -291,6 +210,56 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EasyNutriMobile" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EasyNutriMobile2.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EasyNutriMobile" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EasyNutriMobile2.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EasyNutriMobile" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EasyNutriMobile2.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -317,6 +286,19 @@
   </component>
   <component name="RunManager" selected="PhoneGap/Cordova.genymotion">
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="name" value="Dart" />
+      <option name="saveOutputToFile" value="false" />
+      <option name="showConsoleOnStdErr" value="false" />
+      <option name="showConsoleOnStdOut" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" />
+      <option name="executablePath" />
+      <option name="filePath" />
       <method />
     </configuration>
     <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
@@ -337,34 +319,18 @@
       <node-js-remote-debug />
       <method />
     </configuration>
-    <configuration default="true" type="meteor-app-runner" factoryName="Meteor">
-      <option name="exePath" value="" />
-      <option name="name" value="Meteor" />
-      <option name="startBrowserSettings">
-        <browser url="http://localhost:3000" />
-      </option>
-      <meteor-runner-state>
-        <option name="startBrowserSettings">
-          <browser url="http://localhost:3000" />
-        </option>
-      </meteor-runner-state>
-      <method />
-    </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
       <method />
     </configuration>
     <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
       <method />
     </configuration>
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <pass-parent-envs>true</pass-parent-envs>
-      <envs />
-      <method />
-    </configuration>
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -372,10 +338,6 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
-      <method />
-    </configuration>
-    <configuration default="true" type="ChromiumRemoteDebugType" factoryName="Chromium Remote">
-      <option name="name" value="" />
       <method />
     </configuration>
     <configuration default="true" type="NodeWebKit" factoryName="Node-webkit">
@@ -387,7 +349,6 @@
       <option name="myWorkDir" />
       <option name="myCommand" />
       <option name="myPlatform" />
-      <option name="myExtraArgs" />
       <option name="hasTarget" value="false" />
       <option name="target" />
       <method />
@@ -403,27 +364,22 @@
       <recursive>false</recursive>
       <method />
     </configuration>
-    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
-      <option name="cucumberJsArguments" value="" />
-      <option name="executablePath" />
-      <option name="filePath" />
-      <method />
-    </configuration>
     <configuration default="false" name="chrome" type="JavascriptDebugType" factoryName="JavaScript Debug" uri="http://localhost:63342/EasyNutriMobile/www/index.html">
       <RunnerSettings RunnerId="JavascriptDebugRunner" />
       <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
       <method />
     </configuration>
     <configuration default="false" name="genymotion" type="PhoneGap" factoryName="PhoneGap/Cordova">
-      <option name="myExecutable" value="C:\Users\Joao\AppData\Roaming\npm\ionic.cmd" />
-      <option name="myWorkDir" value="D:\EasyNutriMobile2.0" />
+      <option name="myExecutable" value="C:\Users\nelson\AppData\Roaming\npm\ionic.cmd" />
+      <option name="myWorkDir" value="C:\Users\nelson\Desktop\IS_3o_Ano_1S\EasyNutri\EasyNutriMobile2.0" />
       <option name="myCommand" value="run" />
       <option name="myPlatform" value="android" />
-      <option name="myExtraArgs" value="" />
       <option name="hasTarget" value="false" />
       <option name="target" value="" />
       <RunnerSettings RunnerId="Basic" />
+      <RunnerSettings RunnerId="PhoneGap Runner" />
       <ConfigurationWrapper RunnerId="Basic" />
+      <ConfigurationWrapper RunnerId="PhoneGap Runner" />
       <method />
     </configuration>
     <list size="2">
@@ -439,25 +395,18 @@
     <task active="true" id="Default" summary="Default task">
       <changelist id="eee567b1-be46-4b21-a988-eb5f89dddf19" name="Default" comment="" />
       <created>1421147839749</created>
-      <option name="number" value="Default" />
       <updated>1421147839749</updated>
     </task>
     <task id="LOCAL-00001" summary="dados nao sincronizados e eventos offline e online">
       <created>1421841015170</created>
-      <option name="number" value="00001" />
-      <option name="project" value="LOCAL" />
       <updated>1421841015170</updated>
     </task>
     <task id="LOCAL-00002" summary="toastr implementado">
       <created>1421853689550</created>
-      <option name="number" value="00002" />
-      <option name="project" value="LOCAL" />
       <updated>1421853689550</updated>
     </task>
     <task id="LOCAL-00003" summary="gitignore atualixado">
       <created>1421853966277</created>
-      <option name="number" value="00003" />
-      <option name="project" value="LOCAL" />
       <updated>1421853966277</updated>
     </task>
     <option name="localTasksCounter" value="4" />
@@ -484,29 +433,29 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1552" height="880" extended-state="6" />
+    <frame x="-9" y="-9" width="1938" height="1098" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.328877" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328877" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328877" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25363275" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4104278" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328877" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20158312" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32911393" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25316456" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328877" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -525,9 +474,9 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25363275" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328877" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -554,9 +503,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="69" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/www/js/MainCtrl.js</url>
+          <line>89</line>
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="71" />
     </breakpoint-manager>
-    <watches-manager />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/www/js/loginCtrl.js">
@@ -685,13 +640,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/mudarPassword.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11383928" vertical-offset="0" max-vertical-offset="595">
-          <caret line="3" column="62" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/modal.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15178572" vertical-offset="0" max-vertical-offset="663">
@@ -706,27 +654,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/mudarPasswordCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.023611112" vertical-offset="0" max-vertical-offset="1870">
-          <caret line="1" column="44" selection-start-line="1" selection-start-column="44" selection-end-line="1" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/notificacoes.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.769231" vertical-offset="0" max-vertical-offset="408">
-          <caret line="18" column="9" selection-start-line="0" selection-start-column="0" selection-end-line="18" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/homeCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="136">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/planoAlimentar.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="9.807693" vertical-offset="255" max-vertical-offset="816">
@@ -734,24 +661,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/notificacoesCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10526316" vertical-offset="757" max-vertical-offset="1156">
-          <caret line="47" column="119" selection-start-line="47" selection-start-column="119" selection-end-line="47" selection-end-column="119" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/planoAlimentarCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1239" max-vertical-offset="2431">
           <caret line="95" column="31" selection-start-line="95" selection-start-column="31" selection-end-line="95" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/tabs.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.730769" vertical-offset="208" max-vertical-offset="697">
-          <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -769,13 +682,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/loginCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1751">
-          <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/dadosNaoSincronizados.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-18.307692" vertical-offset="102" max-vertical-offset="901">
@@ -785,8 +691,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/dadosNaoSincCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1445">
-          <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1200" max-vertical-offset="2125">
+          <caret line="48" column="27" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -796,13 +702,6 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="890579">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/MainCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="2652">
-          <caret line="50" column="25" selection-start-line="50" selection-start-column="25" selection-end-line="50" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -817,7 +716,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="1326">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -833,22 +731,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14166667" vertical-offset="0" max-vertical-offset="2822">
           <caret line="6" column="64" selection-start-line="6" selection-start-column="55" selection-end-line="6" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/WebServiceFactory.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="326" max-vertical-offset="4420">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/diarioCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2244" max-vertical-offset="4114">
-          <caret line="147" column="35" selection-start-line="147" selection-start-column="35" selection-end-line="147" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -898,33 +780,113 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.5444686" vertical-offset="1173" max-vertical-offset="14025">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
+        <state vertical-scroll-proportion="0.6058559" vertical-offset="156" max-vertical-offset="600">
           <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/refeicaoCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3480" max-vertical-offset="6834">
-          <caret line="208" column="47" selection-start-line="208" selection-start-column="47" selection-end-line="208" selection-end-column="47" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15144767" vertical-offset="0" max-vertical-offset="449">
-          <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
+        <state vertical-scroll-proportion="0.28935185" vertical-offset="0" max-vertical-offset="432">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/loginCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6674058" vertical-offset="2223" max-vertical-offset="3125">
+          <caret line="113" column="21" selection-start-line="113" selection-start-column="21" selection-end-line="113" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/mudarPasswordCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2750">
+          <caret line="1" column="44" selection-start-line="1" selection-start-column="44" selection-end-line="1" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/mudarPassword.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.2058823" vertical-offset="0" max-vertical-offset="875">
+          <caret line="3" column="62" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/tabs.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.294118" vertical-offset="241" max-vertical-offset="1025">
+          <caret line="25" column="85" selection-start-line="25" selection-start-column="85" selection-end-line="25" selection-end-column="85" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/notificacoes.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.558824" vertical-offset="0" max-vertical-offset="600">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/WebServiceFactory.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6600">
+          <caret line="193" column="22" selection-start-line="193" selection-start-column="22" selection-end-line="193" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/refeicaoCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="8550" max-vertical-offset="9475">
+          <caret line="342" column="10" selection-start-line="342" selection-start-column="10" selection-end-line="342" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/notificacoesCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="1700">
+          <caret line="53" column="13" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/homeCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="200">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/diarioCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="6275">
+          <caret line="43" column="14" selection-start-line="13" selection-start-column="12" selection-end-line="43" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/MainCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5389718" vertical-offset="1875" max-vertical-offset="4925">
+          <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
   </component>
 </project>
+

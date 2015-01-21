@@ -15,6 +15,37 @@ easyNutri.controller('loginCtrl', ['$scope', '$http', 'WebServiceFactory', 'moda
             $rootScope.guardarCredenciais = true;
             $state.go('easyNutri.' + nomePagina, {reload: true, inherit: false});
         }
+        var toast = function (texto, caso) {
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-bottom-center",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "100",
+                "timeOut": "3000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+            switch (caso) {
+                case 1:
+                    toastr.success(texto);
+                    break;
+                case 2:
+                    toast.error(texto);
+                    break;
+                case 3:
+                    toast.info(texto);
+                    break;
+            }
+
+        };
 
         var mostrarSpinner = function () {
             $ionicLoading.show({
@@ -68,10 +99,7 @@ easyNutri.controller('loginCtrl', ['$scope', '$http', 'WebServiceFactory', 'moda
                         $rootScope.credencial = stringEncoded;
                     }
                     $rootScope.loggedIn = true;
-                    $ionicPopup.alert({
-                        title: 'Login',
-                        template: 'Login efetuado com sucesso'
-                    });
+                    toast('Login efetuado com sucesso', 1);
                     $scope.loginModal.hide();
                     $scope.user = {};
                     esconderSpinner();
@@ -79,16 +107,10 @@ easyNutri.controller('loginCtrl', ['$scope', '$http', 'WebServiceFactory', 'moda
                 }).error(function (data, status, headers) {
                     esconderSpinner();
                     if (status == 0) {
-                        $ionicPopup.alert({
-                            title: 'Erro',
-                            template: 'Não existe ligação à rede!'
-                        });
+                        toast('Não existe ligação à rede!', 2);
                     } else {
                         esconderSpinner();
-                        $ionicPopup.alert({
-                            title: 'Erro',
-                            template: 'Username ou Password incorreto!'
-                        });
+                        toast('Username ou Password incorreto!', 2);
                     }
 
                 });

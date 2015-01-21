@@ -5,6 +5,39 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
         $state.go('login', {reload: true, inherit: false});
     }
 
+
+    var toast = function (texto, caso) {
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-bottom-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "100",
+            "timeOut": "3000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        switch (caso) {
+            case 1:
+                toastr.success(texto);
+                break;
+            case 2:
+                toast.error(texto);
+                break;
+            case 3:
+                toast.info(texto);
+                break;
+        }
+
+    };
+
     $scope.toggleLeft = function () {
         $ionicSideMenuDelegate.toggleLeft();
     }
@@ -24,6 +57,7 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
         $scope.loginModal.show();
     }
 
+
     var getNotificacoesOffline = function () {
         if (JSON.parse($window.localStorage.getItem('listaNotificacoes')) != null) {
             $rootScope.listaNotificacoes = JSON.parse($window.localStorage.getItem('listaNotificacoes'));
@@ -41,18 +75,27 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
                 $scope.numeroNot = contNaoLidas;
             }
         } else {
-            $ionicPopup.alert({
-                title: 'Aviso',
-                template: 'Não existem notificações!'
-            });
+            toast('Não existem notificações!', 3);
         }
     };
 
-    $scope.numeroNot = 0;
+
     var getNotificacoes = function () {
         if($rootScope.loggedIn != false){
+
             WebServiceFactory.getNotificacoes().success(function (lista) {
                         $rootScope.listaNotificacoes = lista;
+
+                if ($scope.numeroNotificacoes == undefined) {
+                    $scope.numeroNotificacoes = $rootScope.listaNotificacoes.length;
+                } else {
+                    if ($rootScope.listaNotificacoes.length - $scope.numeroNotificacoes == 1) {
+                        toast('Recebeu uma nova notificação!', 3);
+                    } else if ((total = $rootScope.listaNotificacoes.length - $scope.numeroNotificacoes) > 1) {
+                        toast('Recebeu ' + total + ' novas notificações!', 3);
+                    }
+
+                }
                         var contNaoLidas = 0;
                         for ($i = 0; $i < $rootScope.listaNotificacoes.length; $i++) {
                             if ($rootScope.listaNotificacoes[$i].Lido == 0) {
@@ -63,17 +106,14 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
                             document.getElementById("badgeNot").style.display = 'none';
                         } else {
                             document.getElementById("badgeNot").style.display = 'inline';
-                            $scope.numeroNot = contNaoLidas;
+
                         }
 
                     }).error(function (data, status, headers) {
                         if (status == 0) {
                             getNotificacoesOffline();
                         } else {
-                            $ionicPopup.alert({
-                                title: 'Erro',
-                                template: 'Erro a processar pedido de notificações!'
-                            });
+                            toast('Erro a processar pedido de notificações!', 2);
                         }
                     });
         }
