@@ -15,9 +15,24 @@ easyNutri.controller('dadosNaoSincCtrl', ['$scope', 'WebServiceFactory', '$filte
             $scope.listaRefeicoesEditadas = JSON.parse($window.localStorage.getItem('listaRefeicoesEditadas'));
         }
 
+        $scope.findUnidade = function (linhaRefeicao) {
+            var tipoUnidade;
+            if (linhaRefeicao.PorcaoId == null) {
+                tipoUnidade = linhaRefeicao.Unidade;
+                return tipioUnidade;
+            } else {
+                for ($f = 0; $f < linhaRefeicao.Porcoes.length; $f++) {
+                    if (linhaRefeicao.Porcoes[$f].Id == linhaRefeicao.PorcaoId) {
+                        tipoUnidade = linhaRefeicao.Porcoes[$f].Descricao;
+                        return tipoUnidade;
+                    }
+                }
+            }
+        };
+
         $scope.tiposRefeicao = WebServiceFactory.getTiposRefeicao();
 
-        $scope.removerRefeicaoOffline = function (refeicao) {
+        $scope.removerRefeicaoEditadaOffline = function (refeicao) {
             $ionicPopup.confirm({
                 title: "Remover Refeição",
                 content: "Pretende remover a refeição " + $scope.tiposRefeicao[refeicao.Tipo - 1].Descricao + ' ?'
@@ -25,6 +40,18 @@ easyNutri.controller('dadosNaoSincCtrl', ['$scope', 'WebServiceFactory', '$filte
                 .then(function (result) {
                     if (result) {
                         $scope.listaRefeicoesEditadas.splice($scope.listaRefeicoesEditadas.indexOf(refeicao), 1);
+                    }
+                });
+        };
+
+        $scope.removerRefeicaoNovaOffline = function (refeicao) {
+            $ionicPopup.confirm({
+                title: "Remover Refeição",
+                content: "Pretende remover a refeição " + $scope.tiposRefeicao[refeicao.Tipo - 1].Descricao + ' ?'
+            })
+                .then(function (result) {
+                    if (result) {
+                        $scope.listaRefeicoesNovas.splice($scope.listaRefeicoesNovas.indexOf(refeicao), 1);
                     }
                 });
         };

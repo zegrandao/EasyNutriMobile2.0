@@ -13,14 +13,14 @@
                         <i class="icon" ng-class="isAberto(refeicao) ? 'ion-minus':'ion-plus'"></i>
                         {{tiposRefeicao[refeicao.Tipo-1].Descricao}}
                         <button class="button button-small button-icon icon ion-trash-a" style="float: right"
-                                ng-click="removerRefeicaoOffline(refeicao)"></button>
+                                ng-click="removerRefeicaoNovaOffline(refeicao)"></button>
                         <button class="button button-small button-icon icon ion-edit" style="float: right"
-                                ng-click="editar(refeicao)"></button>
+                                ng-click="editarRefeicaoOffline(refeicao)"></button>
 
                     </ion-item>
                     <ion-item class="item-accordation item-text-wrap" ng-repeat="linha in refeicao.listaAlimentos"
                               ng-show="isAberto(refeicao)">
-                        {{linha.Nome +' - '+linha.Quantidade + ' ' + linha.Unidade}}
+                        {{linha.Nome +' - '+linha.Quantidade + ' ' + findUnidade(linha)}}
                     </ion-item>
                 </div>
                 <div class="item-divider">
@@ -32,7 +32,7 @@
                         <i class="icon" ng-class="isAberto(refeicao) ? 'ion-minus':'ion-plus'"></i>
                         {{tiposRefeicao[refeicao.Tipo-1].Descricao}}
                         <button class="button button-small button-icon icon ion-trash-a" style="float: right"
-                                ng-click="removerRefeicaoOffline(refeicao)"></button>
+                                ng-click="removerRefeicaoEditadaOffline(refeicao)"></button>
                         <button class="button button-small button-icon icon ion-edit" style="float: right"
                                 ng-click="editarRefeicaoOffline(refeicao)"></button>
 

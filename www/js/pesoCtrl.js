@@ -87,10 +87,42 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
             $scope.tornarVisivel();
         };
 
+        var getRegistosOffline = function () {
+            var listaPesosVelhos = JSON.parse($window.localStorage.getItem('listaPesos'));
+            var listaPesosNovos = JSON.parse($window.localStorage.getItem('listaPesosNovos'));
+            if (listaPesosVelhos != null && listaPesosNovos != null) {
+                var a;
+                for (a in listaPesosVelhos) {
+                    $scope.listaPesos.push(a);
+
+                }
+
+                var pesoNovo;
+                for (pesoNovo in listaPesosNovos) {
+                    $scope.listaPesos.push(pesoNovo);
+                }
+                esconderSpinner();
+
+            } else if (listaPesosVelhos != null && listaPesosNovos == null) {
+                $scope.listaPesos = listaPesosVelhos;
+                esconderSpinner();
+
+            } else if (listaPesosVelhos == null && listaPesosNovos != null) {
+                $scope.listaPesos = listaPesosNovos;
+                esconderSpinner();
+
+            } else {
+                esconderSpinner();
+                $ionicPopup.alert({
+                    title: 'Aviso',
+                    template: 'Não existem registos de pesos!'
+                });
+            }
+        }
+
         $scope.getRegistos = function () {
             mostrarSpinner();
             if($rootScope.loggedIn != false){
-                if (!$rootScope.offline) {
                     WebServiceFactory.getRegistosPeso()
                         .success(function(lista) {
                             if (lista != null) {
@@ -112,34 +144,7 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
                         })
                         .error(function (data, status, headers) {
                             if (status == 0) {
-                                var listaPesosVelhos = JSON.parse($window.localStorage.getItem('listaPesos'));
-                                var listaPesosNovos = JSON.parse($window.localStorage.getItem('listaPesosNovos'));
-                                if (listaPesosVelhos != null && listaPesosNovos != null) {
-                                    for (var a in listaPesosVelhos) {
-                                        $scope.listaPesos.push(a);
-
-                                    }
-
-                                    for (var pesoNovo in listaPesosNovos) {
-                                        $scope.listaPesos.push(pesoNovo);
-                                    }
-                                    esconderSpinner();
-
-                                } else if (listaPesosVelhos != null && listaPesosNovos == null) {
-                                    $scope.listaPesos = listaPesosVelhos;
-                                    esconderSpinner();
-
-                                } else if (listaPesosVelhos == null && listaPesosNovos != null) {
-                                    $scope.listaPesos = listaPesosNovos;
-                                    esconderSpinner();
-
-                                } else {
-                                    esconderSpinner();
-                                    $ionicPopup.alert({
-                                        title: 'Aviso',
-                                        template: 'Não existem registos de pesos!'
-                                    });
-                                }
+                                getRegistosOffline();
                             } else {
                                 esconderSpinner();
                                 $ionicPopup.alert({
@@ -148,40 +153,33 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
                                 });
                             }
                         });
-                } else {
-                    var listaPesosVelhos = JSON.parse($window.localStorage.getItem('listaPesos'));
-                    var listaPesosNovos = JSON.parse($window.localStorage.getItem('listaPesosNovos'));
-                    if (listaPesosVelhos != null && listaPesosNovos != null) {
-                        for (var a in listaPesosVelhos) {
-                            $scope.listaPesos.push(a);
-
-                        }
-
-                        for (var pesoNovo in listaPesosNovos) {
-                            $scope.listaPesos.push(pesoNovo);
-                        }
-                        esconderSpinner();
-
-                    } else if (listaPesosVelhos != null && listaPesosNovos == null) {
-                        $scope.listaPesos = listaPesosVelhos;
-                        esconderSpinner();
-
-                    } else if (listaPesosVelhos == null && listaPesosNovos != null) {
-                        $scope.listaPesos = listaPesosNovos;
-                        esconderSpinner();
-
-                    } else {
-                        esconderSpinner();
-                        $ionicPopup.alert({
-                            title: 'Aviso',
-                            template: 'Não existem registos de pesos!'
-                        });
-                    }
-                }
             }
         }
 
         $scope.getRegistos();
+
+        var registarPesoOffline = function (peso) {
+            var lista = new Array();
+            if (JSON.parse($window.localStorage.getItem('listaPesosNovos') != null)) {
+                lista = JSON.parse($window.localStorage.getItem('listaPesosNovos'));
+                lista.push(peso);
+                $window.localStorage.setItem('listaPesosNovos', JSON.stringify(eval(lista)));
+                $ionicPopup.alert({
+                    title: 'Sucesso',
+                    template: 'Peso inserido com sucesso'
+                });
+            } else {
+                lista.push(peso);
+                $window.localStorage.setItem('listaPesosNovos', JSON.stringify(eval(lista)));
+                $ionicPopup.alert({
+                    title: 'Sucesso',
+                    template: 'Peso inserido com sucesso'
+                });
+            }
+            esconderSpinner();
+            inicializar();
+            $scope.getRegistos();
+        }
 
         $scope.registarPeso = function (peso) {
             if (isValid(peso)) {
@@ -189,7 +187,6 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
                 peso.DataMed = $scope.reg.Dia + " " + $scope.reg.Hora;
                 peso.TipoMedicaoID = 1;
                 peso.EmCasa = 1;
-                if (!$rootScope.offline) {
                     WebServiceFactory.registarPeso(peso)
                         .success(function () {
                             esconderSpinner();
@@ -202,26 +199,7 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
                         })
                         .error(function (data, status, headers) {
                             if (status == 0) {
-                                var lista = new Array();
-                                if (JSON.parse($window.localStorage.getItem('listaPesosNovos') != null)) {
-                                    lista = JSON.parse($window.localStorage.getItem('listaPesosNovos'));
-                                    lista.push(peso);
-                                    $window.localStorage.setItem('listaPesosNovos', JSON.stringify(eval(lista)));
-                                    $ionicPopup.alert({
-                                        title: 'Sucesso',
-                                        template: 'Peso inserido com sucesso'
-                                    });
-                                } else {
-                                    lista.push(peso);
-                                    $window.localStorage.setItem('listaPesosNovos', JSON.stringify(eval(lista)));
-                                    $ionicPopup.alert({
-                                        title: 'Sucesso',
-                                        template: 'Peso inserido com sucesso'
-                                    });
-                                }
-                                esconderSpinner();
-                                inicializar();
-                                $scope.getRegistos();
+                                registarPesoOffline(peso);
                             } else {
                                 esconderSpinner();
                                 $ionicPopup.alert({
@@ -230,28 +208,6 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
                                 });
                             }
                         });
-                } else {
-                    var lista = new Array();
-                    if (JSON.parse($window.localStorage.getItem('listaPesosNovos') != null)) {
-                        lista = JSON.parse($window.localStorage.getItem('listaPesosNovos'));
-                        lista.push(peso);
-                        $window.localStorage.setItem('listaPesosNovos', JSON.stringify(eval(lista)));
-                        $ionicPopup.alert({
-                            title: 'Sucesso',
-                            template: 'Peso inserido com sucesso'
-                        });
-                    } else {
-                        lista.push(peso);
-                        $window.localStorage.setItem('listaPesosNovos', JSON.stringify(eval(lista)));
-                        $ionicPopup.alert({
-                            title: 'Sucesso',
-                            template: 'Peso inserido com sucesso'
-                        });
-                    }
-                    esconderSpinner();
-                    inicializar();
-                    $scope.getRegistos();
-                }
             }
         };
 

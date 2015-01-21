@@ -28,7 +28,6 @@ easyNutri.controller('diarioCtrl',
             $scope.pesquisarDiarios = function (dataPesquisa) {
                 mostrarSpinner();
                 if($rootScope.loggedIn != false){
-                    if (!$rootScope.offline) {
                         WebServiceFactory.getDiarioAlimentar(dataPesquisa)
                             .success(function (data) {
                                 if (data != "null") {
@@ -63,17 +62,6 @@ easyNutri.controller('diarioCtrl',
                                     });
                                 }
                             });
-                    } else {
-                        esconderSpinner();
-                        if ($window.localStorage.getItem('diarioAlimentar') !== null) {
-                            $scope.diarioAlimentar = JSON.parse($window.localStorage.getItem('diarioAlimentar'));
-                        } else {
-                            $ionicPopup.alert({
-                                title: 'Informação',
-                                template: 'Não existem registos!'
-                            });
-                        }
-                    }
                 }
             };
 
@@ -145,9 +133,11 @@ easyNutri.controller('diarioCtrl',
                     animation: 'slide-in-up'
                 }
             );
+
             $scope.opendateModal = function () {
                 $scope.datemodal.show();
             };
+
             $scope.closedateModal = function (data) {
                 var dataAtual = $filter('date')(new Date(), 'yyyy-MM-dd');
 

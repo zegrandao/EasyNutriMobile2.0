@@ -92,7 +92,7 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
         //popular página com dados da refeição a editar
         $scope.popularPaginaEditar = function (refeicao) {
             var tipo;
-            if (!$rootScope.offline) {
+            WebServiceFactory.getPlanoAlimentar().success(function () {
                 var dia = $filter('date')(refeicao.DataRefeicao, 'yyyy-MM-dd');
                 var hora = $filter('date')(refeicao.DataRefeicao, 'HH:mm');
                 $scope.refeicao.Dia = dia;
@@ -116,18 +116,19 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
                     }
                     $scope.refeicao.listaAlimentos.push(refeicao.LinhasRefeicao[$i].Alimentos);
                 }
-            } else {
-                tipo = tipo = TiposRefeicaoFactory.get(refeicao.Tipo);
-                var dia = $filter('date')(refeicao.Dia, 'yyyy-MM-dd');
-                var hora = $filter('date')(refeicao.Hora, 'HH:mm');
-                $scope.refeicao.Dia = dia;
-                $scope.refeicao.Hora = hora;
-                $scope.refeicao.Tipo = tipo.Id;
-                for ($i = 0; $i < refeicao.listaAlimentos.length; $i++) {
-                    $scope.refeicao.listaAlimentos.push(refeicao.listaAlimentos[$i]);
+            }).error(function (status, data, headers) {
+                if (status == 0) {
+                    tipo = TiposRefeicaoFactory.get(refeicao.Tipo);
+                    var dia = $filter('date')(refeicao.Dia, 'yyyy-MM-dd');
+                    var hora = $filter('date')(refeicao.Hora, 'HH:mm');
+                    $scope.refeicao.Dia = dia;
+                    $scope.refeicao.Hora = hora;
+                    $scope.refeicao.Tipo = tipo.Id;
+                    for ($i = 0; $i < refeicao.listaAlimentos.length; $i++) {
+                        $scope.refeicao.listaAlimentos.push(refeicao.listaAlimentos[$i]);
+                    }
                 }
-            }
-
+            });
             mostrarBotao();
         };
 
@@ -200,10 +201,30 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
                     WebServiceFactory.guardarRefeicao(refeicao)
                         .success(function () {
                             inicializar();
-                            $ionicPopup.alert({
-                                title: 'Sucesso',
-                                template: 'Refeição guardada com sucesso!'
-                            });
+                            toastr.options.hideDuration = 100;
+                            toastr.options.showDuration = 300;
+                            toastr.options.timeOut = 3000;
+                            toastr.options.showMethod = 'fadeIn';
+                            toastr.options.hideMethod = 'fadeOut';
+                            toastr.options.positionClass = 'toast-bottom-center';
+                            //toastr.options = {
+                            //    "closeButton": false,
+                            //    "debug": false,
+                            //    "newestOnTop": false,
+                            //    "progressBar": false,
+                            //    "positionClass": "toast-bottom-center",
+                            //    "preventDuplicates": false,
+                            //    "onclick": null,
+                            //    "showDuration": "300",
+                            //    "hideDuration": "100",
+                            //    "timeOut": "3000",
+                            //    "extendedTimeOut": "1000",
+                            //    "showEasing": "swing",
+                            //    "hideEasing": "linear",
+                            //    "showMethod": "fadeIn",
+                            //    "hideMethod": "fadeOut"
+                            //};
+                            toastr.success("I do not think that means what you think it means.")
                         })
                         .error(function (data, status, headers) {
                             if (status == 0) {

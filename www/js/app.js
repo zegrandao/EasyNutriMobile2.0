@@ -17,24 +17,20 @@ easyNutri.run(function ($ionicPlatform, $window, $ionicPopup, $rootScope, WebSer
                 StatusBar.styleDefault();
             }
 
-            document.addEventListener("offline", function () {
-                alert('ficou offline');
-                $rootScope.offline = true;
-            }, false);
-
             document.addEventListener("online", function () {
-                $rootScope.offline = false;
                 WebServiceFactory.sincronizarDados();
             }, false);
 
+            var credencial = WebServiceFactory.checkCredencial();
+
             if (window.Connection) {
-                if (navigator.connection.type == Connection.NONE && $window.localStorage.getItem('credencial') == null) {
+                if (navigator.connection.type == Connection.NONE && credencial == null) {
                     $ionicPopup.alert({
                         title: "Modo Offline",
                         content: "Não está ligado à rede!"
-                    })
+                    });
                     ionic.Platform.exitApp();
-                } else if (navigator.connection.type == Connection.NONE && $window.localStorage.getItem('credencial') != null) {
+                } else if (navigator.connection.type == Connection.NONE && credencial != null) {
                     $ionicPopup.confirm({
                         title: "Modo Offline",
                         content: "Não está ligado à rede, deseja continuar em modo offline?"
@@ -43,7 +39,6 @@ easyNutri.run(function ($ionicPlatform, $window, $ionicPopup, $rootScope, WebSer
                             if (!result) {
                                 ionic.Platform.exitApp();
                             } else {
-                                $rootScope.offline = true;
                                 $ionicPopup.alert({
                                     title: 'Aviso',
                                     content: 'Todos os dados que insira na aplicação só serão sincronizados quando tiver uma ' +
@@ -51,11 +46,7 @@ easyNutri.run(function ($ionicPlatform, $window, $ionicPopup, $rootScope, WebSer
                                 });
                             }
                         });
-                } else if (navigator.connection.type != Connection.NONE) {
-                    $rootScope.offline = false;
                 }
-            } else {
-                $rootScope.offline = false;
             }
         });
     })

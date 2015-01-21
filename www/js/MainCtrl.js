@@ -24,13 +24,34 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
         $scope.loginModal.show();
     }
 
+    var getNotificacoesOffline = function () {
+        if (JSON.parse($window.localStorage.getItem('listaNotificacoes')) != null) {
+            $rootScope.listaNotificacoes = JSON.parse($window.localStorage.getItem('listaNotificacoes'));
+            var contNaoLidas = 0;
+            for ($i = 0; $i < $rootScope.listaNotificacoes.length; $i++) {
+                if ($rootScope.listaNotificacoes[$i].Lido === 0) {
+                    contNaoLidas++;
+                }
+            }
+
+            if (contNaoLidas == 0) {
+                document.getElementById("badgeNot").style.display = 'none';
+            } else {
+                document.getElementById("badgeNot").style.display = 'inline';
+                $scope.numeroNot = contNaoLidas;
+            }
+        } else {
+            $ionicPopup.alert({
+                title: 'Aviso',
+                template: 'Não existem notificações!'
+            });
+        }
+    };
+
     $scope.numeroNot = 0;
-    console.log('inicializou a 0');
     var getNotificacoes = function () {
         if($rootScope.loggedIn != false){
-            if($rootScope.offline == false){
-                WebServiceFactory.getNotificacoes().
-                    success(function (lista) {
+            WebServiceFactory.getNotificacoes().success(function (lista) {
                         $rootScope.listaNotificacoes = lista;
                         var contNaoLidas = 0;
                         for ($i = 0; $i < $rootScope.listaNotificacoes.length; $i++) {
@@ -38,7 +59,6 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
                                 contNaoLidas++;
                             }
                         }
-
                         if (contNaoLidas == 0) {
                             document.getElementById("badgeNot").style.display = 'none';
                         } else {
@@ -48,27 +68,7 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
 
                     }).error(function (data, status, headers) {
                         if (status == 0) {
-                            if (JSON.parse($window.localStorage.getItem('listaNotificacoes')) != null) {
-                                $rootScope.listaNotificacoes = JSON.parse($window.localStorage.getItem('listaNotificacoes'));
-                                var contNaoLidas = 0;
-                                for ($i = 0; $i < $rootScope.listaNotificacoes.length; $i++) {
-                                    if ($rootScope.listaNotificacoes[$i].Lido === 0) {
-                                        contNaoLidas++;
-                                    }
-                                }
-
-                                if (contNaoLidas === 0) {
-                                    document.getElementById("badgeNot").style.display = 'none';
-                                } else {
-                                    document.getElementById("badgeNot").style.display = 'inline';
-                                    $scope.numeroNot = contNaoLidas;
-                                }
-                            } else {
-                                $ionicPopup.alert({
-                                    title: 'Aviso',
-                                    template: 'Não existem notificações!'
-                                });
-                            }
+                            getNotificacoesOffline();
                         } else {
                             $ionicPopup.alert({
                                 title: 'Erro',
@@ -76,33 +76,9 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
                             });
                         }
                     });
-            }else{
-                if(JSON.parse($window.localStorage.getItem('listaNotificacoes')) != null){
-                    $rootScope.listaNotificacoes = JSON.parse($window.localStorage.getItem('listaNotificacoes'));
-                    var contNaoLidas = 0;
-                    for ($i = 0; $i < $rootScope.listaNotificacoes.length; $i++) {
-                        if ($rootScope.listaNotificacoes[$i].Lido === 0) {
-                            contNaoLidas++;
-                        }
-                    }
-
-                    if (contNaoLidas === 0) {
-                        document.getElementById("badgeNot").style.display = 'none';
-                    } else {
-                        document.getElementById("badgeNot").style.display = 'inline';
-                        $scope.numeroNot = contNaoLidas;
-                    }
-                }else{
-                    $ionicPopup.alert({
-                        title: 'Aviso',
-                        template: 'Não existem notificações!'
-                    });
-                }
-            }
         }
     };
 
-    if(!$rootScope.offline){
         if($rootScope.loggedIn){
 
             WebServiceFactory.sincronizarDados();
@@ -134,7 +110,6 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
                 getNotificacoes();
             }, 10000);
         }
-    }
 
     var logout = function () {
         if ($rootScope.guardarCredenciais) {
