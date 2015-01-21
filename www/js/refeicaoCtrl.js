@@ -207,6 +207,7 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
                             toastr.options.showMethod = 'fadeIn';
                             toastr.options.hideMethod = 'fadeOut';
                             toastr.options.positionClass = 'toast-bottom-center';
+                            toastr.options.onclick = null;
                             //toastr.options = {
                             //    "closeButton": false,
                             //    "debug": false,
