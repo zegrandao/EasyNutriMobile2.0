@@ -277,8 +277,8 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
                     inicializar();
                 }
             } else {
+                $scope.listaRefeicoesEditadasOffline = new Array();
                 if ($window.localStorage.getItem('listaRefeicoesEditadas') != null) {
-                    $scope.listaRefeicoesEditadasOffline = new Array();
                     $scope.listaRefeicoesEditadasOffline = JSON.parse($window.localStorage.getItem('listaRefeicoesEditadas'));
                     $scope.listaRefeicoesEditadasOffline.push(refeicao);
                     $window.localStorage.setItem('listaRefeicoesEditadas', JSON.stringify(eval($scope.listaRefeicoesEditadasOffline)));
@@ -312,7 +312,7 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
                     .error(function (data, status, headers) {
                         if (status == 0) {
                             editarRefeicaoOffline(refeicao);
-                            $rootScope.editar = false;
+                            ;
                         } else {
                             toast('Erro a editar refeição!', 2);
                             $rootScope.editar = true;
