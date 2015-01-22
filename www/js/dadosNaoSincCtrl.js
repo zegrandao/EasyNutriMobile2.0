@@ -8,25 +8,30 @@ easyNutri.controller('dadosNaoSincCtrl', ['$scope', 'WebServiceFactory', '$filte
 
         console.log($window.localStorage.getItem('listaRefeicoesNovas'));
         console.log($window.localStorage.getItem('listaRefeicoesEditadas'));
+
+        $scope.listaRefeicoesNovas = new Array();
         if ($window.localStorage.getItem('listaRefeicoesNovas') != null) {
-            $scope.listaRefeicoesNovas = new Array();
             $scope.listaRefeicoesNovas = JSON.parse($window.localStorage.getItem('listaRefeicoesNovas'));
             document.getElementById('divLista').style.display = 'inline';
         }
 
+        $scope.listaRefeicoesRemovidas = new Array();
+        if ($window.localStorage.getItem('listaRefeicoesRemovidas') != null) {
+            $scope.listaRefeicoesRemovidas = JSON.parse($window.localStorage.getItem('listaRefeicoesRemovidas'));
+        }
+
+        $scope.listaRefeicoesDiario = new Array();
         if ($window.localStorage.getItem('diarioAlimentar') != null) {
-            $scope.listaRefeicoesDiario = new Array();
             $scope.listaRefeicoesDiario = JSON.parse($window.localStorage.getItem('diarioAlimentar'));
         }
 
-
+        $scope.listaRefeicoesEditadas = new Array();
         if ($window.localStorage.getItem('listaRefeicoesEditadas') != null) {
-            $scope.listaRefeicoesEditadas = new Array();
             $scope.listaRefeicoesEditadas = JSON.parse($window.localStorage.getItem('listaRefeicoesEditadas'));
             document.getElementById('divLista').style.display = 'inline';
         }
 
-        if ($scope.listaRefeicoesEditadas == undefined && $scope.listaRefeicoesNovas == undefined) {
+        if ($scope.listaRefeicoesEditadas == null && $scope.listaRefeicoesNovas == null) {
             $ionicPopup.alert({
                 title: "Aviso",
                 content: "Não existem dados"
@@ -60,6 +65,9 @@ easyNutri.controller('dadosNaoSincCtrl', ['$scope', 'WebServiceFactory', '$filte
                 .then(function (result) {
                     if (result) {
                         $scope.listaRefeicoesEditadas.splice($scope.listaRefeicoesEditadas.indexOf(refeicao), 1);
+                        $scope.listaRefeicoesRemovidas.push(refeicao);
+                        $window.localStorage.setItem('listaRefeicoesEditadas', JSON.stringify(eval($scope.listaRefeicoesEditadas)));
+                        $window.localStorage.setItem('listaRefeicoesRemovidas', JSON.stringify(eval($scope.listaRefeicoesRemovidas)));
                     }
                 });
         };
@@ -90,7 +98,7 @@ easyNutri.controller('dadosNaoSincCtrl', ['$scope', 'WebServiceFactory', '$filte
             $rootScope.offline = true;
             $rootScope.editar = true;
             $rootScope.refeicaoEditar = refeicao;
-            $scope.listaRefeicoesDiario.splice($scope.listaRefeicoesDiario.indexOf(refeicao), 1);
+            $scope.listaRefeicoesDiario.Refeicoes.splice($scope.listaRefeicoesDiario.Refeicoes.indexOf(refeicao), 1);
             $window.localStorage.setItem('diarioAlimentar', JSON.stringify(eval($scope.listaRefeicoesDiario)));
             $location.path('/easyNutri/editarRefeicao');
         };

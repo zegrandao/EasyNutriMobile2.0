@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eee567b1-be46-4b21-a988-eb5f89dddf19" name="Default" comment="gitignore atualixado">
+    <list default="true" id="eee567b1-be46-4b21-a988-eb5f89dddf19" name="Default" comment="editar refeição offline">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/dadosNaoSincCtrl.js" afterPath="$PROJECT_DIR$/www/js/dadosNaoSincCtrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/refeicaoCtrl.js" afterPath="$PROJECT_DIR$/www/js/refeicaoCtrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -30,8 +31,8 @@
       <file leaf-file-name="WebServiceFactory.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/WebServiceFactory.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="499" max-vertical-offset="4488">
-              <caret line="47" column="13" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3556" max-vertical-offset="4488">
+              <caret line="218" column="69" selection-start-line="218" selection-start-column="46" selection-end-line="218" selection-end-column="69" />
               <folding />
             </state>
           </provider>
@@ -50,8 +51,8 @@
       <file leaf-file-name="diarioCtrl.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/diarioCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="4267">
-              <caret line="5" column="32" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1190" max-vertical-offset="4267">
+              <caret line="79" column="85" selection-start-line="79" selection-start-column="70" selection-end-line="79" selection-end-column="85" />
               <folding />
             </state>
           </provider>
@@ -70,15 +71,9 @@
       <file leaf-file-name="dadosNaoSincCtrl.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/dadosNaoSincCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="731" max-vertical-offset="1989">
-              <caret line="43" column="27" selection-start-line="43" selection-start-column="27" selection-end-line="43" selection-end-column="27" />
-              <folding>
-                <marker date="1421946752389" expanded="true" signature="1155:1590" placeholder="{...}" />
-                <marker date="1421946752389" expanded="true" signature="1718:1725" placeholder="{...}" />
-                <marker date="1421946752389" expanded="true" signature="3065:3999" placeholder="{...}" />
-                <marker date="1421946752389" expanded="true" signature="3652:3996" placeholder="{...}" />
-                <marker date="1421946752389" expanded="true" signature="4088:4394" placeholder="{...}" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="930" max-vertical-offset="2125">
+              <caret line="67" column="70" selection-start-line="67" selection-start-column="70" selection-end-line="67" selection-end-column="70" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -86,42 +81,18 @@
       <file leaf-file-name="refeicaoCtrl.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/js/refeicaoCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.42372882" vertical-offset="5129" max-vertical-offset="7140">
-              <caret line="312" column="32" selection-start-line="312" selection-start-column="32" selection-end-line="312" selection-end-column="32" />
+            <state vertical-scroll-proportion="-0.070217915" vertical-offset="4670" max-vertical-offset="7276">
+              <caret line="273" column="54" selection-start-line="273" selection-start-column="54" selection-end-line="273" selection-end-column="54" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="novaRefeicao.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/templates/novaRefeicao.html">
+      <file leaf-file-name="dadosNaoSincronizados.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/dadosNaoSincronizados.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.076923" vertical-offset="833" max-vertical-offset="1394">
-              <caret line="69" column="40" selection-start-line="69" selection-start-column="40" selection-end-line="69" selection-end-column="40" />
-              <folding>
-                <element signature="n#style#0;n#button#0;n#form#0;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ionic.bundle.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/lib/ionic/js/ionic.bundle.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="736562" max-vertical-offset="760699">
-              <caret line="43340" column="0" selection-start-line="43340" selection-start-column="0" selection-end-line="43340" selection-end-column="0" />
-              <folding>
-                <marker date="1421170275124" expanded="true" signature="1743894:1743912" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainCtrl.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/MainCtrl.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="3417">
-              <caret line="29" column="10" selection-start-line="29" selection-start-column="10" selection-end-line="29" selection-end-column="10" />
+            <state vertical-scroll-proportion="-6.4615383" vertical-offset="393" max-vertical-offset="867">
+              <caret line="33" column="55" selection-start-line="33" selection-start-column="55" selection-end-line="33" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -142,21 +113,21 @@
         <option value="$PROJECT_DIR$/www/js/mudarPasswordCtrl.js" />
         <option value="$PROJECT_DIR$/www/js/definicoesCtrl.js" />
         <option value="$PROJECT_DIR$/www/js/notificacoesCtrl.js" />
-        <option value="$PROJECT_DIR$/www/templates/tabs.html" />
         <option value="$PROJECT_DIR$/www/js/planoAlimentarCtrl.js" />
         <option value="$PROJECT_DIR$/platforms/android/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/www/templates/definicoes.html" />
         <option value="$PROJECT_DIR$/www/js/pesoCtrl.js" />
         <option value="$PROJECT_DIR$/www/templates/dadosNaoSincronizados.html" />
-        <option value="$PROJECT_DIR$/www/js/dadosNaoSincCtrl.js" />
         <option value="$PROJECT_DIR$/www/index.html" />
         <option value="$PROJECT_DIR$/www/templates/consultaDiario.html" />
-        <option value="$PROJECT_DIR$/www/js/diarioCtrl.js" />
         <option value="$PROJECT_DIR$/www/js/app.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/config.xml" />
         <option value="$PROJECT_DIR$/www/js/MainCtrl.js" />
         <option value="$PROJECT_DIR$/www/js/WebServiceFactory.js" />
+        <option value="$PROJECT_DIR$/www/templates/tabs.html" />
+        <option value="$PROJECT_DIR$/www/js/dadosNaoSincCtrl.js" />
+        <option value="$PROJECT_DIR$/www/js/diarioCtrl.js" />
         <option value="$PROJECT_DIR$/www/js/refeicaoCtrl.js" />
       </list>
     </option>
@@ -560,7 +531,19 @@
       <option name="project" value="LOCAL" />
       <updated>1421944917844</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="editar refeição offline">
+      <created>1421947160350</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1421947160350</updated>
+    </task>
+    <task id="LOCAL-00007" summary="resolução de bug editar refeicao offline">
+      <created>1421947880247</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1421947880247</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -652,23 +635,13 @@
     <MESSAGE value="gitignore atualixado" />
     <MESSAGE value="if toastr notificacoes corrigido" />
     <MESSAGE value="bug fix editar" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug fix editar" />
+    <MESSAGE value="editar refeição offline" />
+    <MESSAGE value="resolução de bug editar refeicao offline" />
+    <option name="LAST_COMMIT_MESSAGE" value="resolução de bug editar refeicao offline" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/www/js/refeicaoCtrl.js</url>
-          <line>250</line>
-          <option name="timeStamp" value="73" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/www/js/refeicaoCtrl.js</url>
-          <line>222</line>
-          <option name="timeStamp" value="75" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="78" />
     </breakpoint-manager>
     <watches-manager />
@@ -842,13 +815,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/tabs.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.730769" vertical-offset="208" max-vertical-offset="697">
-          <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/pesoCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4199">
@@ -860,27 +826,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.36743516" vertical-offset="0" max-vertical-offset="694">
           <caret line="15" column="66" selection-start-line="15" selection-start-column="66" selection-end-line="15" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/dadosNaoSincronizados.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.307692" vertical-offset="102" max-vertical-offset="901">
-          <caret line="34" column="64" selection-start-line="34" selection-start-column="64" selection-end-line="34" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/dadosNaoSincCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="731" max-vertical-offset="1989">
-          <caret line="43" column="27" selection-start-line="43" selection-start-column="27" selection-end-line="43" selection-end-column="27" />
-          <folding>
-            <marker date="1421946752389" expanded="true" signature="1155:1590" placeholder="{...}" />
-            <marker date="1421946752389" expanded="true" signature="1718:1725" placeholder="{...}" />
-            <marker date="1421946752389" expanded="true" signature="3065:3999" placeholder="{...}" />
-            <marker date="1421946752389" expanded="true" signature="3652:3996" placeholder="{...}" />
-            <marker date="1421946752389" expanded="true" signature="4088:4394" placeholder="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1000,36 +945,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/diarioCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4267">
-          <caret line="5" column="32" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/MainCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="3417">
-          <caret line="29" column="10" selection-start-line="29" selection-start-column="10" selection-end-line="29" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/WebServiceFactory.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="499" max-vertical-offset="4488">
-          <caret line="47" column="13" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/novaRefeicao.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.076923" vertical-offset="833" max-vertical-offset="1394">
           <caret line="69" column="40" selection-start-line="69" selection-start-column="40" selection-end-line="69" selection-end-column="40" />
           <folding>
-            <element signature="n#style#0;n#button#0;n#form#0;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#form#0;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1039,15 +960,63 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="736562" max-vertical-offset="760699">
           <caret line="43340" column="0" selection-start-line="43340" selection-start-column="0" selection-end-line="43340" selection-end-column="0" />
           <folding>
-            <marker date="1421170275124" expanded="true" signature="1743894:1743912" placeholder="..." />
+            <marker date="1421170275124" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/tabs.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.653846" vertical-offset="208" max-vertical-offset="697">
+          <caret line="27" column="107" selection-start-line="27" selection-start-column="107" selection-end-line="27" selection-end-column="107" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/MainCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2142" max-vertical-offset="3417">
+          <caret line="128" column="41" selection-start-line="128" selection-start-column="41" selection-end-line="128" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/WebServiceFactory.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3556" max-vertical-offset="4488">
+          <caret line="218" column="69" selection-start-line="218" selection-start-column="46" selection-end-line="218" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/dadosNaoSincronizados.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.4615383" vertical-offset="393" max-vertical-offset="867">
+          <caret line="33" column="55" selection-start-line="33" selection-start-column="55" selection-end-line="33" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/dadosNaoSincCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="930" max-vertical-offset="2125">
+          <caret line="67" column="70" selection-start-line="67" selection-start-column="70" selection-end-line="67" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/diarioCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1190" max-vertical-offset="4267">
+          <caret line="79" column="85" selection-start-line="79" selection-start-column="70" selection-end-line="79" selection-end-column="85" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/refeicaoCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42372882" vertical-offset="5129" max-vertical-offset="7140">
-          <caret line="312" column="32" selection-start-line="312" selection-start-column="32" selection-end-line="312" selection-end-column="32" />
+        <state vertical-scroll-proportion="-0.070217915" vertical-offset="4670" max-vertical-offset="7276">
+          <caret line="273" column="54" selection-start-line="273" selection-start-column="54" selection-end-line="273" selection-end-column="54" />
           <folding />
         </state>
       </provider>

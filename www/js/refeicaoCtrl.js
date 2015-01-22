@@ -263,6 +263,7 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
         };
 
         var editarRefeicaoOffline = function (refeicao) {
+            $scope.diarioAlimentar = new Array();
             if ($rootScope.editadaOffline) {
                 $scope.listaRefeicoesOffline = new Array();
                 if ($window.localStorage.getItem('listaRefeicoesNovas') != null) {
@@ -283,6 +284,8 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
                     $window.localStorage.setItem('listaRefeicoesEditadas', JSON.stringify(eval($scope.listaRefeicoesEditadasOffline)));
                     $rootScope.editar = false;
                     $rootScope.editarSubmit = false;
+                    $scope.diarioAlimentar.splice($scope.diarioAlimentar.indexOf($rootScope.editarRefeicao), 1);
+                    $window.localStorage.setItem('diarioAlimentar', JSON.stringify(eval($scope.diarioAlimentar)));
                     delete $rootScope.editarRefeicao;
                     toast('Refeição editada com sucesso!', 1);
                     inicializar();
@@ -291,6 +294,8 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
                     $window.localStorage.setItem('listaRefeicoesEditadas', JSON.stringify(eval($scope.listaRefeicoesEditadasOffline)));
                     $rootScope.editar = false;
                     $rootScope.editarSubmit = false;
+                    $scope.diarioAlimentar.splice($scope.diarioAlimentar.indexOf($rootScope.editarRefeicao), 1);
+                    $window.localStorage.setItem('diarioAlimentar', JSON.stringify(eval($scope.diarioAlimentar)));
                     delete $rootScope.editarRefeicao;
                     toast('Refeição editada com sucesso!', 1);
                     inicializar();
