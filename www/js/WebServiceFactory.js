@@ -50,7 +50,7 @@ angular.module('easyNutri').factory('WebServiceFactory', ['$http', '$window', '$
     };
 
     WebServiceFactory.verificarConexao = function () {
-        return $http.get('8.8.8.8');
+        return WebServiceFactory.getNotificacoes();
     };
 
     WebServiceFactory.alterarEstadoNotificacao = function (idNotificacao) {

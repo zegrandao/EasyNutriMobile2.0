@@ -5,6 +5,9 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
         $state.go('login', {reload: true, inherit: false});
     }
 
+    var irParaNotificacoes = function () {
+        $state.go('easyNutri.notificacoes', {reload: true, inherit: false})
+    };
 
     var toast = function (texto, caso) {
         toastr.options = {
@@ -17,7 +20,7 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
             "onclick": null,
             "showDuration": "300",
             "hideDuration": "100",
-            "timeOut": "3000",
+            "timeOut": "5000",
             "extendedTimeOut": "1000",
             "showEasing": "swing",
             "hideEasing": "linear",

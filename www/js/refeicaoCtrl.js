@@ -147,6 +147,7 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
                         refeicao.LinhasRefeicao[$i].Alimentos.PorcaoId = refeicao.LinhasRefeicao[$i].PorcaoId;
                     }
                     $scope.refeicao.listaAlimentos.push(refeicao.LinhasRefeicao[$i].Alimentos);
+                    mostrarBotao();
                 }
             }).error(function (status, data, headers) {
                 if (status == 0) {
@@ -159,6 +160,7 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
                     for ($i = 0; $i < refeicao.listaAlimentos.length; $i++) {
                         $scope.refeicao.listaAlimentos.push(refeicao.listaAlimentos[$i]);
                     }
+                    mostrarBotao();
                 }
             });
             mostrarBotao();
@@ -218,9 +220,7 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
 
         //define metodo para guardar refeicao
         $scope.guardarRefeicao = function (refeicao) {
-
             if (isValid(refeicao)) {
-
                 WebServiceFactory.guardarRefeicao(refeicao)
                     .success(function () {
                         console.log(JSON.stringify(refeicao));
