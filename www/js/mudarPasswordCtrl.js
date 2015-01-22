@@ -3,6 +3,39 @@ easyNutri.controller('mudarPasswordCtrl', ['$scope', '$http', 'WebServiceFactory
     function ($scope, $http, WebServiceFactory, modalFactory, $ionicPopup, $window, $rootScope, $ionicLoading) {
 
         $scope.pass = {};
+
+        var toast = function (texto, caso) {
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-bottom-center",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "100",
+                "timeOut": "3000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+            switch (caso) {
+                case 1:
+                    toastr.success(texto);
+                    break;
+                case 2:
+                    toastr.error(texto);
+                    break;
+                case 3:
+                    toastr.info(texto);
+                    break;
+            }
+
+        };
+
         var isValid = function (passwords) {
             var mensagem = "";
             if (passwords.antiga == undefined || passwords.antiga == "") {
@@ -22,10 +55,7 @@ easyNutri.controller('mudarPasswordCtrl', ['$scope', '$http', 'WebServiceFactory
             }
 
             if (mensagem != "") {
-                $ionicPopup.alert({
-                    title: 'Aviso',
-                    template: mensagem
-                });
+                toast(mensagem, 2);
                 return false;
             }
             return true;
@@ -45,7 +75,7 @@ easyNutri.controller('mudarPasswordCtrl', ['$scope', '$http', 'WebServiceFactory
             $ionicLoading.hide();
         };
 
-        $scope.hideModal = function(){
+        $scope.hideModal = function () {
             $scope.mudarPasswordModal.hide();
         };
 
@@ -80,23 +110,14 @@ easyNutri.controller('mudarPasswordCtrl', ['$scope', '$http', 'WebServiceFactory
                     }
 
                     $scope.hideModal();
-                    $ionicPopup.alert({
-                        title: 'Mudar Password',
-                        template: 'Password alterada com sucesso'
-                    });
+                    toast('Password alterada com sucesso!', 1);
 
                 }).error(function (data, status, header) {
                     esconderSpinner();
                     if (status == 0) {
-                        $ionicPopup.alert({
-                            title: 'Erro',
-                            template: 'Não existe ligação à rede!'
-                        });
+                        toast('Não está ligado à rede', 3);
                     } else {
-                        $ionicPopup.alert({
-                            title: 'Erro',
-                            template: 'Erro a alterar a password'
-                        });
+                        toast('Erro a alterar a password', 2);
                     }
                 });
             }

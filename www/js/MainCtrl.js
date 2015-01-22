@@ -85,7 +85,7 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
 
             WebServiceFactory.getNotificacoes().success(function (lista) {
                         $rootScope.listaNotificacoes = lista;
-
+                $window.localStorage.setItem('listaNotificacoes', JSON.stringify(eval(lista)));
                 if ($scope.numeroNotificacoes == undefined) {
                     $scope.numeroNotificacoes = $rootScope.listaNotificacoes.length;
                 } else {

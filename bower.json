@@ -1,7 +1,13 @@
 {
-  "name": "EasyNutriMobile",
-  "private": "true",
-  "devDependencies": {
-    "ionic": "driftyco/ionic-bower#1.0.0-beta.14"
-  }
+    "name": "EasyNutriMobile",
+    "private": "true",
+    "devDependencies": {
+        "ionic": "driftyco/ionic-bower#1.0.0-beta.14"
+    },
+    "resolutions": {
+        "angular": "~1.2.0"
+    },
+    "dependencies": {
+        "angular-picturefill": "*"
+    }
 }

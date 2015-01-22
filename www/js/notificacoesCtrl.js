@@ -3,7 +3,7 @@ easyNutri.controller('notificacoesCtrl', ['$scope', '$http', 'WebServiceFactory'
 
         if ($rootScope.loggedIn != true) {
             $state.go('login', {reload: true, inherit: false});
-            }
+        }
 
         if ($rootScope.loggedIn) {
             $interval(function () {
@@ -33,7 +33,7 @@ easyNutri.controller('notificacoesCtrl', ['$scope', '$http', 'WebServiceFactory'
                     $scope.modal.show();
                     notificacao.Data = $filter('date')(notificacao.Data, 'dd-MM-yyyy H:mm');
                     $scope.notificacao = notificacao;
-                    $scope.notificacao.Lido = 1;
+                    $scope.listaNotificacoes[$scope.listaNotificacoes.indexOf(notificacao)].Lido = 1;
                     WebServiceFactory.alterarEstadoNotificacao(notificacao.Id).error(function () {
                         if (status == 0) {
                             var listaNotificacoes = new Array();

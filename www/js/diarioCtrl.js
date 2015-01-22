@@ -34,10 +34,10 @@ easyNutri.controller('diarioCtrl',
                         toastr.success(texto);
                         break;
                     case 2:
-                        toast.error(texto);
+                        toastr.error(texto);
                         break;
                     case 3:
-                        toast.info(texto);
+                        toastr.info(texto);
                         break;
                 }
 

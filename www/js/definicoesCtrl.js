@@ -1,9 +1,41 @@
 easyNutri.controller('definicoesCtrl', function ($scope, $ionicSideMenuDelegate, $rootScope, $window, $ionicModal, $ionicPopup, $state) {
 
 
-    if($rootScope.loggedIn != true){
+    if ($rootScope.loggedIn != true) {
         $state.go('login', {reload: true, inherit: false});
     }
+
+    var toast = function (texto, caso) {
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-bottom-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "100",
+            "timeOut": "3000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        switch (caso) {
+            case 1:
+                toastr.success(texto);
+                break;
+            case 2:
+                toastr.error(texto);
+                break;
+            case 3:
+                toastr.info(texto);
+                break;
+        }
+
+    };
 
     $scope.numero = "";
     $scope.paginaInicial = "";
@@ -37,14 +69,7 @@ easyNutri.controller('definicoesCtrl', function ($scope, $ionicSideMenuDelegate,
 
 
     $scope.abrirMudarPasswordModal = function () {
-        if (!$rootScope.offline) {
-            $scope.mudarPasswordModal.show();
-        } else {
-            $ionicPopup.alert({
-                title: 'Erro',
-                template: 'A aplicação está em modo offline!'
-            });
-        }
+        $scope.mudarPasswordModal.show();
     };
 
 
@@ -83,10 +108,7 @@ easyNutri.controller('definicoesCtrl', function ($scope, $ionicSideMenuDelegate,
         }
 
         if (mensagem != "") {
-            $ionicPopup.alert({
-                title: 'Aviso',
-                template: mensagem
-            });
+            toast(mensagem, 2);
             return false;
         }
 
@@ -103,10 +125,7 @@ easyNutri.controller('definicoesCtrl', function ($scope, $ionicSideMenuDelegate,
             }
 
             if (mensagem != "") {
-                $ionicPopup.alert({
-                    title: 'Aviso',
-                    template: mensagem
-                });
+                toast(mensagem, 2);
                 return false;
             }
         }
