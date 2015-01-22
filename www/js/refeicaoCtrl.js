@@ -200,7 +200,6 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
             $scope.textoBotao = "Editar";
             $scope.popularPaginaEditar($rootScope.refeicaoEditar);
             $scope.editarSubmit = true;
-            $rootScope.editar = false;
         } else {
             inicializar();
 
@@ -283,6 +282,7 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
                     $scope.listaRefeicoesEditadasOffline.push(refeicao);
                     $window.localStorage.setItem('listaRefeicoesEditadas', JSON.stringify(eval($scope.listaRefeicoesEditadasOffline)));
                     $rootScope.editar = false;
+                    $rootScope.editarSubmit = false;
                     delete $rootScope.editarRefeicao;
                     toast('Refeição editada com sucesso!', 1);
                     inicializar();
@@ -290,6 +290,7 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
                     $scope.listaRefeicoesEditadasOffline.push(refeicao);
                     $window.localStorage.setItem('listaRefeicoesEditadas', JSON.stringify(eval($scope.listaRefeicoesEditadasOffline)));
                     $rootScope.editar = false;
+                    $rootScope.editarSubmit = false;
                     delete $rootScope.editarRefeicao;
                     toast('Refeição editada com sucesso!', 1);
                     inicializar();
@@ -302,22 +303,23 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
             console.log("A tentar editar refeicao: " + refeicao);
             if (isValid(refeicao)) {
                 var idLinha = refeicao.idRefeicao;
-                WebServiceFactory.editarRefeicaoWeb(refeicao, idLinha)
-                    .success(function () {
-                        $rootScope.editar = false;
-                        delete $rootScope.editarRefeicao;
-                        toast('Refeição editada com sucesso!', 1);
-                        $location.path('/easyNutri/consultaDiario');
-                    })
-                    .error(function (data, status, headers) {
-                        if (status == 0) {
-                            editarRefeicaoOffline(refeicao);
-                            ;
-                        } else {
-                            toast('Erro a editar refeição!', 2);
-                            $rootScope.editar = true;
-                        }
-                    });
+                editarRefeicaoOffline(refeicao);
+                //WebServiceFactory.editarRefeicaoWeb(refeicao, idLinha)
+                //    .success(function () {
+                //        $rootScope.editar = false;
+                //        $rootScope.editarSubmit = false;
+                //        delete $rootScope.editarRefeicao;
+                //        toast('Refeição editada com sucesso!', 1);
+                //        $location.path('/easyNutri/consultaDiario');
+                //    })
+                //    .error(function (data, status, headers) {
+                //        if (status == 0) {
+                //            editarRefeicaoOffline(refeicao);
+                //        } else {
+                //            toast('Erro a editar refeição!', 2);
+                //            $rootScope.editar = true;
+                //        }
+                //    });
             }
         };
 
