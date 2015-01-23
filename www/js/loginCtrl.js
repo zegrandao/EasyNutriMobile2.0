@@ -27,7 +27,6 @@ easyNutri.controller('loginCtrl', ['$scope', '$http', 'WebServiceFactory', 'moda
                 "showDuration": "300",
                 "hideDuration": "100",
                 "timeOut": "3000",
-                "extendedTimeOut": "1000",
                 "showEasing": "swing",
                 "hideEasing": "linear",
                 "showMethod": "fadeIn",

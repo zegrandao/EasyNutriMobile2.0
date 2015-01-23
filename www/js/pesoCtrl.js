@@ -14,6 +14,37 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
 
         $scope.peso = {};
 
+        var toast = function (texto, caso) {
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-bottom-center",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "100",
+                "timeOut": "3000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+            switch (caso) {
+                case 1:
+                    toastr.success(texto);
+                    break;
+                case 2:
+                    toastr.error(texto);
+                    break;
+                case 3:
+                    toastr.info(texto);
+                    break;
+            }
+
+        };
+
         var patternPeso = /^[0-9]{1,3}(\.[0-9])?$/;
         var patternHora = /^[0-9]{1,2}\:[0-9]{2}$/;
 
@@ -113,16 +144,14 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
 
             } else {
                 esconderSpinner();
-                $ionicPopup.alert({
-                    title: 'Aviso',
-                    template: 'Não existem registos de pesos!'
-                });
+                toast('Não existem registos', 3);
             }
         }
 
         $scope.getRegistos = function () {
             mostrarSpinner();
             if($rootScope.loggedIn != false){
+                WebServiceFactory.verificarConexao().success(function () {
                     WebServiceFactory.getRegistosPeso()
                         .success(function(lista) {
                             if (lista != null) {
@@ -136,23 +165,21 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
                                 $window.localStorage.setItem('listaPesos', JSON.stringify(eval(lista)));
                             } else {
                                 esconderSpinner();
-                                $ionicPopup.alert({
-                                    title: 'Aviso',
-                                    template: 'Não existem registos de pesos!'
-                                });
+                                toast('Não existem registos', 3);
                             }
                         })
                         .error(function (data, status, headers) {
                             if (status == 0) {
-                                getRegistosOffline();
+
                             } else {
                                 esconderSpinner();
-                                $ionicPopup.alert({
-                                    title: 'Erro',
-                                    template: 'Erro a processar pedido de pesos!'
-                                });
+                                toast('Erro a processar pedido', 2);
                             }
                         });
+                }).error(function () {
+                    getRegistosOffline();
+                });
+
             }
         }
 
@@ -164,17 +191,11 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
                 lista = JSON.parse($window.localStorage.getItem('listaPesosNovos'));
                 lista.push(peso);
                 $window.localStorage.setItem('listaPesosNovos', JSON.stringify(eval(lista)));
-                $ionicPopup.alert({
-                    title: 'Sucesso',
-                    template: 'Peso inserido com sucesso'
-                });
+                toast('Peso inserido com sucesso', 1);
             } else {
                 lista.push(peso);
                 $window.localStorage.setItem('listaPesosNovos', JSON.stringify(eval(lista)));
-                $ionicPopup.alert({
-                    title: 'Sucesso',
-                    template: 'Peso inserido com sucesso'
-                });
+                toast('Peso inserido com sucesso', 1);
             }
             esconderSpinner();
             inicializar();
@@ -187,27 +208,22 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
                 peso.DataMed = $scope.reg.Dia + " " + $scope.reg.Hora;
                 peso.TipoMedicaoID = 1;
                 peso.EmCasa = 1;
+                WebServiceFactory.verificarConexao().success(function () {
                     WebServiceFactory.registarPeso(peso)
                         .success(function () {
                             esconderSpinner();
-                            $ionicPopup.alert({
-                                title: 'Sucesso',
-                                template: 'Peso inserido com sucesso'
-                            });
+                            toast('Peso inserido com sucesso', 1);
                             inicializar();
                             $scope.getRegistos();
                         })
                         .error(function (data, status, headers) {
-                            if (status == 0) {
-                                registarPesoOffline(peso);
-                            } else {
-                                esconderSpinner();
-                                $ionicPopup.alert({
-                                    title: 'Erro',
-                                    template: 'Erro a guardar peso!'
-                                });
-                            }
+                            esconderSpinner();
+                            toast('Erro a registar o peso', 2);
                         });
+                }).error(function () {
+                    registarPesoOffline(peso);
+                });
+
             }
         };
 

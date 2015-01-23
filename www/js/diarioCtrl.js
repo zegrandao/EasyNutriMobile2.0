@@ -23,7 +23,6 @@ easyNutri.controller('diarioCtrl',
                     "showDuration": "300",
                     "hideDuration": "100",
                     "timeOut": "3000",
-                    "extendedTimeOut": "1000",
                     "showEasing": "swing",
                     "hideEasing": "linear",
                     "showMethod": "fadeIn",
@@ -43,8 +42,6 @@ easyNutri.controller('diarioCtrl',
 
             };
 
-
-
             var mostrarSpinner = function () {
                 $ionicLoading.show({
                     content: '<i class="icon ion-load-a"></i>',
@@ -62,10 +59,13 @@ easyNutri.controller('diarioCtrl',
             $scope.pesquisarDiarios = function (dataPesquisa) {
                 mostrarSpinner();
                 if($rootScope.loggedIn != false){
+                    WebServiceFactory.verificarConexao().success(function () {
                         WebServiceFactory.getDiarioAlimentar(dataPesquisa)
                             .success(function (data) {
                                 if (data != "null") {
                                     $scope.diarioAlimentar = data;
+                                    console.log('JSON que vem do webservice: ' + JSON.stringify(data));
+                                    $window.localStorage.setItem('diarioAlimentar', JSON.stringify(eval(data)));
                                     esconderSpinner();
                                 } else {
                                     $scope.diarioAlimentar = "";
@@ -75,19 +75,19 @@ easyNutri.controller('diarioCtrl',
 
                             })
                             .error(function (data, status, headers) {
-                                if (status == 0) {
-                                    esconderSpinner();
-                                    if ($window.localStorage.getItem('diarioAlimentar') !== null) {
-                                        $scope.diarioAlimentar = JSON.parse($window.localStorage.getItem('diarioAlimentar'));
-                                    } else {
-                                        toast('Não existem registos!', 3);
-                                    }
-                                } else {
-                                    esconderSpinner();
-                                    toast('Erro a pesquisar diários alimentares!', 2);
-
-                                }
+                                esconderSpinner();
+                                toast('Erro a pesquisar diários alimentares!', 2);
                             });
+                    }).error(function () {
+                        esconderSpinner();
+                        if ($window.localStorage.getItem('diarioAlimentar') != null) {
+                            console.log(JSON.stringify($window.localStorage.getItem('diarioAlimentar')));
+                            $scope.diarioAlimentar = JSON.parse($window.localStorage.getItem('diarioAlimentar'));
+                        } else {
+                            toast('Não existem registos!', 3);
+                        }
+                    });
+
                 }
             };
 
@@ -106,15 +106,16 @@ easyNutri.controller('diarioCtrl',
                 }
             };
 
-            if (!$rootScope.offline) {
+            WebServiceFactory.verificarConexao().success(function () {
                 $scope.pesquisarDiarios($scope.pesquisa.Dia);
-            } else {
+            }).error(function () {
                 if ($window.localStorage.getItem('diarioAlimentar') !== null) {
                     $scope.diarioAlimentar = JSON.parse($window.localStorage.getItem('diarioAlimentar'));
                 } else {
                     toast('Não existem registos!', 3);
                 }
-            }
+            });
+
 
             $scope.tiposRefeicao = TiposRefeicaoFactory.all();
 
@@ -178,6 +179,7 @@ easyNutri.controller('diarioCtrl',
             $scope.editar = function (refeicao) {
                 $rootScope.editar = true;
                 $rootScope.refeicaoEditar = refeicao;
+                console.log(JSON.stringify($rootScope.refeicaoEditar));
                 $location.path('/easyNutri/editarRefeicao');
             };
 
@@ -201,7 +203,7 @@ easyNutri.controller('diarioCtrl',
 
             $scope.remover = function (refeicao) {
                 mostrarSpinner();
-                if (!$rootScope.offline) {
+                WebServiceFactory.verificarConexao().success(function () {
                     WebServiceFactory.removerRefeicaoWeb(refeicao.Id)
                         .success(function () {
                             esconderSpinner();
@@ -209,17 +211,12 @@ easyNutri.controller('diarioCtrl',
                             $scope.diarioAlimentar.Refeicoes.splice($scope.diarioAlimentar.Refeicoes.indexOf(refeicao), 1);
                         })
                         .error(function (data, status, headers) {
-                            if (status == 0) {
-                                removerOffline(refeicao);
-                            } else {
-                                esconderSpinner();
-                                toast('Erro a remover refeição!', 2);
-
-                            }
+                            esconderSpinner();
+                            toast('Erro a remover refeição!', 2);
                         });
-                } else {
+                }).error(function () {
                     removerOffline(refeicao);
-                }
+                });
             };
 
 

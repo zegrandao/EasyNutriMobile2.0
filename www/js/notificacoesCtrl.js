@@ -34,20 +34,19 @@ easyNutri.controller('notificacoesCtrl', ['$scope', '$http', 'WebServiceFactory'
                     notificacao.Data = $filter('date')(notificacao.Data, 'dd-MM-yyyy H:mm');
                     $scope.notificacao = notificacao;
                     $scope.listaNotificacoes[$scope.listaNotificacoes.indexOf(notificacao)].Lido = 1;
-                    WebServiceFactory.alterarEstadoNotificacao(notificacao.Id).error(function () {
-                        if (status == 0) {
-                            var listaNotificacoes = new Array();
-                            if ($window.localStorage.getItem('listaNotificacoesLidas') != null) {
-                                listaNotificacoes = JSON.parse($window.localStorage.getItem('listaNotificacoesLidas'));
-                                listaNotificacoes.push(notificacao);
-                                $window.localStorage.setItem('listaNotificacoesLidas', JSON.stringify(eval(listaNotificacoes)));
-                            } else {
-                                listaNotificacoes.push(notificacao);
-                                $window.localStorage.setItem('listaNotificacoesLidas', JSON.stringify(eval(listaNotificacoes)));
-                            }
+                    WebServiceFactory.verificarConexao().success(function () {
+                        WebServiceFactory.alterarEstadoNotificacao(notificacao.Id);
+                    }).error(function () {
+                        var listaNotificacoes = new Array();
+                        if ($window.localStorage.getItem('listaNotificacoesLidas') != null) {
+                            listaNotificacoes = JSON.parse($window.localStorage.getItem('listaNotificacoesLidas'));
+                            listaNotificacoes.push(notificacao);
+                            $window.localStorage.setItem('listaNotificacoesLidas', JSON.stringify(eval(listaNotificacoes)));
+                        } else {
+                            listaNotificacoes.push(notificacao);
+                            $window.localStorage.setItem('listaNotificacoesLidas', JSON.stringify(eval(listaNotificacoes)));
                         }
                     });
-
                 }
 
             }

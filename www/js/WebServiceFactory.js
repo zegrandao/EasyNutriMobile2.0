@@ -50,7 +50,7 @@ angular.module('easyNutri').factory('WebServiceFactory', ['$http', '$window', '$
     };
 
     WebServiceFactory.verificarConexao = function () {
-        return WebServiceFactory.getNotificacoes();
+        return $http.get(urlBase + 'VerificarConexao');
     };
 
     WebServiceFactory.alterarEstadoNotificacao = function (idNotificacao) {
@@ -114,7 +114,6 @@ angular.module('easyNutri').factory('WebServiceFactory', ['$http', '$window', '$
             delete refeicao.listaAlimentos[$i]['$$hashKey'];
             delete refeicao.listaAlimentos[$i]['Porcoes'];
         }
-
         return $http({
             method: 'POST',
             url: urlBase + 'Refeicoes',//guardar
@@ -135,9 +134,11 @@ angular.module('easyNutri').factory('WebServiceFactory', ['$http', '$window', '$
 
     WebServiceFactory.editarRefeicaoWeb = function (refeicao, idLinha) {
         var cred = WebServiceFactory.checkCredencial();
-        for ($i = 0; $i < refeicao.listaAlimentos.length; $i++) {
-            delete refeicao.listaAlimentos[$i]['$$hashKey'];
-            delete refeicao.listaAlimentos[$i]['Porcoes'];
+        if (!$rootScope.editadaOffline || !$rootScope.editadaVelhaOffline) {
+            for ($i = 0; $i < refeicao.listaAlimentos.length; $i++) {
+                delete refeicao.listaAlimentos[$i]['$$hashKey'];
+                delete refeicao.listaAlimentos[$i]['Porcoes'];
+            }
         }
         return $http({
             method: 'PUT',
@@ -207,6 +208,7 @@ angular.module('easyNutri').factory('WebServiceFactory', ['$http', '$window', '$
 
             if ($window.localStorage.getItem('listaRefeicoesEditadas') != null) {
                 var listaRefeicoesEditadas = JSON.parse($window.localStorage.getItem('listaRefeicoesEditadas'));
+                console.log('JSON sincronizar dados: ' + JSON.stringify(listaRefeicoesEditadas));
                 for (var $e = 0; $e < listaRefeicoesEditadas.length; $e++) {
                     var idLinha = listaRefeicoesEditadas[$e].idRefeicao;
                     WebServiceFactory.editarRefeicaoWeb(listaRefeicoesEditadas[$e], idLinha).error(function () {
@@ -218,8 +220,10 @@ angular.module('easyNutri').factory('WebServiceFactory', ['$http', '$window', '$
 
             if ($window.localStorage.getItem('listaRefeicoesRemovidas') != null) {
                 var listaRefeicoesRemovidas = JSON.parse($window.localStorage.getItem('listaRefeicoesRemovidas'));
+                console.log(JSON.stringify(listaRefeicoesRemovidas));
                 for (var $r = 0; $r < listaRefeicoesRemovidas.length; $r++) {
-                    WebServiceFactory.removerRefeicaoWeb(listaRefeicoesRemovidas[$r].Id).error(function () {
+                    console.log(JSON.stringify(listaRefeicoesRemovidas[$r].idRefeicao));
+                    WebServiceFactory.removerRefeicaoWeb(listaRefeicoesRemovidas[$r].idRefeicao).error(function () {
                         mensagem += "Erro a sincronizar as refeições removidas";
                     });
                 }

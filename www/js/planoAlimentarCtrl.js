@@ -9,6 +9,37 @@ easyNutri.controller('planoAlimentarCtrl',
             $scope.recomendacoes = "";
             $scope.planoAlimentar = "";
 
+            var toast = function (texto, caso) {
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-bottom-center",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "100",
+                    "timeOut": "3000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+                switch (caso) {
+                    case 1:
+                        toastr.success(texto);
+                        break;
+                    case 2:
+                        toastr.error(texto);
+                        break;
+                    case 3:
+                        toastr.info(texto);
+                        break;
+                }
+
+            };
+
             document.getElementById('btn_Equiv').onclick = function () {
                 $state.go('easyNutri.tabelaEquivalencias');
                 document.getElementById('btn_Equiv').style.display = 'none';
@@ -45,10 +76,7 @@ easyNutri.controller('planoAlimentarCtrl',
                     esconderSpinner();
                     $scope.planoAlimentar = "";
                     document.getElementById('recomendacoes').style.display = 'none';
-                    $ionicPopup.alert({
-                        title: 'Informação',
-                        template: 'Não existe plano alimentar!'
-                    });
+                    toast('Não existe plano alimentar', 3);
                 }
             };
 
@@ -56,7 +84,7 @@ easyNutri.controller('planoAlimentarCtrl',
             var getPlanoAlimentar = function () {
                 if($rootScope.loggedIn != false){
                     mostrarSpinner();
-                    if ($rootScope.offline != false) {
+                    WebServiceFactory.verificarConexao().success(function () {
                         WebServiceFactory.getPlanoAlimentar()
                             .success(function (data) {
                                 if (data != "null") {
@@ -76,27 +104,16 @@ easyNutri.controller('planoAlimentarCtrl',
                                     esconderSpinner();
                                     $scope.planoAlimentar = "";
                                     document.getElementById('recomendacoes').style.display = 'none';
-                                    $ionicPopup.alert({
-                                        title: 'Informação',
-                                        template: 'Não existe plano alimentar!'
-                                    });
+                                    toast('Não existe plano alimentar', 3);
                                 }
                             })
                             .error(function (data, status, headers) {
-                                if (status == 0) {
-                                    getPlanoAlimentarOffline();
-                                } else {
-                                    esconderSpinner();
-                                    console.log(data + status + headers);
-                                    $ionicPopup.alert({
-                                        title: 'Erro',
-                                        template: 'Não conseguiu ir buscar o plano alimentar!'
-                                    });
-                                }
+                                esconderSpinner();
+                                toast('Não conseguiu ir buscar o plano alimentar', 2);
                             });
-                    } else {
+                    }).error(function () {
                         getPlanoAlimentarOffline();
-                    }
+                    });
                 }
             };
 

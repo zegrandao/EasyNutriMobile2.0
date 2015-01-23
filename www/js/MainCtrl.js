@@ -21,7 +21,6 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
             "showDuration": "300",
             "hideDuration": "100",
             "timeOut": "5000",
-            "extendedTimeOut": "1000",
             "showEasing": "swing",
             "hideEasing": "linear",
             "showMethod": "fadeIn",
@@ -85,42 +84,40 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
 
     var getNotificacoes = function () {
         if($rootScope.loggedIn != false){
+            WebServiceFactory.verificarConexao().success(function () {
+                WebServiceFactory.getNotificacoes().success(function (lista) {
+                    $rootScope.listaNotificacoes = lista;
+                    $window.localStorage.setItem('listaNotificacoes', JSON.stringify(eval(lista)));
+                    if ($scope.numeroNotificacoes == undefined) {
+                        $scope.numeroNotificacoes = $rootScope.listaNotificacoes.length;
+                    } else {
+                        if ($rootScope.listaNotificacoes.length - $scope.numeroNotificacoes == 1) {
+                            toast('Recebeu uma nova notificação!', 3);
+                            $scope.numeroNotificacoes = $rootScope.listaNotificacoes.length;
+                        } else if ((total = $rootScope.listaNotificacoes.length - $scope.numeroNotificacoes) > 1) {
+                            toast('Recebeu ' + total + ' novas notificações!', 3);
+                            $scope.numeroNotificacoes = $rootScope.listaNotificacoes.length;
+                        }
+                    }
+                    var contNaoLidas = 0;
+                    for ($i = 0; $i < $rootScope.listaNotificacoes.length; $i++) {
+                        if ($rootScope.listaNotificacoes[$i].Lido == 0) {
+                            contNaoLidas++;
+                        }
+                    }
+                    if (contNaoLidas == 0) {
+                        document.getElementById("badgeNot").style.display = 'none';
+                    } else {
+                        document.getElementById("badgeNot").style.display = 'inline';
 
-            WebServiceFactory.getNotificacoes().success(function (lista) {
-                        $rootScope.listaNotificacoes = lista;
-                $window.localStorage.setItem('listaNotificacoes', JSON.stringify(eval(lista)));
-                if ($scope.numeroNotificacoes == undefined) {
-                    $scope.numeroNotificacoes = $rootScope.listaNotificacoes.length;
-                } else {
-                    if ($rootScope.listaNotificacoes.length - $scope.numeroNotificacoes == 1) {
-                        toast('Recebeu uma nova notificação!', 3);
-                        $scope.numeroNotificacoes = $rootScope.listaNotificacoes.length;
-                    } else if ((total = $rootScope.listaNotificacoes.length - $scope.numeroNotificacoes) > 1) {
-                        toast('Recebeu ' + total + ' novas notificações!', 3);
-                        $scope.numeroNotificacoes = $rootScope.listaNotificacoes.length;
                     }
 
-                }
-                        var contNaoLidas = 0;
-                        for ($i = 0; $i < $rootScope.listaNotificacoes.length; $i++) {
-                            if ($rootScope.listaNotificacoes[$i].Lido == 0) {
-                                contNaoLidas++;
-                            }
-                        }
-                        if (contNaoLidas == 0) {
-                            document.getElementById("badgeNot").style.display = 'none';
-                        } else {
-                            document.getElementById("badgeNot").style.display = 'inline';
-
-                        }
-
-                    }).error(function (data, status, headers) {
-                        if (status == 0) {
-                            getNotificacoesOffline();
-                        } else {
-                            toast('Erro a processar pedido de notificações!', 2);
-                        }
-                    });
+                }).error(function (data, status, headers) {
+                    toast('Erro a processar pedido de notificações!', 2);
+                });
+            }).error(function () {
+                getNotificacoesOffline();
+            });
         }
     };
 

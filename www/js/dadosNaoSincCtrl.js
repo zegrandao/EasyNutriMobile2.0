@@ -89,17 +89,15 @@ easyNutri.controller('dadosNaoSincCtrl', ['$scope', 'WebServiceFactory', '$filte
             $rootScope.editar = true;
             $rootScope.editadaOffline = true;
             $rootScope.refeicaoEditar = refeicao;
-            $scope.listaRefeicoesNovas.splice($scope.listaRefeicoesNovas.indexOf(refeicao), 1);
-            $window.localStorage.setItem('listaRefeicoesNovas', JSON.stringify(eval($scope.listaRefeicoesNovas)));
             $location.path('/easyNutri/editarRefeicao');
         };
 
         $scope.editarRefeicaoOffline = function (refeicao) {
             $rootScope.offline = true;
             $rootScope.editar = true;
+            $rootScope.editadaVelhaOffline = true;
             $rootScope.refeicaoEditar = refeicao;
-            $scope.listaRefeicoesDiario.Refeicoes.splice($scope.listaRefeicoesDiario.Refeicoes.indexOf(refeicao), 1);
-            $window.localStorage.setItem('diarioAlimentar', JSON.stringify(eval($scope.listaRefeicoesDiario)));
+            console.log('JSON enviado para a pagina editar: ' + JSON.stringify(refeicao));
             $location.path('/easyNutri/editarRefeicao');
         };
 

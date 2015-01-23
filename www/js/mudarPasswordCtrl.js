@@ -16,7 +16,6 @@ easyNutri.controller('mudarPasswordCtrl', ['$scope', '$http', 'WebServiceFactory
                 "showDuration": "300",
                 "hideDuration": "100",
                 "timeOut": "3000",
-                "extendedTimeOut": "1000",
                 "showEasing": "swing",
                 "hideEasing": "linear",
                 "showMethod": "fadeIn",
@@ -82,45 +81,43 @@ easyNutri.controller('mudarPasswordCtrl', ['$scope', '$http', 'WebServiceFactory
         $scope.mudarPassword = function (passwords) {
             if (isValid(passwords)) {
                 mostrarSpinner();
-                var arrayHash = {};
-                var hashNova = CryptoJS.SHA256(passwords.nova);
-                hashNova = hashNova.toString(CryptoJS.enc.Hex);
-                var hashVelha = CryptoJS.SHA256(passwords.antiga);
-                hashVelha = hashVelha.toString(CryptoJS.enc.Hex);
-                arrayHash.nova = hashNova;
-                arrayHash.antiga = hashVelha;
-                WebServiceFactory.mudarPasswordWeb(arrayHash).success(function () {
-                    esconderSpinner();
-                    var stringDescodificada;
+                WebServiceFactory.verificarConexao().success(function () {
+                    var arrayHash = {};
+                    var hashNova = CryptoJS.SHA256(passwords.nova);
+                    hashNova = hashNova.toString(CryptoJS.enc.Hex);
+                    var hashVelha = CryptoJS.SHA256(passwords.antiga);
+                    hashVelha = hashVelha.toString(CryptoJS.enc.Hex);
+                    arrayHash.nova = hashNova;
+                    arrayHash.antiga = hashVelha;
+                    WebServiceFactory.mudarPasswordWeb(arrayHash).success(function () {
+                        var stringDescodificada;
+                        if ($rootScope.guardarCredenciais) {
+                            stringDescodificada = atob($window.localStorage.getItem('credencial'));
+                        } else {
+                            stringDescodificada = atob($rootScope.credencial);
+                        }
 
-                    if ($rootScope.guardarCredenciais) {
-                        stringDescodificada = atob($window.localStorage.getItem('credencial'));
-                    } else {
-                        stringDescodificada = atob($rootScope.credencial);
-                    }
+                        var res = stringDescodificada.split(':');
+                        var string = res[0] + ":" + hashNova;
+                        var stringEncoded = btoa(string);
 
-                    var res = stringDescodificada.split(':');
-                    var string = res[0] + ":" + hashNova;
-                    var stringEncoded = btoa(string);
-
-                    if ($rootScope.guardarCredenciais) {
-                        $window.localStorage.setItem('credencial', stringEncoded);
-                    } else {
-                        $rootScope.credencial = stringEncoded;
-                    }
-
-                    $scope.hideModal();
-                    toast('Password alterada com sucesso!', 1);
-
-                }).error(function (data, status, header) {
-                    esconderSpinner();
-                    if (status == 0) {
-                        toast('Não está ligado à rede', 3);
-                    } else {
+                        if ($rootScope.guardarCredenciais) {
+                            $window.localStorage.setItem('credencial', stringEncoded);
+                        } else {
+                            $rootScope.credencial = stringEncoded;
+                        }
+                        esconderSpinner();
+                        $scope.hideModal();
+                        toast('Password alterada com sucesso!', 1);
+                    }).error(function (data, status, header) {
+                        esconderSpinner();
                         toast('Erro a alterar a password', 2);
-                    }
+
+                    });
+                }).error(function () {
+                    esconderSpinner();
+                    toast('Não está ligado à rede', 3);
                 });
             }
-
         };
     }]);
