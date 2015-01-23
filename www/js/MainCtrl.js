@@ -123,30 +123,35 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
 
         if($rootScope.loggedIn){
 
-            WebServiceFactory.sincronizarDados();
-            getNotificacoes();
+            WebServiceFactory.verificarConexao().success(function () {
 
-            var data = new Date();
-            data = $filter('date')(data, 'yyyy-MM-dd');
-            WebServiceFactory.getNotificacoes().success(function(notificacoes){
-                $window.localStorage.setItem('listaNotificacoes', JSON.stringify(eval(notificacoes)));
+                WebServiceFactory.sincronizarDados();
+                getNotificacoes();
+
+                var data = new Date();
+                data = $filter('date')(data, 'yyyy-MM-dd');
+                WebServiceFactory.getNotificacoes().success(function (notificacoes) {
+                    $window.localStorage.setItem('listaNotificacoes', JSON.stringify(eval(notificacoes)));
+                });
+
+                WebServiceFactory.getPlanoAlimentar().success(function (planoAlimentar) {
+                    $window.localStorage.setItem('planoAlimentar', JSON.stringify(eval(planoAlimentar)));
+                });
+
+                WebServiceFactory.getDiarioAlimentar(data).success(function (diarioAlimentar) {
+                    $window.localStorage.setItem('diarioAlimentar', JSON.stringify(eval(diarioAlimentar)));
+                });
+
+                WebServiceFactory.getAlimentos().success(function (alimentos) {
+                    $window.localStorage.setItem('listaAlimentos', JSON.stringify(eval(alimentos)));
+                });
+
+                WebServiceFactory.getRegistosPeso().success(function (pesos) {
+                    $window.localStorage.setItem('listaPesos', JSON.stringify(eval(pesos)));
+                });
+
             });
 
-            WebServiceFactory.getPlanoAlimentar().success(function(planoAlimentar){
-                $window.localStorage.setItem('planoAlimentar', JSON.stringify(eval(planoAlimentar)));
-            });
-
-            WebServiceFactory.getDiarioAlimentar(data).success(function(diarioAlimentar){
-                $window.localStorage.setItem('diarioAlimentar', JSON.stringify(eval(diarioAlimentar)));
-            });
-
-            WebServiceFactory.getAlimentos().success(function (alimentos) {
-                $window.localStorage.setItem('listaAlimentos', JSON.stringify(eval(alimentos)));
-            });
-
-            WebServiceFactory.getRegistosPeso().success(function(pesos){
-                $window.localStorage.setItem('listaPesos', JSON.stringify(eval(pesos)));
-            });
 
             $interval(function () {
                 getNotificacoes();

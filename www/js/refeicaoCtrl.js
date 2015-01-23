@@ -95,7 +95,7 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
                         break;
                     }
                 }
-                }
+            }
 
             if (mensagem != "") {
                 $ionicPopup.alert({
@@ -124,29 +124,29 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
         $scope.popularPaginaEditar = function (refeicao) {
             var tipo;
             WebServiceFactory.verificarConexao().success(function () {
-                        var dia = $filter('date')(refeicao.DataRefeicao, 'yyyy-MM-dd');
-                        var hora = $filter('date')(refeicao.DataRefeicao, 'HH:mm');
-                        $scope.refeicao.Dia = dia;
-                        $scope.refeicao.Hora = hora;
-                        tipo = TiposRefeicaoFactory.get(refeicao.TipoRefeicaoId);
-                        $scope.refeicao.idRefeicao = refeicao.Id;
-                        $scope.refeicao.Tipo = tipo.Id;
-                        for ($i = 0; $i < refeicao.LinhasRefeicao.length; $i++) {
-                            refeicao.LinhasRefeicao[$i].Alimentos.Quantidade = refeicao.LinhasRefeicao[$i].Quant;
-                            refeicao.LinhasRefeicao[$i].Alimentos.Porcoes.push(
-                                {
-                                    Descricao: refeicao.LinhasRefeicao[$i].Alimentos.Unidade,
-                                    Porcao: 1, IdAlimento: refeicao.LinhasRefeicao[$i].Alimentos.Id, Id: 0
-                                });
+                var dia = $filter('date')(refeicao.DataRefeicao, 'yyyy-MM-dd');
+                var hora = $filter('date')(refeicao.DataRefeicao, 'HH:mm');
+                $scope.refeicao.Dia = dia;
+                $scope.refeicao.Hora = hora;
+                tipo = TiposRefeicaoFactory.get(refeicao.TipoRefeicaoId);
+                $scope.refeicao.idRefeicao = refeicao.Id;
+                $scope.refeicao.Tipo = tipo.Id;
+                for ($i = 0; $i < refeicao.LinhasRefeicao.length; $i++) {
+                    refeicao.LinhasRefeicao[$i].Alimentos.Quantidade = refeicao.LinhasRefeicao[$i].Quant;
+                    refeicao.LinhasRefeicao[$i].Alimentos.Porcoes.push(
+                        {
+                            Descricao: refeicao.LinhasRefeicao[$i].Alimentos.Unidade,
+                            Porcao: 1, IdAlimento: refeicao.LinhasRefeicao[$i].Alimentos.Id, Id: 0
+                        });
 
-                            if (refeicao.LinhasRefeicao[$i].PorcaoId == null) {
-                                refeicao.LinhasRefeicao[$i].Alimentos.PorcaoId = 0;
+                    if (refeicao.LinhasRefeicao[$i].PorcaoId == null) {
+                        refeicao.LinhasRefeicao[$i].Alimentos.PorcaoId = 0;
 
-                            } else {
-                                refeicao.LinhasRefeicao[$i].Alimentos.PorcaoId = refeicao.LinhasRefeicao[$i].PorcaoId;
-                            }
-                            $scope.refeicao.listaAlimentos.push(refeicao.LinhasRefeicao[$i].Alimentos);
-                        }
+                    } else {
+                        refeicao.LinhasRefeicao[$i].Alimentos.PorcaoId = refeicao.LinhasRefeicao[$i].PorcaoId;
+                    }
+                    $scope.refeicao.listaAlimentos.push(refeicao.LinhasRefeicao[$i].Alimentos);
+                }
                 mostrarBotao();
             }).error(function (status, data, headers) {
                 if (status == 0) {
@@ -230,7 +230,6 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
         }).error(function () {
             $scope.alimentos = JSON.parse($window.localStorage.getItem('listaAlimentos'));
         });
-
 
 
         //método para diferenciar a ação do botão entre editar uma refeição e guardar uma nova refeição
@@ -354,7 +353,7 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
                 if ($scope.refeicao.listaAlimentos[i].Id === alimento.Id) {
                     $scope.refeicao.listaAlimentos.splice($scope.refeicao.listaAlimentos.indexOf(alimento), 1);
                 }
-                }
+            }
             mostrarBotao();
         };
 
@@ -436,7 +435,7 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
                         return $scope.refeicao.listaAlimentos[$i].PorcaoId;
                     }
                 }
-                }
+            }
             return "";
         }
     }]);

@@ -5,13 +5,13 @@ easyNutri.controller('notificacoesCtrl', ['$scope', '$http', 'WebServiceFactory'
             $state.go('login', {reload: true, inherit: false});
         }
 
-        if ($rootScope.loggedIn) {
+        WebServiceFactory.verificarConexao().success(function () {
             $interval(function () {
                 $scope.listaNotificacoes = $rootScope.listaNotificacoes;
             }, 10000);
-        } else {
+        }).error(function () {
             $scope.listaNotificacoes = JSON.parse($window.localStorage.getItem('listaNotificacoes'));
-        }
+        });
 
 
         $ionicModal.fromTemplateUrl('templates/modal.html', function ($ionicModal) {
@@ -34,9 +34,11 @@ easyNutri.controller('notificacoesCtrl', ['$scope', '$http', 'WebServiceFactory'
                     notificacao.Data = $filter('date')(notificacao.Data, 'dd-MM-yyyy H:mm');
                     $scope.notificacao = notificacao;
                     $scope.listaNotificacoes[$scope.listaNotificacoes.indexOf(notificacao)].Lido = 1;
+                    notificacao.Lido = 1;
                     WebServiceFactory.verificarConexao().success(function () {
                         WebServiceFactory.alterarEstadoNotificacao(notificacao.Id);
                     }).error(function () {
+
                         var listaNotificacoes = new Array();
                         if ($window.localStorage.getItem('listaNotificacoesLidas') != null) {
                             listaNotificacoes = JSON.parse($window.localStorage.getItem('listaNotificacoesLidas'));
@@ -47,6 +49,7 @@ easyNutri.controller('notificacoesCtrl', ['$scope', '$http', 'WebServiceFactory'
                             $window.localStorage.setItem('listaNotificacoesLidas', JSON.stringify(eval(listaNotificacoes)));
                         }
                     });
+
                 }
 
             }
