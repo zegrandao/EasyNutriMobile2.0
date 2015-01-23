@@ -159,3 +159,15 @@ easyNutri.run(function ($ionicPlatform, $window, $ionicPopup, $rootScope, WebSer
         $urlRouterProvider.otherwise('/login');
 
     });
+
+//easyNutri.filter('filtroAlimento',function(){
+//    return function(query,nomeAlimento){
+//            if(nomeAlimento != undefined){
+//                console.log('entrou filtro');
+//                if(query.indexOf(nomeAlimento)>=0){
+//                    console.log(nomeAlimento);
+//                    return nomeAlimento;
+//                }
+//            }
+//            }
+//    });

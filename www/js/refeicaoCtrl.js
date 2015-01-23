@@ -18,6 +18,16 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
             $scope.numeroAlimentos = 5;
         }
 
+
+        $array = ['leite vaca', 'leite cabra'];
+        console.log('função')
+        for (var x in $array) {
+            console.log('Comment: ' + $array[x]);
+            if ($array[x].indexOf("leite v") >= 0) {
+                console.log('encontrou');
+            }
+        }
+
         var toast = function (texto, caso) {
             toastr.options = {
                 "closeButton": false,
