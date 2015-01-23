@@ -5,14 +5,15 @@ easyNutri.controller('notificacoesCtrl', ['$scope', '$http', 'WebServiceFactory'
             $state.go('login', {reload: true, inherit: false});
         }
 
-        WebServiceFactory.verificarConexao().success(function () {
+
             $interval(function () {
                 console.log('entrou na pagina notificacoes');
+                WebServiceFactory.verificarConexao().success(function () {
                 $scope.listaNotificacoes = $rootScope.listaNotificacoes;
+                }).error(function () {
+                    $scope.listaNotificacoes = JSON.parse($window.localStorage.getItem('listaNotificacoes'));
+                });
             }, 10000);
-        }).error(function () {
-            $scope.listaNotificacoes = JSON.parse($window.localStorage.getItem('listaNotificacoes'));
-        });
 
 
         $ionicModal.fromTemplateUrl('templates/modal.html', function ($ionicModal) {
