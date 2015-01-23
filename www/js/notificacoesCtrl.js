@@ -7,6 +7,7 @@ easyNutri.controller('notificacoesCtrl', ['$scope', '$http', 'WebServiceFactory'
 
         WebServiceFactory.verificarConexao().success(function () {
             $interval(function () {
+                console.log('entrou na pagina notificacoes');
                 $scope.listaNotificacoes = $rootScope.listaNotificacoes;
             }, 10000);
         }).error(function () {
@@ -35,18 +36,21 @@ easyNutri.controller('notificacoesCtrl', ['$scope', '$http', 'WebServiceFactory'
                     $scope.notificacao = notificacao;
                     $scope.listaNotificacoes[$scope.listaNotificacoes.indexOf(notificacao)].Lido = 1;
                     notificacao.Lido = 1;
+
                     WebServiceFactory.verificarConexao().success(function () {
                         WebServiceFactory.alterarEstadoNotificacao(notificacao.Id);
                     }).error(function () {
-
                         var listaNotificacoes = new Array();
                         if ($window.localStorage.getItem('listaNotificacoesLidas') != null) {
                             listaNotificacoes = JSON.parse($window.localStorage.getItem('listaNotificacoesLidas'));
                             listaNotificacoes.push(notificacao);
                             $window.localStorage.setItem('listaNotificacoesLidas', JSON.stringify(eval(listaNotificacoes)));
+                            $window.localStorage.setItem('listaNotificacoes', JSON.stringify(eval($scope.listaNotificacoes)));
+
                         } else {
                             listaNotificacoes.push(notificacao);
                             $window.localStorage.setItem('listaNotificacoesLidas', JSON.stringify(eval(listaNotificacoes)));
+                            $window.localStorage.setItem('listaNotificacoes', JSON.stringify(eval($scope.listaNotificacoes)));
                         }
                     });
 

@@ -224,6 +224,7 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
         WebServiceFactory.verificarConexao().success(function () {
             WebServiceFactory.getAlimentos().success(function (lista) {
                 $scope.alimentos = lista;
+                console.log($scope.alimentos);
             }).error(function (data, status, headers) {
                 toast('Erro a processar pedido de alimentos!', 2);
             });
