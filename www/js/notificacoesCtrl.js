@@ -13,6 +13,7 @@ easyNutri.controller('notificacoesCtrl', ['$scope', '$http', 'WebServiceFactory'
                 }).error(function () {
                     $scope.listaNotificacoes = JSON.parse($window.localStorage.getItem('listaNotificacoes'));
                 });
+
             }, 10000);
 
 

@@ -89,6 +89,7 @@ easyNutri.controller('dadosNaoSincCtrl', ['$scope', 'WebServiceFactory', '$filte
             $rootScope.editar = true;
             $rootScope.editadaOffline = true;
             $rootScope.refeicaoEditar = refeicao;
+            console.log('JSON enviado para a página editar nova refeição: ' + JSON.stringify(refeicao));
             $location.path('/easyNutri/editarRefeicao');
         };
 

@@ -19,7 +19,7 @@
                     </ion-item>
                     <ion-item class="item-accordation item-text-wrap" ng-repeat="linha in refeicao.listaAlimentos"
                               ng-show="isAberto(refeicao)">
-                        {{linha.Nome +' - '+ linha.Quantidade + ' ' + linha.Unidade}}
+                        {{linha.Nome +' - '+ linha.Quantidade + ' ' + findUnidade(linha)}}
                     </ion-item>
                 </div>
                 <div class="item-divider">
