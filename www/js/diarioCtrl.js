@@ -81,13 +81,19 @@ easyNutri.controller('diarioCtrl',
                     }).error(function () {
                         esconderSpinner();
                         if ($window.localStorage.getItem('diarioAlimentar') != null) {
-                            console.log(JSON.stringify($window.localStorage.getItem('diarioAlimentar')));
-                            $scope.diarioAlimentar = JSON.parse($window.localStorage.getItem('diarioAlimentar'));
+                            var diario = JSON.parse($window.localStorage.getItem('diarioAlimentar'));
+                            var dataDiario = $filter('date')(diario.DataDiario, 'yyyy-MM-dd');
+                            if ($scope.pesquisa.Dia == dataDiario) {
+                                $scope.diarioAlimentar = diario;
+                            } else {
+                                $scope.diarioAlimentar = null;
+                                toast('Não existem registos!', 3);
+                            }
                         } else {
+                            $scope.diarioAlimentar = null;
                             toast('Não existem registos!', 3);
                         }
                     });
-
                 }
             };
 
@@ -109,12 +115,13 @@ easyNutri.controller('diarioCtrl',
             WebServiceFactory.verificarConexao().success(function () {
                 $scope.pesquisarDiarios($scope.pesquisa.Dia);
             }).error(function () {
-                if ($window.localStorage.getItem('diarioAlimentar') !== null) {
+                if ($window.localStorage.getItem('diarioAlimentar') != null) {
                     var diario = JSON.parse($window.localStorage.getItem('diarioAlimentar'));
                     var dataDiario = $filter('date')(diario.DataDiario, 'yyyy-MM-dd');
                     if ($scope.pesquisa.Dia == dataDiario) {
                         $scope.diarioAlimentar = diario;
                     } else {
+                        $scope.diarioAlimentar = null;
                         toast('Não existem registos!', 3);
                     }
                 } else {

@@ -220,12 +220,18 @@ angular.module('easyNutri').factory('WebServiceFactory', ['$http', '$window', '$
 
             if ($window.localStorage.getItem('listaRefeicoesRemovidas') != null) {
                 var listaRefeicoesRemovidas = JSON.parse($window.localStorage.getItem('listaRefeicoesRemovidas'));
-                console.log(JSON.stringify(listaRefeicoesRemovidas));
+                console.log(JSON.stringify(listaRefeicoesRemovidas.Refeicoes));
                 for (var $r = 0; $r < listaRefeicoesRemovidas.length; $r++) {
-                    console.log(JSON.stringify(listaRefeicoesRemovidas[$r].idRefeicao));
-                    WebServiceFactory.removerRefeicaoWeb(listaRefeicoesRemovidas[$r].idRefeicao).error(function () {
-                        mensagem += "Erro a sincronizar as refeições removidas";
-                    });
+                    if (listaRefeicoesRemovidas[$r].idRefeicao == undefined) {
+                        var id = listaRefeicoesRemovidas[$r].Id;
+                        WebServiceFactory.removerRefeicaoWeb(listaRefeicoesRemovidas[$r].Id).error(function () {
+                            mensagem += "Erro a sincronizar as refeições removidas";
+                        });
+                    } else {
+                        WebServiceFactory.removerRefeicaoWeb(listaRefeicoesRemovidas[$r].idRefeicao).error(function () {
+                            mensagem += "Erro a sincronizar as refeições removidas";
+                        });
+                    }
                 }
                 $window.localStorage.removeItem('listaRefeicoesRemovidas');
             }
