@@ -111,7 +111,8 @@ easyNutri.controller('diarioCtrl',
             }).error(function () {
                 if ($window.localStorage.getItem('diarioAlimentar') !== null) {
                     var diario = JSON.parse($window.localStorage.getItem('diarioAlimentar'));
-                    if ($scope.pesquisa.Dia == diario.DataDiario) {
+                    var dataDiario = $filter('date')(diario.DataDiario, 'yyyy-MM-dd');
+                    if ($scope.pesquisa.Dia == dataDiario) {
                         $scope.diarioAlimentar = diario;
                     } else {
                         toast('Não existem registos!', 3);
