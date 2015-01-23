@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eee567b1-be46-4b21-a988-eb5f89dddf19" name="Default" comment="notificaçoes ok">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/js/jQuery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/dadosNaoSincCtrl.js" afterPath="$PROJECT_DIR$/www/js/dadosNaoSincCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/dadosNaoSincronizados.html" afterPath="$PROJECT_DIR$/www/templates/dadosNaoSincronizados.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/index.html" afterPath="$PROJECT_DIR$/www/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/notificacoesCtrl.js" afterPath="$PROJECT_DIR$/www/js/notificacoesCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/refeicaoCtrl.js" afterPath="$PROJECT_DIR$/www/js/refeicaoCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/lib/toastr/toastr.js" afterPath="$PROJECT_DIR$/www/lib/toastr/toastr.js" />
+    <list default="true" id="eee567b1-be46-4b21-a988-eb5f89dddf19" name="Default" comment="offline mode for testing">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/diarioCtrl.js" afterPath="$PROJECT_DIR$/www/js/diarioCtrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="EasyNutriMobile.iws" />
@@ -83,21 +77,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="diarioCtrl.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="diarioCtrl.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/js/diarioCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2652" max-vertical-offset="4216">
-              <caret line="179" column="37" selection-start-line="179" selection-start-column="37" selection-end-line="179" selection-end-column="37" />
+            <state vertical-scroll-proportion="-4.292479" vertical-offset="3445" max-vertical-offset="4318">
+              <caret line="112" column="89" selection-start-line="112" selection-start-column="74" selection-end-line="112" selection-end-column="89" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dadosNaoSincCtrl.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dadosNaoSincCtrl.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/dadosNaoSincCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6885475" vertical-offset="1173" max-vertical-offset="2108">
-              <caret line="98" column="30" selection-start-line="98" selection-start-column="30" selection-end-line="98" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1173" max-vertical-offset="2108">
+              <caret line="84" column="10" selection-start-line="84" selection-start-column="10" selection-end-line="84" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -132,11 +126,11 @@
         <option value="$PROJECT_DIR$/www/js/notificacoesCtrl.js" />
         <option value="$PROJECT_DIR$/www/templates/dadosNaoSincronizados.html" />
         <option value="$PROJECT_DIR$/www/js/dadosNaoSincCtrl.js" />
-        <option value="$PROJECT_DIR$/www/js/diarioCtrl.js" />
         <option value="$PROJECT_DIR$/www/lib/toastr/toastr.js" />
         <option value="$PROJECT_DIR$/www/js/jQuery.js" />
         <option value="$PROJECT_DIR$/www/index.html" />
         <option value="$PROJECT_DIR$/www/js/refeicaoCtrl.js" />
+        <option value="$PROJECT_DIR$/www/js/diarioCtrl.js" />
       </list>
     </option>
   </component>
@@ -576,7 +570,13 @@
       <option name="project" value="LOCAL" />
       <updated>1422013874965</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="offline mode for testing">
+      <created>1422021583477</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1422021583477</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -606,7 +606,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328877" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328877" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.0053475937" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.46524063" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328877" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -675,7 +675,8 @@
     <MESSAGE value="editar refeição offline concluido" />
     <MESSAGE value="notificaçoes ok" />
     <MESSAGE value="notificaçoes upd" />
-    <option name="LAST_COMMIT_MESSAGE" value="notificaçoes upd" />
+    <MESSAGE value="offline mode for testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="offline mode for testing" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1029,7 +1030,7 @@
         <state vertical-scroll-proportion="0.072135784" vertical-offset="0" max-vertical-offset="707">
           <caret line="3" column="31942" selection-start-line="3" selection-start-column="31942" selection-end-line="3" selection-end-column="31942" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1042,10 +1043,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/diarioCtrl.js">
+    <entry file="file://$PROJECT_DIR$/www/js/dadosNaoSincCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2652" max-vertical-offset="4216">
-          <caret line="179" column="37" selection-start-line="179" selection-start-column="37" selection-end-line="179" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1173" max-vertical-offset="2108">
+          <caret line="84" column="10" selection-start-line="84" selection-start-column="10" selection-end-line="84" selection-end-column="10" />
           <folding />
         </state>
       </provider>
@@ -1058,10 +1059,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/dadosNaoSincCtrl.js">
+    <entry file="file://$PROJECT_DIR$/www/js/diarioCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6885475" vertical-offset="1173" max-vertical-offset="2108">
-          <caret line="98" column="30" selection-start-line="98" selection-start-column="30" selection-end-line="98" selection-end-column="30" />
+        <state vertical-scroll-proportion="-4.292479" vertical-offset="3445" max-vertical-offset="4318">
+          <caret line="112" column="89" selection-start-line="112" selection-start-column="74" selection-end-line="112" selection-end-column="89" />
           <folding />
         </state>
       </provider>

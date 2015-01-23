@@ -110,7 +110,12 @@ easyNutri.controller('diarioCtrl',
                 $scope.pesquisarDiarios($scope.pesquisa.Dia);
             }).error(function () {
                 if ($window.localStorage.getItem('diarioAlimentar') !== null) {
-                    $scope.diarioAlimentar = JSON.parse($window.localStorage.getItem('diarioAlimentar'));
+                    var diario = JSON.parse($window.localStorage.getItem('diarioAlimentar'));
+                    if ($scope.pesquisa.Dia == diario.DataDiario) {
+                        $scope.diarioAlimentar = diario;
+                    } else {
+                        toast('Não existem registos!', 3);
+                    }
                 } else {
                     toast('Não existem registos!', 3);
                 }
@@ -209,6 +214,7 @@ easyNutri.controller('diarioCtrl',
                             esconderSpinner();
                             toast('Refeição removida com sucesso!', 1);
                             $scope.diarioAlimentar.Refeicoes.splice($scope.diarioAlimentar.Refeicoes.indexOf(refeicao), 1);
+                            $window.localStorage.setItem(JSON.stringify(eval($scope.diarioAlimentar)));
                         })
                         .error(function (data, status, headers) {
                             esconderSpinner();
