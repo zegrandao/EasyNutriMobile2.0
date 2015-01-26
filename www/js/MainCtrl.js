@@ -1,4 +1,4 @@
-easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebServiceFactory, $interval, $rootScope, $ionicPopup, $window, $location, $ionicModal, $state, $filter, SignalFactory) {
+easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebServiceFactory, $interval, $rootScope, $ionicPopup, $window, $location, $ionicModal, $state, $filter, signalFactory) {
 
     if($rootScope.loggedIn != true){
         $state.go('login', {reload: true, inherit: false});
@@ -15,7 +15,7 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
             "newestOnTop": false,
             "progressBar": false,
             "positionClass": "toast-bottom-center",
-            "preventDuplicates": false,
+            "preventDuplicates": true,
             "onclick": null,
             "showDuration": "300",
             "hideDuration": "100",
@@ -38,6 +38,12 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
         }
 
     };
+
+    var emitSignal = function ($scope, msgBus) {
+        $scope.sendmsg = function () {
+            msgBus.emitMsg('notificationReceived')
+        }
+    }
 
     $scope.toggleLeft = function () {
         $ionicSideMenuDelegate.toggleLeft();
@@ -69,6 +75,8 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
                 }
             }
 
+            emitSignal($scope, signalFactory);
+
             if (contNaoLidas == 0) {
                 document.getElementById("badgeNot").style.display = 'none';
             } else {
@@ -86,7 +94,6 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
             WebServiceFactory.verificarConexao().success(function () {
                 WebServiceFactory.getNotificacoes().success(function (lista) {
                     $rootScope.listaNotificacoes = lista;
-                    SignalFactory.emitMsg('recebeu');
                     $window.localStorage.setItem('listaNotificacoes', JSON.stringify(eval(lista)));
                     if ($scope.numeroNotificacoes == undefined) {
                         $scope.numeroNotificacoes = $rootScope.listaNotificacoes.length;
@@ -111,6 +118,8 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
                         document.getElementById("badgeNot").style.display = 'inline';
 
                     }
+
+                    emitSignal($scope, signalFactory);
 
                 }).error(function (data, status, headers) {
                     toast('Erro a processar pedido de notificações!', 2);

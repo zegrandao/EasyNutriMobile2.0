@@ -1,4 +1,4 @@
-easyNutri.factory('signalFactory', function ($rootScope) {
+easyNutri.$provide.factory('signalFactory', ['$rootScope', function ($rootScope) {
     var msgBus = {};
     msgBus.emitMsg = function (msg) {
         $rootScope.$emit(msg);
@@ -8,4 +8,4 @@ easyNutri.factory('signalFactory', function ($rootScope) {
         scope.$on('$destroy', unbind);
     };
     return msgBus;
-});
+}]);

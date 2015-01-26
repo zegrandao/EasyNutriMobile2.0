@@ -1,18 +1,30 @@
-easyNutri.controller('notificacoesCtrl', function ($scope, $http, WebServiceFactory, modalFactory, $ionicPopup, $ionicModal, $filter, $rootScope, $interval, $window, $state, SignalFactory) {
+easyNutri.controller('notificacoesCtrl', function ($scope, $http, WebServiceFactory, modalFactory, $ionicPopup, $ionicModal, $filter, $rootScope, $interval, $window, $state, signalFactory) {
 
         if ($rootScope.loggedIn != true) {
             $state.go('login', {reload: true, inherit: false});
         }
 
 
-    SignalFactory.onMsg('recebeu', $scope, function () {
+    var receiveSignal = function ($scope, msgBus) {
+        msgBus.onMsg('notificationReceived', $scope, function () {
                 WebServiceFactory.verificarConexao().success(function () {
-                $scope.listaNotificacoes = $rootScope.listaNotificacoes;
+                    $scope.listaNotificacoes = $rootScope.listaNotificacoes;
                 }).error(function () {
                     $scope.listaNotificacoes = JSON.parse($window.localStorage.getItem('listaNotificacoes'));
                 });
+        });
+    }
 
-    });
+    receiveSignal($scope, signalFactory);
+//            $interval(function () {
+//                console.log('entrou na pagina notificacoes');
+//                WebServiceFactory.verificarConexao().success(function () {
+//                $scope.listaNotificacoes = $rootScope.listaNotificacoes;
+//                }).error(function () {
+//                    $scope.listaNotificacoes = JSON.parse($window.localStorage.getItem('listaNotificacoes'));
+//                });
+//
+//            }, 10000);
 
 
         $ionicModal.fromTemplateUrl('templates/modal.html', function ($ionicModal) {
