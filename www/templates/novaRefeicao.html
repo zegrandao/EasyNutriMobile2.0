@@ -35,7 +35,7 @@
                 <div id="listaPesquisa" style="display: none">
                     <ion-list type="list-inset">
                         <ion-item ng-bind="alimento.Nome" ng-click="addAlimentoLista(alimento)"
-                                  ng-repeat="alimento in alimentos | filtroAlimento:pesquisa.alimento | limitTo: numeroAlimentos | orderBy: pesquisa.alimento">
+                                  ng-repeat="alimento in alimentos | filter:pesquisa.alimento | limitTo: numeroAlimentos">
                         <!--{{alimento.Nome}}-->
                         </ion-item>
                     </ion-list>

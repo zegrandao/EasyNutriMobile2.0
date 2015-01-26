@@ -160,21 +160,3 @@ easyNutri.run(function ($ionicPlatform, $window, $ionicPopup, $rootScope, WebSer
 
     });
 
-easyNutri.filter("filtroAlimento", function () {
-    return function (input, searchText) {
-        var returnArray = [];
-        var searchTextSplit = searchText.toLowerCase().split(' ');
-        for (var x = 0; x < input.length; x++) {
-            var count = 0;
-            for (var y = 0; y < searchTextSplit.length; y++) {
-                if (input[x].toLowerCase().indexOf(searchTextSplit[y]) !== -1) {
-                    count++;
-                }
-            }
-            if (count == searchTextSplit.length) {
-                returnArray.push(input[x]);
-            }
-        }
-        return returnArray;
-    }
-});
