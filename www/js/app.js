@@ -160,14 +160,21 @@ easyNutri.run(function ($ionicPlatform, $window, $ionicPopup, $rootScope, WebSer
 
     });
 
-//easyNutri.filter('filtroAlimento',function(){
-//    return function(query,nomeAlimento){
-//            if(nomeAlimento != undefined){
-//                console.log('entrou filtro');
-//                if(query.indexOf(nomeAlimento)>=0){
-//                    console.log(nomeAlimento);
-//                    return nomeAlimento;
-//                }
-//            }
-//            }
-//    });
+easyNutri.filter("filtroAlimento", function () {
+    return function (input, searchText) {
+        var returnArray = [];
+        var searchTextSplit = searchText.toLowerCase().split(' ');
+        for (var x = 0; x < input.length; x++) {
+            var count = 0;
+            for (var y = 0; y < searchTextSplit.length; y++) {
+                if (input[x].toLowerCase().indexOf(searchTextSplit[y]) !== -1) {
+                    count++;
+                }
+            }
+            if (count == searchTextSplit.length) {
+                returnArray.push(input[x]);
+            }
+        }
+        return returnArray;
+    }
+});
