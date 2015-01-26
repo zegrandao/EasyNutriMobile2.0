@@ -1,5 +1,4 @@
-easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebServiceFactory, $interval,
-                                           $rootScope, $ionicPopup, $window, $location, $ionicModal, $state, $filter) {
+easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebServiceFactory, $interval, $rootScope, $ionicPopup, $window, $location, $ionicModal, $state, $filter, SignalFactory) {
 
     if($rootScope.loggedIn != true){
         $state.go('login', {reload: true, inherit: false});
@@ -87,6 +86,7 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
             WebServiceFactory.verificarConexao().success(function () {
                 WebServiceFactory.getNotificacoes().success(function (lista) {
                     $rootScope.listaNotificacoes = lista;
+                    SignalFactory.emitMsg('recebeu');
                     $window.localStorage.setItem('listaNotificacoes', JSON.stringify(eval(lista)));
                     if ($scope.numeroNotificacoes == undefined) {
                         $scope.numeroNotificacoes = $rootScope.listaNotificacoes.length;

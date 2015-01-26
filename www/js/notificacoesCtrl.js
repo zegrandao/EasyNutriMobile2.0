@@ -1,20 +1,18 @@
-easyNutri.controller('notificacoesCtrl', ['$scope', '$http', 'WebServiceFactory', 'modalFactory', '$ionicPopup', '$ionicModal', '$filter', '$rootScope', '$interval', '$window', '$state',
-    function ($scope, $http, WebServiceFactory, modalFactory, $ionicPopup, $ionicModal, $filter, $rootScope, $interval, $window, $state) {
+easyNutri.controller('notificacoesCtrl', function ($scope, $http, WebServiceFactory, modalFactory, $ionicPopup, $ionicModal, $filter, $rootScope, $interval, $window, $state, SignalFactory) {
 
         if ($rootScope.loggedIn != true) {
             $state.go('login', {reload: true, inherit: false});
         }
 
 
-            $interval(function () {
-                console.log('entrou na pagina notificacoes');
+    SignalFactory.onMsg('recebeu', $scope, function () {
                 WebServiceFactory.verificarConexao().success(function () {
                 $scope.listaNotificacoes = $rootScope.listaNotificacoes;
                 }).error(function () {
                     $scope.listaNotificacoes = JSON.parse($window.localStorage.getItem('listaNotificacoes'));
                 });
 
-            }, 10000);
+    });
 
 
         $ionicModal.fromTemplateUrl('templates/modal.html', function ($ionicModal) {
@@ -67,4 +65,4 @@ easyNutri.controller('notificacoesCtrl', ['$scope', '$http', 'WebServiceFactory'
         $scope.removeModal = function () {
             $scope.modal.remove();
         };
-    }]);
+});
