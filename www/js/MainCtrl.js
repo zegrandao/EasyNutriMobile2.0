@@ -4,9 +4,6 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
         $state.go('login', {reload: true, inherit: false});
     }
 
-    var irParaNotificacoes = function () {
-        $state.go('easyNutri.notificacoes', {reload: true, inherit: false})
-    };
 
     var toast = function (texto, caso) {
         toastr.options = {
@@ -15,10 +12,12 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
             "newestOnTop": false,
             "progressBar": false,
             "positionClass": "toast-bottom-center",
-            "preventDuplicates": false,
-            "onclick": null,
+            "preventDuplicates": true,
+            "onclick": function () {
+                $state.go('easyNutri.notificacoes');
+            },
             "showDuration": "300",
-            "hideDuration": "100",
+            "hideDuration": "300",
             "timeOut": "5000",
             "showEasing": "swing",
             "hideEasing": "linear",
@@ -38,6 +37,7 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
         }
 
     };
+
 
     var emitSignal = function ($scope, msgBus) {
         $scope.sendmsg = function () {
@@ -99,8 +99,14 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
                         $scope.numeroNotificacoes = $rootScope.listaNotificacoes.length;
                     } else {
                         if ($rootScope.listaNotificacoes.length - $scope.numeroNotificacoes == 1) {
-                            toast('Recebeu uma nova notificação!', 3);
                             $scope.numeroNotificacoes = $rootScope.listaNotificacoes.length;
+                            //toast('Recebeu uma nova notificação!', 3);
+                            toastr.info('Recebeu uma notificação', '', {
+                                positionClass: "toast-bottom-center", onclick: function () {
+                                    $state.go('easyNutri.notificacoes');
+                                }
+                            })
+
                         } else if ((total = $rootScope.listaNotificacoes.length - $scope.numeroNotificacoes) > 1) {
                             toast('Recebeu ' + total + ' novas notificações!', 3);
                             $scope.numeroNotificacoes = $rootScope.listaNotificacoes.length;

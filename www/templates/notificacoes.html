@@ -6,12 +6,11 @@
         <div>
             <ion-list type="list-inset">
                 <ion-item class="item-icon-right y" ng-click="setNotificacao(notificacao)"
-                          ng-repeat="notificacao in listaNotificacoes">
-                   <span id="{{notificacao.Lido==0?'spanNot':'&quot;&quot;'}}">Assunto: {{notificacao.Assunto}}
+                          ng-repeat="notificacao in listaNotificacoes | limitTo: 15">
+                   <span id="{{notificacao.Lido==0?'spanNot':'&quot;&quot;'}}"><b>Data:</b> {{notificacao.Data | date:'yyyy-MM-dd HH:mm'}}
+                       &nbsp;&nbsp;<b>Assunto:</b> {{notificacao.Assunto}}
                     <i class="{{notificacao.Lido==0?'icon ion-email':'&quot;&quot;'}}"></i>
                    </span>
-
-
                 </ion-item>
             </ion-list>
         </div>
