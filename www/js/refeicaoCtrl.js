@@ -408,6 +408,7 @@ easyNutri.controller('refeicaoCtrl',
                 $scope.datemodal = modal;
             },
             {
+                id: 1,
                 // Use our scope for the scope of the modal to keep it simple
                 scope: $scope,
                 // The animation we want to use for the modal entrance
@@ -420,6 +421,7 @@ easyNutri.controller('refeicaoCtrl',
                 $scope.timemodal = modal;
             },
             {
+                id: 2,
                 // Use our scope for the scope of the modal to keep it simple
                 scope: $scope,
                 // The animation we want to use for the modal entrance
@@ -428,46 +430,58 @@ easyNutri.controller('refeicaoCtrl',
         );
 
         //método para abrir o datepicker
-        $scope.opendateModal = function () {
-            $scope.datemodal.show();
+        $scope.openModal = function (index) {
+            if (index == 1) {
+                $scope.datemodal.show();
+            } else {
+                var arrayHora = $scope.refeicao.Hora.split(':');
+                var hora = arrayHora[0];
+                var minutos = arrayHora[1];
+                $scope.hora = hora;
+                $scope.minutos = minutos;
+                $scope.timemodal.show();
+            }
+
+        };
+
+        //método para fechar o datepicker
+        $scope.closeModal = function (data) {
+            if (this.id == 1) {
+
+                var dataAtual = $filter('date')(new Date(), 'yyyy-MM-dd');
+
+                if (data <= dataAtual) {
+                    $scope.datemodal.hide();
+                    data = $filter('date')(data, 'yyyy-MM-dd');
+                    $scope.refeicao.Dia = data;
+                } else {
+                    toast('Escolheu uma data superior à do sistema', 2);
+                }
+            } else {
+                var hora = horaModal + ':' + minutos;
+                var horaAtual = $filter('date')(new Date(), 'HH:mm');
+
+                if (hora <= horaAtual) {
+                    $scope.timemodal.hide();
+                    hora = $filter('date')(hora, 'HH:mm');
+                    $scope.refeicao.Hora = hora;
+                } else {
+                    toast('Escolheu uma hora superior à do sistema', 2);
+                }
+            }
+
         };
 
         $scope.opentimeModal = function () {
-            var arrayHora = $scope.refeicao.Hora.split(':');
-            var hora = arrayHora[0];
-            var minutos = arrayHora[1];
-            $scope.hora = hora;
-            $scope.minutos = minutos;
-            $scope.timemodal.show();
+
         };
 
         $scope.closetimeModal = function (horaModal, minutos) {
 
-            var hora = horaModal + ':' + minutos;
-            var horaAtual = $filter('date')(new Date(), 'HH:mm');
 
-            if (hora <= horaAtual) {
-                $scope.timemodal.hide();
-                hora = $filter('date')(hora, 'HH:mm');
-                $scope.refeicao.Hora = hora;
-            } else {
-                toast('Escolheu uma hora superior à do sistema', 2);
-            }
         };
 
-        //método para fechar o datepicker
-        $scope.closedateModal = function (data) {
 
-            var dataAtual = $filter('date')(new Date(), 'yyyy-MM-dd');
-
-            if (data <= dataAtual) {
-                $scope.datemodal.hide();
-                data = $filter('date')(data, 'yyyy-MM-dd');
-                $scope.refeicao.Dia = data;
-            } else {
-                toast('Escolheu uma data superior à do sistema', 2);
-            }
-        };
 
         $scope.getPorcao = function (alimento) {
             if ($scope.refeicao.listaAlimentos.length != 0) {

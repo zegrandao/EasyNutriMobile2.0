@@ -5,7 +5,8 @@
         <div>
             <label class="item item-input">
                 <span class="input-label">Dia</span>
-                <input type="date" placeholder="Escolha a data" ng-model="refeicao.Dia" name="datepicker" ng-click="opendateModal()" readonly>
+                <input type="text" placeholder="Escolha a data" ng-model="refeicao.Dia" name="datepicker"
+                       ng-click="openModal(1)" readonly>
             </label>
         </div>
         <div class="list">
@@ -17,7 +18,7 @@
                 </label>
                 <label class="item item-input">
                     <span class="input-label">Hora</span>
-                    <input ng-model="refeicao.Hora" type="time" ng-click="opentimeModal()" placeholder="Escolha a hora"
+                    <input ng-model="refeicao.Hora" type="text" ng-click="openModal(2)" placeholder="Escolha a hora"
                            readonly>
                 </label>
 
