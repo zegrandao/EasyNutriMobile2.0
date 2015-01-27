@@ -4,9 +4,9 @@ angular.module('easyNutri').factory('WebServiceFactory', function ($http, $windo
 
     var error = false;
     /* url debug */
-    var urlBase = 'http://192.168.246.64/easynutriapi2/api/';
+//    var urlBase = 'http://192.168.246.64/easynutriapi2/api/';
 ///* url produção */
-//    var urlBase = 'http://dei.estg.ipleiria.pt/projetos/easynutri/api/api/';
+    var urlBase = 'http://dei.estg.ipleiria.pt/projetos/easynutri/api/api/';
 
     WebServiceFactory.checkCredencial = function () {
         if ($rootScope.loggedIn) {
