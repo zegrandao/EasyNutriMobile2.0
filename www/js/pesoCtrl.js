@@ -81,7 +81,7 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
                 mensagem += "Defina a hora; ";
             }
 
-            if ($scope.reg.Hora > horaSistema && $scope.reg.Dia >= diaAtual && $scope.reg.Minutos > minutosSistema) {
+            if ($scope.reg.Hora > horaSistema || $scope.reg.Dia > diaAtual || $scope.reg.Minutos > minutosSistema) {
                 mensagem += "A hora é superior à hora do sistema; ";
             }
 

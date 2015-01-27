@@ -111,7 +111,7 @@ easyNutri.controller('refeicaoCtrl',
                 mensagem += "Defina a hora; ";
             }
 
-            if (refeicao.Hora > horaSistema && refeicao.Dia >= dataAtual && refeicao.Minutos > minutosSistema) {
+            if (refeicao.Hora > horaSistema || refeicao.Dia > dataAtual || refeicao.Minutos > minutosSistema) {
                 mensagem += "A hora é superior à hora do sistema; ";
             }
 
