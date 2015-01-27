@@ -87,8 +87,13 @@ easyNutri.controller('dadosNaoSincCtrl', ['$scope', 'WebServiceFactory', '$filte
         };
 
         $scope.acaoBotao = function () {
-            WebServiceFactory.sincronizarDados();
-            $state.go($state.current, {}, {reload: true});
+            WebServiceFactory.verificarConexao().success(function () {
+                WebServiceFactory.sincronizarDados();
+                $state.go($state.current, {}, {reload: true});
+            }).error(function () {
+                toastr.info('Não tem ligação à internet');
+            });
+
         };
 
         $scope.editarRefeicaoNovaOffline = function (refeicao) {
