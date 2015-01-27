@@ -1,5 +1,4 @@
-easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filter', '$ionicModal', '$ionicPopup',
-    '$rootScope', 'TiposRefeicaoFactory', '$location', '$window', 'TiposRefeicaoFactory', '$state',
+easyNutri.controller('refeicaoCtrl',
     function ($scope, $http, WebServiceFactory, $filter, $ionicModal, $ionicPopup, $rootScope, TiposRefeicaoFactory, $location, $window, $state) {
 
         if ($rootScope.loggedIn != true) {
@@ -16,16 +15,6 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
             $scope.numeroAlimentos = parseInt($window.localStorage.getItem('numeroPesquisa'));
         } else {
             $scope.numeroAlimentos = 5;
-        }
-
-
-        $array = ['leite vaca', 'leite cabra'];
-        console.log('função')
-        for (var x in $array) {
-            console.log('Comment: ' + $array[x]);
-            if ($array[x].indexOf("leite v") >= 0) {
-                console.log('encontrou');
-            }
         }
 
         var toast = function (texto, caso) {
@@ -261,9 +250,10 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
 
         //popular lista de alimentos pesquisavel
         WebServiceFactory.verificarConexao().success(function () {
+            // WebServiceFactory.sincronizarDados();
             WebServiceFactory.getAlimentos().success(function (lista) {
                 $scope.alimentos = lista;
-                console.log($scope.alimentos);
+
             }).error(function (data, status, headers) {
                 toast('Erro a processar pedido de alimentos!', 2);
             });
@@ -302,6 +292,7 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
         $scope.guardarRefeicao = function (refeicao) {
             if (isValid(refeicao)) {
                 WebServiceFactory.verificarConexao().success(function () {
+
                     WebServiceFactory.guardarRefeicao(refeicao)
                         .success(function () {
                             inicializar();
@@ -310,6 +301,7 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
                         .error(function (data, status, headers) {
                             toast('Erro a guardar refeição!', 2);
                         });
+                    //WebServiceFactory.sincronizarDados();
                 }).error(function () {
                     guardarRefeicaoOffline(refeicao);
                 });
@@ -369,6 +361,7 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
             if (isValid(refeicao)) {
                 var idLinha = refeicao.idRefeicao;
                 WebServiceFactory.verificarConexao().success(function () {
+                    //WebServiceFactory.sincronizarDados();
                     WebServiceFactory.editarRefeicaoWeb(refeicao, idLinha)
                         .success(function () {
                             $rootScope.editar = false;
@@ -422,9 +415,44 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
             }
         );
 
+        $ionicModal.fromTemplateUrl('templates/timemodal.html',
+            function (modal) {
+                $scope.timemodal = modal;
+            },
+            {
+                // Use our scope for the scope of the modal to keep it simple
+                scope: $scope,
+                // The animation we want to use for the modal entrance
+                animation: 'slide-in-up'
+            }
+        );
+
         //método para abrir o datepicker
         $scope.opendateModal = function () {
             $scope.datemodal.show();
+        };
+
+        $scope.opentimeModal = function () {
+            var arrayHora = $scope.refeicao.Hora.split(':');
+            var hora = arrayHora[0];
+            var minutos = arrayHora[1];
+            $scope.hora = hora;
+            $scope.minutos = minutos;
+            $scope.timemodal.show();
+        };
+
+        $scope.closetimeModal = function (horaModal, minutos) {
+
+            var hora = horaModal + ':' + minutos;
+            var horaAtual = $filter('date')(new Date(), 'HH:mm');
+
+            if (hora <= horaAtual) {
+                $scope.timemodal.hide();
+                hora = $filter('date')(hora, 'HH:mm');
+                $scope.refeicao.Hora = hora;
+            } else {
+                toast('Escolheu uma hora superior à do sistema', 2);
+            }
         };
 
         //método para fechar o datepicker
@@ -451,4 +479,4 @@ easyNutri.controller('refeicaoCtrl', ['$scope', '$http', 'WebServiceFactory', '$
             }
             return "";
         }
-    }]);
+    });

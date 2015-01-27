@@ -59,8 +59,10 @@ easyNutri.controller('diarioCtrl',
             mostrarSpinner();
             if ($rootScope.loggedIn != false) {
                 WebServiceFactory.verificarConexao().success(function () {
+                    //WebServiceFactory.sincronizarDados();
                     WebServiceFactory.getDiarioAlimentar(dataPesquisa)
                         .success(function (data) {
+
                             if (data != "null") {
                                 $scope.diarioAlimentar = data;
                                 console.log('JSON que vem do webservice: ' + JSON.stringify(data));
@@ -112,6 +114,7 @@ easyNutri.controller('diarioCtrl',
         };
 
         WebServiceFactory.verificarConexao().success(function () {
+            // WebServiceFactory.sincronizarDados();
             $scope.pesquisarDiarios($scope.pesquisa.Dia);
         }).error(function () {
             if ($window.localStorage.getItem('diarioAlimentar') != null) {
@@ -216,14 +219,14 @@ easyNutri.controller('diarioCtrl',
         $scope.remover = function (refeicao) {
             mostrarSpinner();
             WebServiceFactory.verificarConexao().success(function () {
-                WebServiceFactory.removerRefeicaoWeb(refeicao.Id)
+                var id = parseInt(refeicao.Id);
+                WebServiceFactory.removerRefeicaoWeb(id)
                     .success(function () {
                         esconderSpinner();
-                        toast('Refeição removida com sucesso!', 1);
                         $scope.diarioAlimentar.Refeicoes.splice($scope.diarioAlimentar.Refeicoes.indexOf(refeicao), 1);
-                        $window.localStorage.setItem(JSON.stringify(eval($scope.diarioAlimentar)));
-                    })
-                    .error(function (data, status, headers) {
+                        $window.localStorage.setItem('diarioAlimentar', JSON.stringify(eval($scope.diarioAlimentar)));
+                        toast('Refeição removida com sucesso!', 1);
+                    }).error(function (data, status, headers) {
                         esconderSpinner();
                         toast('Erro a remover refeição!', 2);
                     });

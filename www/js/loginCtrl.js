@@ -4,16 +4,10 @@ easyNutri.controller('loginCtrl', ['$scope', '$http', 'WebServiceFactory', 'moda
         $scope.user = {};
         $rootScope.guardarCredenciais = false;
 
-        var nomePagina = $window.localStorage.getItem('pagina');
-
-        if (nomePagina == undefined) {
-            nomePagina = 'home';
-        }
-
         if ($window.localStorage.getItem('credencial') != null) {
             $rootScope.loggedIn = true;
             $rootScope.guardarCredenciais = true;
-            $state.go('easyNutri.' + nomePagina, {reload: true, inherit: false});
+            $state.go('easyNutri.home', {reload: true, inherit: false});
         }
         var toast = function (texto, caso) {
             toastr.options = {

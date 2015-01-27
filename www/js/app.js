@@ -17,37 +17,41 @@ easyNutri.run(function ($ionicPlatform, $window, $ionicPopup, $rootScope, WebSer
                 StatusBar.styleDefault();
             }
 
-            document.addEventListener("online", function () {
-                WebServiceFactory.sincronizarDados();
-            }, false);
+//            document.addEventListener("online", function () {
+//                WebServiceFactory.sincronizarDados();
+//            }, false);
 
             var credencial = WebServiceFactory.checkCredencial();
 
-            if (window.Connection) {
-                if (navigator.connection.type == Connection.NONE && credencial == null) {
-                    $ionicPopup.alert({
-                        title: "Modo Offline",
-                        content: "Não está ligado à rede!"
-                    });
-                    ionic.Platform.exitApp();
-                } else if (navigator.connection.type == Connection.NONE && credencial != null) {
-                    $ionicPopup.confirm({
-                        title: "Modo Offline",
-                        content: "Não está ligado à rede, deseja continuar em modo offline?"
-                    })
-                        .then(function (result) {
-                            if (!result) {
-                                ionic.Platform.exitApp();
-                            } else {
-                                $ionicPopup.alert({
-                                    title: 'Aviso',
-                                    content: 'Todos os dados que insira na aplicação só serão sincronizados quando tiver uma ' +
-                                    'ligação à internet com a aplicação a correr'
-                                });
-                            }
+            WebServiceFactory.verificarConexao().error(function (status) {
+                if (status == 0) {
+                    if (credencial == null) {
+                        $ionicPopup.alert({
+                            title: "Modo Offline",
+                            content: "Não está ligado à rede!"
                         });
+                        ionic.Platform.exitApp();
+                    } else if (credencial != null) {
+                        $ionicPopup.confirm({
+                            title: "Modo Offline",
+                            content: "Não está ligado à rede, deseja continuar em modo offline?"
+                        })
+                            .then(function (result) {
+                                if (!result) {
+                                    ionic.Platform.exitApp();
+                                } else {
+                                    $ionicPopup.alert({
+                                        title: 'Aviso',
+                                        content: 'Todos os dados que insira na aplicação só serão sincronizados quando tiver uma ' +
+                                            'ligação à internet com a aplicação a correr'
+                                    });
+                                }
+                            });
+                    }
                 }
-            }
+            });
+
+
         });
     })
 

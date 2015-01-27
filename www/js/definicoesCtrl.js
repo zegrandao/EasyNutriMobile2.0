@@ -37,15 +37,6 @@ easyNutri.controller('definicoesCtrl', function ($scope, $ionicSideMenuDelegate,
     };
 
     $scope.numero = "";
-    $scope.paginaInicial = "";
-    $scope.arrayPaginas = [
-        {'Id': 1, 'nomePagina': 'consultaDiario'},
-        {'Id': 2, 'nomePagina': 'planoAlimentar'},
-        {'Id': 3, 'nomePagina': 'novaRefeicao'},
-        {'Id': 4, 'nomePagina': 'notificacoes'},
-        {'Id': 5, 'nomePagina': 'peso'},
-        {'Id': 6, 'nomePagina': 'home'}
-    ];
 
 
     if ($window.localStorage.getItem('numeroPesquisa') !== null) {
@@ -72,49 +63,6 @@ easyNutri.controller('definicoesCtrl', function ($scope, $ionicSideMenuDelegate,
     };
 
 
-    var getNomePagina = function (idPagina) {
-        for ($i = 0; $i < $scope.arrayPaginas.length; $i++) {
-            if (idPagina == $scope.arrayPaginas[$i].Id) {
-                return $scope.arrayPaginas[$i].nomePagina;
-                break;
-            }
-        }
-
-    };
-
-
-    var getIdPagina = function (nome) {
-        for ($i = 0; $i < $scope.arrayPaginas.length; $i++) {
-            if (nome == $scope.arrayPaginas[$i].nomePagina) {
-                return $scope.arrayPaginas[$i].Id;
-                break;
-            }
-        }
-    };
-
-
-    if ($window.localStorage.getItem('pagina') != null) {
-        var nome = $window.localStorage.getItem('pagina');
-        var idPagina = getIdPagina(nome);
-        $scope.pagina = idPagina;
-    }
-
-
-    var isValidPagina = function (paginaInicial) {
-        var mensagem = "";
-        if (paginaInicial == "" || paginaInicial == undefined) {
-            mensagem += "Tem que definir uma pagina inicial; ";
-        }
-
-        if (mensagem != "") {
-            toast(mensagem, 2);
-            return false;
-        }
-
-        return true;
-    };
-
-
     var isValidNumero = function (numero) {
         var mensagem = "";
 
@@ -129,13 +77,6 @@ easyNutri.controller('definicoesCtrl', function ($scope, $ionicSideMenuDelegate,
             }
         }
         return true;
-    };
-
-    $scope.alterarHome = function (paginaInicial) {
-        if (isValidPagina(paginaInicial)) {
-            var pagina = getNomePagina(paginaInicial);
-            $window.localStorage.setItem('pagina', pagina);
-        }
     };
 
 
