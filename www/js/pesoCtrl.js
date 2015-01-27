@@ -10,7 +10,10 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
         $scope.reg.Dia = $filter('date')($scope.reg.Dia, 'yyyy-MM-dd');
 
         $scope.reg.Hora = "";
-        $scope.reg.Hora = $filter('date')(new Date(), 'HH:mm');
+        var hora = $filter('date')(new Date(), 'HH:mm');
+        var arrayHora = hora.split(':');
+        $scope.reg.Hora = parseInt(arrayHora[0]);
+        $scope.reg.Minutos = parseInt(arrayHora[1]);
 
         $scope.peso = {};
 
@@ -64,7 +67,12 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
 
         var isValid = function (peso) {
             var mensagem = "";
-            var horaSistema = $filter('date')(new Date(), 'HH:mm');
+            var hora = $filter('date')(new Date(), 'HH:mm');
+            var diaAtual = $filter('date')(new Date(), 'yyyy-MM-dd');
+            var arrayHora = hora.split(':');
+            var horaSistema = arrayHora[0];
+            var minutosSistema = arrayHora[1];
+
             if ($scope.reg.Dia == null) {
                 mensagem += "Defina o dia; ";
             }
@@ -73,13 +81,23 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
                 mensagem += "Defina a hora; ";
             }
 
-            if ($scope.reg.Hora > horaSistema) {
+            if ($scope.reg.Hora > horaSistema && $scope.reg.Dia >= diaAtual && $scope.reg.Minutos > minutosSistema) {
                 mensagem += "A hora é superior à hora do sistema; ";
             }
 
-            if (!patternHora.test($scope.reg.Hora)) {
-                mensagem += "Formato incorreto da hora. Exemplo: 23:15; ";
+            if ($scope.reg.Hora > 23 || $scope.reg.Hora < 0) {
+                mensagem += "Introduza uma hora entre 0 e 23";
             }
+
+            if ($scope.reg.Minutos == "") {
+                mensagem += "Defina os minutos; ";
+            }
+
+
+            if ($scope.reg.Minutos > 60 || $scope.reg.Minutos < 0) {
+                mensagem += "Introduza minutos entre 0 e 59; "
+            }
+
 
             if (peso.Valor == "") {
                 mensagem += "Defina o peso; ";
@@ -111,8 +129,10 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
             $scope.reg = {};
             $scope.reg.Dia = new Date();
             $scope.reg.Dia = $filter('date')($scope.reg.Dia, 'yyyy-MM-dd');
-            $scope.reg.Hora = new Date();
-            $scope.reg.Hora = $filter('date')($scope.reg.Hora, 'HH:mm');
+            var hora = $filter('date')($scope.reg.Dia, 'HH:mm');
+            var arrayHora = hora.split(':');
+            $scope.reg.Hora = parseInt(arrayHora[0]);
+            $scope.reg.Minutos = parseInt(arrayHora[1]);
             $scope.peso = {};
             $scope.peso.Valor = "";
             $scope.tornarVisivel();
@@ -188,11 +208,13 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
         var registarPesoOffline = function (peso) {
             var lista = new Array();
             if (JSON.parse($window.localStorage.getItem('listaPesosNovos') != null)) {
+                peso.DataMed = $scope.reg.Dia + " " + $scope.reg.Hora + ":" + $scope.reg.Minutos;
                 lista = JSON.parse($window.localStorage.getItem('listaPesosNovos'));
                 lista.push(peso);
                 $window.localStorage.setItem('listaPesosNovos', JSON.stringify(eval(lista)));
                 toast('Peso inserido com sucesso', 1);
             } else {
+                peso.DataMed = $scope.reg.Dia + " " + $scope.reg.Hora + ":" + $scope.reg.Minutos;
                 lista.push(peso);
                 $window.localStorage.setItem('listaPesosNovos', JSON.stringify(eval(lista)));
                 toast('Peso inserido com sucesso', 1);
@@ -205,7 +227,7 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
         $scope.registarPeso = function (peso) {
             if (isValid(peso)) {
                 mostrarSpinner();
-                peso.DataMed = $scope.reg.Dia + " " + $scope.reg.Hora;
+                peso.DataMed = $scope.reg.Dia + " " + $scope.reg.Hora + ":" + $scope.reg.Minutos;
                 peso.TipoMedicaoID = 1;
                 peso.EmCasa = 1;
                 WebServiceFactory.verificarConexao().success(function () {

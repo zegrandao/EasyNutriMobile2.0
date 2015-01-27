@@ -93,7 +93,10 @@ easyNutri.controller('refeicaoCtrl',
 
         var isValid = function (refeicao) {
             var mensagem = "";
-            var horaSistema = $filter('date')(new Date(), 'HH:mm');
+            var hora = $filter('date')(new Date(), 'HH:mm');
+            var arrayHora = hora.split(':');
+            var horaSistema = parseInt(arrayHora[0]);
+            var minutosSistema = parseInt(arrayHora[1]);
             var dataAtual = $filter('date')(new Date(), 'yyyy-MM-dd');
 
             if (refeicao.Dia == null) {
@@ -108,8 +111,16 @@ easyNutri.controller('refeicaoCtrl',
                 mensagem += "Defina a hora; ";
             }
 
-            if (refeicao.Hora > horaSistema && refeicao.Dia >= dataAtual) {
-                mensagem += "A hora é superior à hora do sistema; "
+            if (refeicao.Hora > horaSistema && refeicao.Dia >= dataAtual && refeicao.Minutos > minutosSistema) {
+                mensagem += "A hora é superior à hora do sistema; ";
+            }
+
+            if (refeicao.Hora > 23 || refeicao.Hora < 0) {
+                mensagem += "Introduza uma hora entre 0 e 23";
+            }
+
+            if (refeicao.Minutos > 60 || refeicao.Minutos < 0) {
+                mensagem += "Introduza minutos entre 0 e 59; "
             }
 
             if (refeicao.listaAlimentos === undefined) {
@@ -142,7 +153,10 @@ easyNutri.controller('refeicaoCtrl',
             $scope.textoBotao = "Registar";
             $scope.refeicao.Data = new Date();
             $scope.refeicao.Dia = $filter('date')($scope.refeicao.Data, 'yyyy-MM-dd');
-            $scope.refeicao.Hora = $filter('date')($scope.refeicao.Data, 'HH:mm');
+            var horaSistema = $filter('date')($scope.refeicao.Data, 'HH:mm');
+            var arrayHora = horaSistema.split(':');
+            $scope.refeicao.Hora = parseInt(arrayHora[0]);
+            $scope.refeicao.Minutos = parseInt(arrayHora[1]);
             $scope.refeicao.Tipo = 1;
             $scope.refeicao.listaAlimentos = new Array();
             mostrarBotao();
@@ -154,8 +168,10 @@ easyNutri.controller('refeicaoCtrl',
             WebServiceFactory.verificarConexao().success(function () {
                 var dia = $filter('date')(refeicao.DataRefeicao, 'yyyy-MM-dd');
                 var hora = $filter('date')(refeicao.DataRefeicao, 'HH:mm');
+                var arrayHora = hora.split(':');
                 $scope.refeicao.Dia = dia;
-                $scope.refeicao.Hora = hora;
+                $scope.refeicao.Hora = parseInt(arrayHora[0]);
+                $scope.refeicao.Minutos = parseInt(arrayHora[1]);
                 tipo = TiposRefeicaoFactory.get(refeicao.TipoRefeicaoId);
                 $scope.refeicao.idRefeicao = refeicao.Id;
                 $scope.refeicao.Tipo = tipo.Id;
@@ -182,8 +198,10 @@ easyNutri.controller('refeicaoCtrl',
                         tipo = TiposRefeicaoFactory.get(refeicao.Tipo);
                         var dia = $filter('date')(refeicao.Dia, 'yyyy-MM-dd');
                         var hora = $filter('date')(refeicao.Hora, 'HH:mm');
+                        var arrayHora = hora.split(':');
                         $scope.refeicao.Dia = dia;
-                        $scope.refeicao.Hora = hora;
+                        $scope.refeicao.Hora = parseInt(arrayHora[0]);
+                        $scope.refeicao.Minutos = parseInt(arrayHora[1]);
                         $scope.refeicao.Tipo = tipo.Id;
                         for ($i = 0; $i < refeicao.listaAlimentos.length; $i++) {
                             $scope.refeicao.listaAlimentos.push(refeicao.listaAlimentos[$i]);
@@ -195,8 +213,10 @@ easyNutri.controller('refeicaoCtrl',
                             tipo = TiposRefeicaoFactory.get(refeicao.Tipo);
                             var dia = $filter('date')(refeicao.Dia, 'yyyy-MM-dd');
                             var hora = $filter('date')(refeicao.Hora, 'HH:mm');
+                            var arrayHora = hora.split(':');
                             $scope.refeicao.Dia = dia;
-                            $scope.refeicao.Hora = hora;
+                            $scope.refeicao.Hora = parseInt(arrayHora[0]);
+                            $scope.refeicao.Minutos = parseInt(arrayHora[1]);
                             $scope.refeicao.Tipo = tipo.Id;
                             $scope.refeicao.idRefeicao = refeicao.idRefeicao;
                             for ($i = 0; $i < refeicao.listaAlimentos.length; $i++) {
@@ -205,10 +225,12 @@ easyNutri.controller('refeicaoCtrl',
                             mostrarBotao();
                         } else { //refeicao que veio do webservice editada pela 1ª vez
                             console.log('JSON que vem dos dados nao sincronizados: ' + JSON.stringify(refeicao));
-                            var dia = $filter('date')(refeicao.DataRefeicao, 'yyyy-MM-dd');
-                            var hora = $filter('date')(refeicao.DataRefeicao, 'HH:mm');
+                            var dia = $filter('date')(refeicao.Dia, 'yyyy-MM-dd');
+                            var hora = $filter('date')(refeicao.Hora, 'HH:mm');
+                            var arrayHora = hora.split(':');
                             $scope.refeicao.Dia = dia;
-                            $scope.refeicao.Hora = hora;
+                            $scope.refeicao.Hora = parseInt(arrayHora[0]);
+                            $scope.refeicao.Minutos = parseInt(arrayHora[1]);
                             tipo = TiposRefeicaoFactory.get(refeicao.TipoRefeicaoId);
                             $scope.refeicao.idRefeicao = refeicao.Id;
                             $scope.refeicao.Tipo = tipo.Id;
@@ -275,12 +297,16 @@ easyNutri.controller('refeicaoCtrl',
         var guardarRefeicaoOffline = function (refeicao) {
             $scope.listaRefeicoesNovasOffline = new Array();
             if ($window.localStorage.getItem('listaRefeicoesNovas') !== null) {
+                refeicao.Hora = refeicao.Hora + ':' + refeicao.Minutos;
+                refeicao.DataRefeicao = refeicao.Dia + " " + refeicao.Hora;
                 $scope.listaRefeicoesNovasOffline = JSON.parse($window.localStorage.getItem('listaRefeicoesNovas'));
                 $scope.listaRefeicoesNovasOffline.push(refeicao);
                 $window.localStorage.setItem('listaRefeicoesNovas', JSON.stringify(eval($scope.listaRefeicoesNovasOffline)));
                 inicializar();
                 toast('Refeicao guardada com sucesso', 1);
             } else if ($window.localStorage.getItem('listaRefeicoesNovas') == null) {
+                refeicao.Hora = refeicao.Hora + ':' + refeicao.Minutos;
+                refeicao.DataRefeicao = refeicao.Dia + " " + refeicao.Hora;
                 $scope.listaRefeicoesNovasOffline.push(refeicao);
                 $window.localStorage.setItem('listaRefeicoesNovas', JSON.stringify(eval($scope.listaRefeicoesNovasOffline)));
                 inicializar();
@@ -292,7 +318,8 @@ easyNutri.controller('refeicaoCtrl',
         $scope.guardarRefeicao = function (refeicao) {
             if (isValid(refeicao)) {
                 WebServiceFactory.verificarConexao().success(function () {
-
+                    refeicao.Hora = refeicao.Hora + ':' + refeicao.Minutos;
+                    WebServiceFactory.sincronizarDados();
                     WebServiceFactory.guardarRefeicao(refeicao)
                         .success(function () {
                             inicializar();
@@ -301,7 +328,7 @@ easyNutri.controller('refeicaoCtrl',
                         .error(function (data, status, headers) {
                             toast('Erro a guardar refeição!', 2);
                         });
-                    WebServiceFactory.sincronizarDados();
+
                 }).error(function () {
                     guardarRefeicaoOffline(refeicao);
                 });
@@ -309,10 +336,11 @@ easyNutri.controller('refeicaoCtrl',
         };
 
         var editarRefeicaoOffline = function (refeicao) {
-
             if ($rootScope.editadaOffline) {
                 $scope.listaRefeicoesOffline = new Array();
                 if ($window.localStorage.getItem('listaRefeicoesNovas') != null) {
+                    refeicao.Hora = refeicao.Hora + ':' + refeicao.Minutos;
+                    refeicao.DataRefeicao = refeicao.Dia + " " + refeicao.Hora;
                     $scope.listaRefeicoesOffline = JSON.parse($window.localStorage.getItem('listaRefeicoesNovas'));
                     $scope.listaRefeicoesOffline.splice($scope.listaRefeicoesOffline.indexOf($rootScope.refeicaoEditar), 1);
                     $scope.listaRefeicoesOffline.push(refeicao);
@@ -328,6 +356,8 @@ easyNutri.controller('refeicaoCtrl',
                 $scope.diarioAlimentar = new Array();
                 $scope.diarioAlimentar = JSON.parse($window.localStorage.getItem('diarioAlimentar'));
                 if ($window.localStorage.getItem('listaRefeicoesEditadas') != null) {
+                    refeicao.Hora = refeicao.Hora + ':' + refeicao.Minutos;
+                    refeicao.DataRefeicao = refeicao.Dia + " " + refeicao.Hora;
                     $scope.listaRefeicoesEditadasOffline = JSON.parse($window.localStorage.getItem('listaRefeicoesEditadas'));
                     $scope.listaRefeicoesEditadasOffline.splice($scope.listaRefeicoesEditadasOffline.indexOf($rootScope.refeicaoEditar), 1);
                     $scope.listaRefeicoesEditadasOffline.push(refeicao);
@@ -341,6 +371,8 @@ easyNutri.controller('refeicaoCtrl',
                     toast('Refeição editada com sucesso!', 1);
                     inicializar();
                 } else if ($window.localStorage.getItem('listaRefeicoesEditadas') == null) {
+                    refeicao.Hora = refeicao.Hora + ':' + refeicao.Minutos;
+                    refeicao.DataRefeicao = refeicao.Dia + " " + refeicao.Hora;
                     $scope.listaRefeicoesEditadasOffline.push(refeicao);
                     $window.localStorage.setItem('listaRefeicoesEditadas', JSON.stringify(eval($scope.listaRefeicoesEditadasOffline)));
                     $rootScope.editar = false;
@@ -362,6 +394,7 @@ easyNutri.controller('refeicaoCtrl',
                 var idLinha = refeicao.idRefeicao;
                 WebServiceFactory.verificarConexao().success(function () {
                     WebServiceFactory.sincronizarDados();
+                    refeicao.Hora = refeicao.Hora + ':' + refeicao.Minutos;
                     WebServiceFactory.editarRefeicaoWeb(refeicao, idLinha)
                         .success(function () {
                             $rootScope.editar = false;
@@ -433,21 +466,11 @@ easyNutri.controller('refeicaoCtrl',
         $scope.openModal = function (index) {
             if (index == 1) {
                 $scope.datemodal.show();
-            } else {
-                var arrayHora = $scope.refeicao.Hora.split(':');
-                var hora = arrayHora[0];
-                var minutos = arrayHora[1];
-                $scope.hora = hora;
-                $scope.minutos = minutos;
-                $scope.timemodal.show();
             }
-
         };
 
         //método para fechar o datepicker
-        $scope.closeModal = function (data) {
-            if (this.id == 1) {
-
+        $scope.closeModal = function (data, horaModal, minutos) {
                 var dataAtual = $filter('date')(new Date(), 'yyyy-MM-dd');
 
                 if (data <= dataAtual) {
@@ -457,30 +480,7 @@ easyNutri.controller('refeicaoCtrl',
                 } else {
                     toast('Escolheu uma data superior à do sistema', 2);
                 }
-            } else {
-                var hora = horaModal + ':' + minutos;
-                var horaAtual = $filter('date')(new Date(), 'HH:mm');
-
-                if (hora <= horaAtual) {
-                    $scope.timemodal.hide();
-                    hora = $filter('date')(hora, 'HH:mm');
-                    $scope.refeicao.Hora = hora;
-                } else {
-                    toast('Escolheu uma hora superior à do sistema', 2);
-                }
-            }
-
         };
-
-        $scope.opentimeModal = function () {
-
-        };
-
-        $scope.closetimeModal = function (horaModal, minutos) {
-
-
-        };
-
 
 
         $scope.getPorcao = function (alimento) {

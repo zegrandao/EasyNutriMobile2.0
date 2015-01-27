@@ -202,16 +202,17 @@ angular.module('easyNutri').factory('WebServiceFactory', function ($http, $windo
                 var listaRefeicoesNovas = JSON.parse($window.localStorage.getItem('listaRefeicoesNovas'));
                 for (var $n = 0; $n < listaRefeicoesNovas.length; $n++) {
                     WebServiceFactory.guardarRefeicao(listaRefeicoesNovas[$n]).success(function () {
-                        listaRefeicoesNovas.splice($n, 1);
+                        error = false;
                     }).error(function (status) {
                         if (status == 0) {
                             error = true;
                         }
-
                     });
                     if (error) {
                         error = false;
                         break;
+                    } else {
+                        listaRefeicoesNovas.splice($n, 1);
                     }
                 }
                 if (listaRefeicoesNovas.length == 0) {
@@ -226,16 +227,17 @@ angular.module('easyNutri').factory('WebServiceFactory', function ($http, $windo
                 for (var $e = 0; $e < listaRefeicoesEditadas.length; $e++) {
                     var idLinha = listaRefeicoesEditadas[$e].idRefeicao;
                     WebServiceFactory.editarRefeicaoWeb(listaRefeicoesEditadas[$e], idLinha).success(function () {
-                        listaRefeicoesEditadas.splice($e, 1);
+                        error = false;
                     }).error(function (status) {
                         if (status == 0) {
                             error = true;
                         }
-
                     });
                     if (error) {
                         error = false;
                         break;
+                    } else {
+                        listaRefeicoesEditadas.splice($e, 1);
                     }
                 }
                 if (listaRefeicoesEditadas.length == 0) {
@@ -251,18 +253,16 @@ angular.module('easyNutri').factory('WebServiceFactory', function ($http, $windo
                     if (listaRefeicoesRemovidas[$r].idRefeicao == undefined) {
                         var id = listaRefeicoesRemovidas[$r].Id;
                         WebServiceFactory.removerRefeicaoWeb(listaRefeicoesRemovidas[$r].Id).success(function () {
-                            listaRefeicoesRemovidas.splice($r, 1);
+                            error = false;
                         }).error(function (status) {
-
                             if (status == 0) {
                                 error = true;
                             }
                         });
                     } else {
                         WebServiceFactory.removerRefeicaoWeb(listaRefeicoesRemovidas[$r].idRefeicao).success(function () {
-                            listaRefeicoesRemovidas.splice($r, 1);
+                            error = false;
                         }).error(function (status) {
-
                             if (status == 0) {
                                 error = true;
                             }
@@ -271,6 +271,8 @@ angular.module('easyNutri').factory('WebServiceFactory', function ($http, $windo
                     if (error) {
                         error = false;
                         break;
+                    } else {
+                        listaRefeicoesRemovidas.splice($r, 1);
                     }
                 }
                 if (listaRefeicoesRemovidas.length == 0) {
@@ -283,7 +285,7 @@ angular.module('easyNutri').factory('WebServiceFactory', function ($http, $windo
                 var listaPesos = JSON.parse($window.localStorage.getItem('listaPesosNovos'));
                 for (var $p = 0; $p < listaPesos.length; $p++) {
                     WebServiceFactory.registarPeso(listaPesos[$p]).success(function () {
-                        listaPesos.splice($p, 1);
+                        error = false;
                     }).error(function (status) {
 
                         if (status == 0) {
@@ -293,6 +295,8 @@ angular.module('easyNutri').factory('WebServiceFactory', function ($http, $windo
                     if (error) {
                         error = false;
                         break;
+                    } else {
+                        listaPesos.splice($p, 1);
                     }
                 }
                 if (listaPesos.length == 0) {
@@ -304,7 +308,7 @@ angular.module('easyNutri').factory('WebServiceFactory', function ($http, $windo
                 var listaNotificacoes = JSON.parse($window.localStorage.getItem('listaNotificacoesLidas'));
                 for (var $n = 0; $n < listaNotificacoes.length; $n++) {
                     WebServiceFactory.alterarEstadoNotificacao(listaNotificacoes[$n].Id).success(function () {
-                        listaNotificacoes.splice($n, 1);
+                        error = false;
                     }).error(function (status) {
                         if (status == 0) {
                             error = true;
@@ -313,15 +317,15 @@ angular.module('easyNutri').factory('WebServiceFactory', function ($http, $windo
                     if (error) {
                         error = false;
                         break;
+                    } else {
+                        listaNotificacoes.splice($n, 1);
                     }
                 }
                 if (listaNotificacoes.length == 0) {
                     $window.localStorage.removeItem('listaNotificacoesLidas');
                 }
             }
-
         }
-
     };
     return WebServiceFactory;
 });

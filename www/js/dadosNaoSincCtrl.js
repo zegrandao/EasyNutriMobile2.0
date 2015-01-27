@@ -5,9 +5,10 @@ easyNutri.controller('dadosNaoSincCtrl', ['$scope', 'WebServiceFactory', '$filte
             $state.go('login', {reload: true, inherit: false});
         }
 
-
-        console.log($window.localStorage.getItem('listaRefeicoesNovas'));
-        console.log($window.localStorage.getItem('listaRefeicoesEditadas'));
+        if ($window.localStorage.getItem('listaRefeicoesNovas') != null || $window.localStorage.getItem('listaRefeicoesRemovidas') != null ||
+            $window.localStorage.getItem('listaRefeicoesEditadas') != null || $window.localStorage.getItem('listaPesosNovos') != null) {
+            document.getElementById('botaoSincronizar').style.display = 'inline';
+        }
 
         $scope.listaRefeicoesNovas = new Array();
         if ($window.localStorage.getItem('listaRefeicoesNovas') != null) {
@@ -39,6 +40,7 @@ easyNutri.controller('dadosNaoSincCtrl', ['$scope', 'WebServiceFactory', '$filte
 
             $state.go('easyNutri.home', {reload: true, inherit: false});
         }
+
 
         $scope.findUnidade = function (linhaRefeicao) {
             var tipoUnidade;
@@ -82,6 +84,11 @@ easyNutri.controller('dadosNaoSincCtrl', ['$scope', 'WebServiceFactory', '$filte
                         $scope.listaRefeicoesNovas.splice($scope.listaRefeicoesNovas.indexOf(refeicao), 1);
                     }
                 });
+        };
+
+        $scope.acaoBotao = function () {
+            WebServiceFactory.sincronizarDados();
+            $state.go($state.current, {}, {reload: true});
         };
 
         $scope.editarRefeicaoNovaOffline = function (refeicao) {
