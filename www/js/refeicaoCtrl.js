@@ -250,7 +250,7 @@ easyNutri.controller('refeicaoCtrl',
 
         //popular lista de alimentos pesquisavel
         WebServiceFactory.verificarConexao().success(function () {
-            // WebServiceFactory.sincronizarDados();
+            WebServiceFactory.sincronizarDados();
             WebServiceFactory.getAlimentos().success(function (lista) {
                 $scope.alimentos = lista;
 
@@ -301,7 +301,7 @@ easyNutri.controller('refeicaoCtrl',
                         .error(function (data, status, headers) {
                             toast('Erro a guardar refeição!', 2);
                         });
-                    //WebServiceFactory.sincronizarDados();
+                    WebServiceFactory.sincronizarDados();
                 }).error(function () {
                     guardarRefeicaoOffline(refeicao);
                 });
@@ -361,7 +361,7 @@ easyNutri.controller('refeicaoCtrl',
             if (isValid(refeicao)) {
                 var idLinha = refeicao.idRefeicao;
                 WebServiceFactory.verificarConexao().success(function () {
-                    //WebServiceFactory.sincronizarDados();
+                    WebServiceFactory.sincronizarDados();
                     WebServiceFactory.editarRefeicaoWeb(refeicao, idLinha)
                         .success(function () {
                             $rootScope.editar = false;

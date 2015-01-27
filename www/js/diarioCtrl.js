@@ -59,7 +59,7 @@ easyNutri.controller('diarioCtrl',
             mostrarSpinner();
             if ($rootScope.loggedIn != false) {
                 WebServiceFactory.verificarConexao().success(function () {
-                    //WebServiceFactory.sincronizarDados();
+                    WebServiceFactory.sincronizarDados();
                     WebServiceFactory.getDiarioAlimentar(dataPesquisa)
                         .success(function (data) {
 
@@ -114,7 +114,7 @@ easyNutri.controller('diarioCtrl',
         };
 
         WebServiceFactory.verificarConexao().success(function () {
-            // WebServiceFactory.sincronizarDados();
+            WebServiceFactory.sincronizarDados();
             $scope.pesquisarDiarios($scope.pesquisa.Dia);
         }).error(function () {
             if ($window.localStorage.getItem('diarioAlimentar') != null) {
