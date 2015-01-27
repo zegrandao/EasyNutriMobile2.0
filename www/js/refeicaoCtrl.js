@@ -470,7 +470,7 @@ easyNutri.controller('refeicaoCtrl',
         };
 
         //método para fechar o datepicker
-        $scope.closeModal = function (data, horaModal, minutos) {
+        $scope.closeModal = function (data) {
                 var dataAtual = $filter('date')(new Date(), 'yyyy-MM-dd');
 
                 if (data <= dataAtual) {

@@ -44,7 +44,8 @@
         <div>
             <ion-list type="list-inset">
                 <ion-item ng-repeat="registo in listaPesos | limitTo: 5">
-                    <strong>Valor:</strong>{{registo.Valor}}Kg &nbsp;&nbsp; <strong>Data:</strong> {{registo.DataMed}}
+                    <strong>Valor:</strong>{{registo.Valor}}Kg &nbsp;&nbsp; <strong>Data:</strong> {{registo.DataMed |
+                    date:'yyyy-MM-dd HH:mm'}}
                     &nbsp;&nbsp; <strong>{{registo.tipoRegisto}}</strong>
                 </ion-item>
             </ion-list>

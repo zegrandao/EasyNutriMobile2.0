@@ -263,7 +263,7 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
         $scope.opendateModal = function () {
             $scope.datemodal.show();
         };
-        $scope.closedateModal = function (data) {
+        $scope.closeModal = function (data) {
             var dataAtual = $filter('date')(new Date(), 'yyyy-MM-dd');
 
             if (data <= dataAtual) {
