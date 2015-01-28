@@ -1,8 +1,8 @@
 easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filter', '$ionicModal', '$ionicPopup', '$ionicLoading', '$rootScope', '$window', '$state',
     function ($scope, $http, WebServiceFactory, $filter, $ionicModal, $ionicPopup, $ionicLoading, $rootScope, $window, $state) {
 
-        if($rootScope.loggedIn != true){
-            $state.go('login', {reload: true, inherit: false});
+        if ($rootScope.loggedIn != true) {
+            $state.go('easyNutri.home', {reload: true, inherit: false});
         }
 
         $scope.reg = {};
@@ -77,19 +77,27 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
                 mensagem += "Defina o dia; ";
             }
 
-            if ($scope.reg.Hora == "") {
+            if ($scope.reg.Hora == "" && $scope.reg.Hora != 0) {
                 mensagem += "Defina a hora; ";
             }
 
-            if ($scope.reg.Hora > horaSistema || $scope.reg.Dia > diaAtual || $scope.reg.Minutos > minutosSistema) {
+            if ($scope.reg.Hora == 0) {
+                $scope.reg.Hora = 24;
+            }
+
+            if ($scope.reg.Hora > horaSistema && $scope.reg.Dia >= diaAtual) {
                 mensagem += "A hora é superior à hora do sistema; ";
             }
 
-            if ($scope.reg.Hora > 23 || $scope.reg.Hora < 0) {
+            if ($scope.reg.Minutos > minutosSistema && $scope.reg.Dia >= diaAtual) {
+                mensagem += "Os minutos são superiores aos minutos do sistema; ";
+            }
+
+            if ($scope.reg.Hora > 24 || $scope.reg.Hora < 0) {
                 mensagem += "Introduza uma hora entre 0 e 23";
             }
 
-            if ($scope.reg.Minutos == "") {
+            if ($scope.reg.Minutos == "" && $scope.reg.Minutos != 0) {
                 mensagem += "Defina os minutos; ";
             }
 
@@ -108,6 +116,9 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
             }
 
             if (mensagem != "") {
+                if ($scope.reg.Hora == 24) {
+                    $scope.reg.Hora = 00;
+                }
                 $ionicPopup.alert({
                     title: 'Aviso',
                     template: mensagem
@@ -127,9 +138,9 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
 
         var inicializar = function () {
             $scope.reg = {};
-            $scope.reg.Dia = new Date();
-            $scope.reg.Dia = $filter('date')($scope.reg.Dia, 'yyyy-MM-dd');
-            var hora = $filter('date')($scope.reg.Dia, 'HH:mm');
+            var data = new Date();
+            $scope.reg.Dia = $filter('date')(data, 'yyyy-MM-dd');
+            var hora = $filter('date')(data, 'HH:mm');
             var arrayHora = hora.split(':');
             $scope.reg.Hora = parseInt(arrayHora[0]);
             $scope.reg.Minutos = parseInt(arrayHora[1]);
@@ -208,6 +219,9 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
         var registarPesoOffline = function (peso) {
             var lista = new Array();
             if (JSON.parse($window.localStorage.getItem('listaPesosNovos') != null)) {
+                if ($scope.reg.Hora == 24) {
+                    $scope.reg.Hora = 0;
+                }
                 peso.DataMed = $scope.reg.Dia + " " + $scope.reg.Hora + ":" + $scope.reg.Minutos;
                 lista = JSON.parse($window.localStorage.getItem('listaPesosNovos'));
                 lista.push(peso);
@@ -227,6 +241,9 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
         $scope.registarPeso = function (peso) {
             if (isValid(peso)) {
                 mostrarSpinner();
+                if ($scope.reg.Hora == 24) {
+                    $scope.reg.Hora = 0;
+                }
                 peso.DataMed = $scope.reg.Dia + " " + $scope.reg.Hora + ":" + $scope.reg.Minutos;
                 peso.TipoMedicaoID = 1;
                 peso.EmCasa = 1;

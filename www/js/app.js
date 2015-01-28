@@ -63,10 +63,6 @@ easyNutri.run(function ($ionicPlatform, $window, $ionicPopup, $rootScope, WebSer
         // Each state's controller can be found in controllers.js
         $stateProvider
             // setup an abstract state for the tabs directive
-            .state('login', {
-                url: '/login',
-                templateUrl: 'templates/startScreen.html'
-            })
             .state('easyNutri', {
                 url: "/easyNutri",
                 abstract: true,
@@ -160,7 +156,7 @@ easyNutri.run(function ($ionicPlatform, $window, $ionicPopup, $rootScope, WebSer
             });
         // if none of the above states are matched, use this as the fallback
         //$urlRouterProvider.when('/login');
-        $urlRouterProvider.otherwise('/login');
+       $urlRouterProvider.otherwise('/easyNutri/home');
 
    })
 

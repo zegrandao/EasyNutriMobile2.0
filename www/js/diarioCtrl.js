@@ -2,7 +2,7 @@ easyNutri.controller('diarioCtrl',
     function ($scope, $http, WebServiceFactory, $filter, $ionicModal, TiposRefeicaoFactory, $ionicPopup, $location, $rootScope, $ionicLoading, $window, $state) {
 
         if ($rootScope.loggedIn != true) {
-            $state.go('login', {reload: true, inherit: false});
+            $state.go('easyNutri.home', {reload: true, inherit: false});
         }
 
         $scope.pesquisa = {};
@@ -177,7 +177,7 @@ easyNutri.controller('diarioCtrl',
             $scope.datemodal.show();
         };
 
-        $scope.closedateModal = function (data) {
+        $scope.closeModal = function (data) {
             var dataAtual = $filter('date')(new Date(), 'yyyy-MM-dd');
 
             if (data <= dataAtual) {
@@ -194,7 +194,6 @@ easyNutri.controller('diarioCtrl',
         $scope.editar = function (refeicao) {
             $rootScope.editar = true;
             $rootScope.refeicaoEditar = refeicao;
-            console.log(JSON.stringify($rootScope.refeicaoEditar));
             $location.path('/easyNutri/editarRefeicao');
         };
 

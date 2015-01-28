@@ -2,7 +2,7 @@ easyNutri.controller('dadosNaoSincCtrl', ['$scope', 'WebServiceFactory', '$filte
     function ($scope, WebServiceFactory, $filter, $rootScope, $window, $state, $ionicPopup, $location) {
 
         if ($rootScope.loggedIn != true) {
-            $state.go('login', {reload: true, inherit: false});
+            $state.go('easyNutri.home', {reload: true, inherit: false});
         }
 
         if ($window.localStorage.getItem('listaRefeicoesNovas') != null || $window.localStorage.getItem('listaRefeicoesRemovidas') != null ||

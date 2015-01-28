@@ -2,7 +2,7 @@ easyNutri.controller('definicoesCtrl', function ($scope, $ionicSideMenuDelegate,
 
 
     if ($rootScope.loggedIn != true) {
-        $state.go('login', {reload: true, inherit: false});
+        $state.go('easyNutri.home', {reload: true, inherit: false});
     }
 
     var toast = function (texto, caso) {

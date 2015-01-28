@@ -1,7 +1,29 @@
 easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebServiceFactory, $interval, $rootScope, $ionicPopup, $window, $location, $ionicModal, $state, $filter, signalFactory) {
 
-    if($rootScope.loggedIn != true){
-        $state.go('login', {reload: true, inherit: false});
+    $ionicModal.fromTemplateUrl('templates/login.html', function ($ionicModal) {
+        },
+        {
+            scope: $scope,
+            animation: 'slide-in-up',
+            focusFirstInput: true
+        }).then(function ($ionicModal) {
+            $scope.loginModal = $ionicModal;
+        });
+
+    $scope.openLoginModal = function () {
+        $scope.loginModal.show();
+    };
+
+
+    if ($window.localStorage.getItem('credencial') != null) {
+        console.log(JSON.stringify($window.localStorage.getItem('credencial')));
+        $rootScope.loggedIn = true;
+        $rootScope.guardarCredenciais = true;
+
+    } else if ($rootScope.loggedIn != true) {
+        if ($scope.loginModal != undefined) {
+            $scope.openLoginModal();
+        }
     }
 
 
@@ -49,20 +71,7 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
         $ionicSideMenuDelegate.toggleLeft();
     }
 
-    $ionicModal.fromTemplateUrl('templates/login.html', function ($ionicModal) {
-        },
-        {
-            scope: $scope,
-            animation: 'slide-in-up',
-            focusFirstInput: true
 
-        }).then(function ($ionicModal) {
-            $scope.loginModal = $ionicModal;
-        });
-
-    $scope.openLoginModal = function () {
-        $scope.loginModal.show();
-    }
 
 
     var getNotificacoesOffline = function () {
@@ -137,9 +146,7 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
     };
 
         if($rootScope.loggedIn){
-
             WebServiceFactory.verificarConexao().success(function () {
-
                 WebServiceFactory.sincronizarDados();
                 getNotificacoes();
 
@@ -194,7 +201,8 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
         $rootScope.guardarCredenciais = false;
         $rootScope.loggedIn = false;
         $rootScope.offline = false;
-        $state.go('login', {}, {reload: true, inherit: false});
+        $state.go('easyNutri.home', {}, {reload: true, inherit: false});
+        $scope.openLoginModal();
     };
 
     $scope.mostrarConfirmacao = function () {

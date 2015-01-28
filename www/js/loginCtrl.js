@@ -2,13 +2,8 @@ easyNutri.controller('loginCtrl', ['$scope', '$http', 'WebServiceFactory', 'moda
     function ($scope, $http, WebServiceFactory, modalFactory, $ionicPopup, $ionicModal, $location, $window, $rootScope, $state, $ionicLoading, $interval) {
 
         $scope.user = {};
-        $rootScope.guardarCredenciais = false;
 
-        if ($window.localStorage.getItem('credencial') != null) {
-            $rootScope.loggedIn = true;
-            $rootScope.guardarCredenciais = true;
-            $state.go('easyNutri.home', {reload: true, inherit: false});
-        }
+
         var toast = function (texto, caso) {
             toastr.options = {
                 "closeButton": false,
@@ -105,7 +100,6 @@ easyNutri.controller('loginCtrl', ['$scope', '$http', 'WebServiceFactory', 'moda
                         esconderSpinner();
                         toast('Username ou Password incorreto!', 2);
                     }
-
                 });
             }
             ;

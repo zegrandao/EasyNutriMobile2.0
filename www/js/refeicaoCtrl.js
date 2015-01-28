@@ -2,7 +2,7 @@ easyNutri.controller('refeicaoCtrl',
     function ($scope, $http, WebServiceFactory, $filter, $ionicModal, $ionicPopup, $rootScope, TiposRefeicaoFactory, $location, $window, $state) {
 
         if ($rootScope.loggedIn != true) {
-            $state.go('login', {reload: true, inherit: false});
+            $state.go('easyNutri.home', {reload: true, inherit: false});
         }
 
         $scope.refeicao = {};
@@ -10,6 +10,7 @@ easyNutri.controller('refeicaoCtrl',
         $scope.refeicao.listaAlimentos = new Array();
         $scope.editarSubmit = false;
         $scope.numeroAlimentos = "";
+
 
         if ($window.localStorage.getItem('numeroPesquisa') != null) {
             $scope.numeroAlimentos = parseInt($window.localStorage.getItem('numeroPesquisa'));
@@ -48,6 +49,35 @@ easyNutri.controller('refeicaoCtrl',
 
         };
 
+        var mostrarBotao = function () {
+            if ($scope.refeicao.listaAlimentos.length != 0) {
+                document.getElementById("botaoRegistar").style.display = "inline";
+                document.getElementById("hr").style.display = "block";
+            } else {
+                document.getElementById("botaoRegistar").style.display = "none";
+                document.getElementById("hr").style.display = "none";
+            }
+        };
+
+        var inicializar = function () {
+            $rootScope.editar = false;
+            $scope.titulo = "Nova Refeição";
+            $scope.textoBotao = "Registar";
+            $scope.refeicao.Data = new Date();
+            $scope.refeicao.Dia = $filter('date')($scope.refeicao.Data, 'yyyy-MM-dd');
+            var horaSistema = $filter('date')($scope.refeicao.Data, 'HH:mm');
+            var arrayHora = horaSistema.split(':');
+            $scope.refeicao.Hora = parseInt(arrayHora[0]);
+            $scope.refeicao.Minutos = parseInt(arrayHora[1]);
+            $scope.refeicao.Tipo = 1;
+            $scope.refeicao.listaAlimentos = new Array();
+            mostrarBotao();
+        };
+
+        if ($state.current.name == 'easyNutri.novaRefeicao') {
+            inicializar();
+        }
+
         //método para adicionar um alimento à lista
         $scope.addAlimentoLista = function (alimento) {
             document.getElementById("campoAlimento").value = "";
@@ -80,16 +110,6 @@ easyNutri.controller('refeicaoCtrl',
         //popular tipos de refeicoes disponivies
         $scope.listaTipos = WebServiceFactory.getTiposRefeicao();
 
-        var mostrarBotao = function () {
-            if ($scope.refeicao.listaAlimentos.length != 0) {
-                document.getElementById("botaoRegistar").style.display = "inline";
-                document.getElementById("hr").style.display = "block";
-            } else {
-                document.getElementById("botaoRegistar").style.display = "none";
-                document.getElementById("hr").style.display = "none";
-            }
-        };
-
 
         var isValid = function (refeicao) {
             var mensagem = "";
@@ -107,15 +127,27 @@ easyNutri.controller('refeicaoCtrl',
                 mensagem += "Defina o tipo da refeição; ";
             }
 
-            if (refeicao.Hora == "") {
+            if (refeicao.Hora == "" && refeicao.Hora != 0) {
                 mensagem += "Defina a hora; ";
             }
 
-            if (refeicao.Hora > horaSistema || refeicao.Dia > dataAtual || refeicao.Minutos > minutosSistema) {
+            if (refeicao.Hora == 0) {
+                refeicao.Hora = 24;
+            }
+
+            if (refeicao.Hora > horaSistema && refeicao.Dia >= dataAtual) {
                 mensagem += "A hora é superior à hora do sistema; ";
             }
 
-            if (refeicao.Hora > 23 || refeicao.Hora < 0) {
+            if (refeicao.Minutos > minutosSistema && refeicao.Dia >= dataAtual) {
+                mensagem += "Os minutos são superiores aos minutos do sistema; ";
+            }
+
+            if (refeicao.Minutos == "" && refeicao.Minutos != 0) {
+                mensagem += "Defina os minutos; ";
+            }
+
+            if (refeicao.Hora > 24 || refeicao.Hora < 0) {
                 mensagem += "Introduza uma hora entre 0 e 23";
             }
 
@@ -137,6 +169,9 @@ easyNutri.controller('refeicaoCtrl',
             }
 
             if (mensagem != "") {
+                if (refeicao.Hora == 24) {
+                    refeicao.Hora = 00;
+                }
                 $ionicPopup.alert({
                     title: 'Aviso',
                     template: mensagem
@@ -145,21 +180,6 @@ easyNutri.controller('refeicaoCtrl',
             }
             return true;
 
-        };
-
-        var inicializar = function () {
-            $rootScope.editar = false;
-            $scope.titulo = "Nova Refeição";
-            $scope.textoBotao = "Registar";
-            $scope.refeicao.Data = new Date();
-            $scope.refeicao.Dia = $filter('date')($scope.refeicao.Data, 'yyyy-MM-dd');
-            var horaSistema = $filter('date')($scope.refeicao.Data, 'HH:mm');
-            var arrayHora = horaSistema.split(':');
-            $scope.refeicao.Hora = parseInt(arrayHora[0]);
-            $scope.refeicao.Minutos = parseInt(arrayHora[1]);
-            $scope.refeicao.Tipo = 1;
-            $scope.refeicao.listaAlimentos = new Array();
-            mostrarBotao();
         };
 
         //popular página com dados da refeição a editar
@@ -224,9 +244,9 @@ easyNutri.controller('refeicaoCtrl',
                             }
                             mostrarBotao();
                         } else { //refeicao que veio do webservice editada pela 1ª vez
-                            console.log('JSON que vem dos dados nao sincronizados: ' + JSON.stringify(refeicao));
-                            var dia = $filter('date')(refeicao.Dia, 'yyyy-MM-dd');
-                            var hora = $filter('date')(refeicao.Hora, 'HH:mm');
+                            console.log('JSON que vem dos dados sincronizados: ' + JSON.stringify(refeicao));
+                            var dia = $filter('date')(refeicao.DataRefeicao, 'yyyy-MM-dd');
+                            var hora = $filter('date')(refeicao.DataRefeicao, 'HH:mm');
                             var arrayHora = hora.split(':');
                             $scope.refeicao.Dia = dia;
                             $scope.refeicao.Hora = parseInt(arrayHora[0]);
@@ -297,6 +317,9 @@ easyNutri.controller('refeicaoCtrl',
         var guardarRefeicaoOffline = function (refeicao) {
             $scope.listaRefeicoesNovasOffline = new Array();
             if ($window.localStorage.getItem('listaRefeicoesNovas') !== null) {
+                if (refeicao.Hora == 24) {
+                    refeicao.Hora = 0;
+                }
                 refeicao.Hora = refeicao.Hora + ':' + refeicao.Minutos;
                 refeicao.DataRefeicao = refeicao.Dia + " " + refeicao.Hora;
                 $scope.listaRefeicoesNovasOffline = JSON.parse($window.localStorage.getItem('listaRefeicoesNovas'));
@@ -305,6 +328,9 @@ easyNutri.controller('refeicaoCtrl',
                 inicializar();
                 toast('Refeicao guardada com sucesso', 1);
             } else if ($window.localStorage.getItem('listaRefeicoesNovas') == null) {
+                if (refeicao.Hora == 24) {
+                    refeicao.Hora = 0;
+                }
                 refeicao.Hora = refeicao.Hora + ':' + refeicao.Minutos;
                 refeicao.DataRefeicao = refeicao.Dia + " " + refeicao.Hora;
                 $scope.listaRefeicoesNovasOffline.push(refeicao);
@@ -318,6 +344,9 @@ easyNutri.controller('refeicaoCtrl',
         $scope.guardarRefeicao = function (refeicao) {
             if (isValid(refeicao)) {
                 WebServiceFactory.verificarConexao().success(function () {
+                    if (refeicao.Hora == 24) {
+                        refeicao.Hora = 0;
+                    }
                     refeicao.Hora = refeicao.Hora + ':' + refeicao.Minutos;
                     WebServiceFactory.sincronizarDados();
                     WebServiceFactory.guardarRefeicao(refeicao)
@@ -339,6 +368,9 @@ easyNutri.controller('refeicaoCtrl',
             if ($rootScope.editadaOffline) {
                 $scope.listaRefeicoesOffline = new Array();
                 if ($window.localStorage.getItem('listaRefeicoesNovas') != null) {
+                    if (refeicao.Hora == 24) {
+                        refeicao.Hora = 0;
+                    }
                     refeicao.Hora = refeicao.Hora + ':' + refeicao.Minutos;
                     refeicao.DataRefeicao = refeicao.Dia + " " + refeicao.Hora;
                     $scope.listaRefeicoesOffline = JSON.parse($window.localStorage.getItem('listaRefeicoesNovas'));
@@ -356,6 +388,9 @@ easyNutri.controller('refeicaoCtrl',
                 $scope.diarioAlimentar = new Array();
                 $scope.diarioAlimentar = JSON.parse($window.localStorage.getItem('diarioAlimentar'));
                 if ($window.localStorage.getItem('listaRefeicoesEditadas') != null) {
+                    if (refeicao.Hora == 24) {
+                        refeicao.Hora = 0;
+                    }
                     refeicao.Hora = refeicao.Hora + ':' + refeicao.Minutos;
                     refeicao.DataRefeicao = refeicao.Dia + " " + refeicao.Hora;
                     $scope.listaRefeicoesEditadasOffline = JSON.parse($window.localStorage.getItem('listaRefeicoesEditadas'));
@@ -371,6 +406,9 @@ easyNutri.controller('refeicaoCtrl',
                     toast('Refeição editada com sucesso!', 1);
                     inicializar();
                 } else if ($window.localStorage.getItem('listaRefeicoesEditadas') == null) {
+                    if (refeicao.Hora == 24) {
+                        refeicao.Hora = 0;
+                    }
                     refeicao.Hora = refeicao.Hora + ':' + refeicao.Minutos;
                     refeicao.DataRefeicao = refeicao.Dia + " " + refeicao.Hora;
                     $scope.listaRefeicoesEditadasOffline.push(refeicao);
@@ -394,6 +432,9 @@ easyNutri.controller('refeicaoCtrl',
                 var idLinha = refeicao.idRefeicao;
                 WebServiceFactory.verificarConexao().success(function () {
                     WebServiceFactory.sincronizarDados();
+                    if (refeicao.Hora == 24) {
+                        refeicao.Hora = 0;
+                    }
                     refeicao.Hora = refeicao.Hora + ':' + refeicao.Minutos;
                     WebServiceFactory.editarRefeicaoWeb(refeicao, idLinha)
                         .success(function () {

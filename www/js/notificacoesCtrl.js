@@ -1,8 +1,8 @@
 easyNutri.controller('notificacoesCtrl', function ($scope, $http, WebServiceFactory, modalFactory, $ionicPopup, $ionicModal, $filter, $rootScope, $interval, $window, $state, signalFactory) {
 
-        if ($rootScope.loggedIn != true) {
-            $state.go('login', {reload: true, inherit: false});
-        }
+    if ($rootScope.loggedIn != true) {
+        $state.go('easyNutri.home', {reload: true, inherit: false});
+    }
 
 
     var receiveSignal = function ($scope, msgBus) {
@@ -44,11 +44,10 @@ easyNutri.controller('notificacoesCtrl', function ($scope, $http, WebServiceFact
                 var isTrue = modalFactory.setNotificacao(notificacao);
                 if (isTrue) {
                     $scope.modal.show();
-                    notificacao.Data = $filter('date')(notificacao.Data, 'dd-MM-yyyy H:mm');
+                    notificacao.Data = $filter('date')(notificacao.Data, 'yyyy-MM-dd HH:mm');
                     $scope.notificacao = notificacao;
                     $scope.listaNotificacoes[$scope.listaNotificacoes.indexOf(notificacao)].Lido = 1;
                     notificacao.Lido = 1;
-
                     WebServiceFactory.verificarConexao().success(function () {
                         WebServiceFactory.alterarEstadoNotificacao(notificacao.Id);
                     }).error(function () {

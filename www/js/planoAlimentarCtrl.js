@@ -2,8 +2,8 @@ easyNutri.controller('planoAlimentarCtrl',
     ['$scope', '$http', 'WebServiceFactory', '$filter', '$ionicModal', 'TiposRefeicaoFactory', '$ionicPopup', '$state', '$rootScope', '$ionicLoading', '$window',
         function ($scope, $http, WebServiceFactory, $filter, $ionicModal, TiposRefeicaoFactory, $ionicPopup, $state, $rootScope, $ionicLoading, $window) {
 
-            if($rootScope.loggedIn != true){
-                $state.go('login', {reload: true, inherit: false});
+            if ($rootScope.loggedIn != true) {
+                $state.go('easyNutri.home', {reload: true, inherit: false});
             }
 
             $scope.recomendacoes = "";
