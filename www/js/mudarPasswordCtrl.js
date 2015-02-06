@@ -45,6 +45,10 @@ easyNutri.controller('mudarPasswordCtrl', ['$scope', '$http', 'WebServiceFactory
                 mensagem += "Preencha a password nova; ";
             }
 
+            if (passwords.nova.indexOf(' ') != -1) {
+                mensagem += "A password não pode conter espaços; ";
+            }
+
             if (passwords.PasswordConfirma == undefined || passwords.PasswordConfirma == "") {
                 mensagem += "Preencha a password para confirmar; ";
             }
@@ -83,6 +87,7 @@ easyNutri.controller('mudarPasswordCtrl', ['$scope', '$http', 'WebServiceFactory
                 mostrarSpinner();
                 WebServiceFactory.verificarConexao().success(function () {
                     var arrayHash = {};
+                    passwords.nova = passwords.nova.trim();
                     var hashNova = CryptoJS.SHA256(passwords.nova);
                     hashNova = hashNova.toString(CryptoJS.enc.Hex);
                     var hashVelha = CryptoJS.SHA256(passwords.antiga);

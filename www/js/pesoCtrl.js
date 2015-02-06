@@ -223,12 +223,16 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
                     $scope.reg.Hora = 0;
                 }
                 peso.DataMed = $scope.reg.Dia + " " + $scope.reg.Hora + ":" + $scope.reg.Minutos;
+                peso.TipoMedicaoID = 1;
+                peso.EmCasa = 1;
                 lista = JSON.parse($window.localStorage.getItem('listaPesosNovos'));
                 lista.push(peso);
                 $window.localStorage.setItem('listaPesosNovos', JSON.stringify(eval(lista)));
                 toast('Peso inserido com sucesso', 1);
             } else {
                 peso.DataMed = $scope.reg.Dia + " " + $scope.reg.Hora + ":" + $scope.reg.Minutos;
+                peso.TipoMedicaoID = 1;
+                peso.EmCasa = 1;
                 lista.push(peso);
                 $window.localStorage.setItem('listaPesosNovos', JSON.stringify(eval(lista)));
                 toast('Peso inserido com sucesso', 1);

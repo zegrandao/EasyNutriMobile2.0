@@ -41,7 +41,7 @@ easyNutri.controller('loginCtrl', ['$scope', '$http', 'WebServiceFactory', 'moda
                 animation: 'fade-in',
                 showBackdrop: false,
                 maxWidth: 50,
-                showDelay: 0
+                showDelay: 0,
             });
         };
 
@@ -76,9 +76,9 @@ easyNutri.controller('loginCtrl', ['$scope', '$http', 'WebServiceFactory', 'moda
                 mostrarSpinner();
                 var hash = CryptoJS.SHA256(user.Password);
                 hash = hash.toString(CryptoJS.enc.Hex);
+                user.Username = user.Username.trim();
                 var string = user.Username + ":" + hash;
                 var stringEncoded = btoa(string);
-                user.Username = user.Username.trim();
                 WebServiceFactory.userLogin(user.Username, hash).success(function () {
                     if (user.save) {
                         $window.localStorage.setItem('credencial', stringEncoded);

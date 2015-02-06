@@ -5,7 +5,8 @@ easyNutri.controller('MainCtrl', function ($scope, $ionicSideMenuDelegate, WebSe
         {
             scope: $scope,
             animation: 'slide-in-up',
-            focusFirstInput: true
+            focusFirstInput: true,
+            backdrop: 'static'
         }).then(function ($ionicModal) {
             $scope.loginModal = $ionicModal;
         });

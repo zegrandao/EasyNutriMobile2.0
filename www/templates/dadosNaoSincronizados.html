@@ -29,7 +29,7 @@
                 <div class="item-divider">
                     Refeições Editadas
                 </div>
-                <div ng-repeat="refeicao in listaRefeicoesEditadas | orderBy: 'refeicao.Tipo'">
+                <div ng-repeat="refeicao in listaRefeicoesEditadas | orderBy: refeicao.Tipo">
                     <ion-item class="item-stable" ng-click="abrirRefeicao(refeicao)"
                               ng-class="{active: isAberto(refeicao)}">
                         <i class="icon" ng-class="isAberto(refeicao) ? 'ion-minus':'ion-plus'"></i>
@@ -42,6 +42,16 @@
                     <ion-item class="item-accordation item-text-wrap" ng-repeat="linha in refeicao.listaAlimentos"
                               ng-show="isAberto(refeicao)">
                         {{linha.Nome +' - '+ linha.Quantidade + ' ' + findUnidade(linha)}}
+                    </ion-item>
+                </div>
+                <div class="item-divider">
+                    Registos de Peso Novos
+                </div>
+                <div ng-repeat="peso in listaPesosNovos | orderBy: 'peso.DataMed'">
+                    <ion-item class="item-stable">
+                        <strong>Valor:</strong>{{peso.Valor}}Kg &nbsp;&nbsp; <strong>Data:</strong> {{peso.DataMed |
+                        date:'yyyy-MM-dd HH:mm'}}
+                        &nbsp;&nbsp; <strong>{{peso.tipoRegisto}}</strong>
                     </ion-item>
                 </div>
             </ion-list>

@@ -32,6 +32,17 @@ easyNutri.controller('dadosNaoSincCtrl', ['$scope', 'WebServiceFactory', '$filte
             document.getElementById('divLista').style.display = 'inline';
         }
 
+        $scope.listaPesosNovos = new Array();
+        if ($window.localStorage.getItem('listaPesosNovos') != null) {
+            var lista = JSON.parse($window.localStorage.getItem('listaPesosNovos'));
+            for (item in lista) {
+                lista[item].DataMed = $filter('date')(lista[item].DataMed, 'yyyy-MM-dd HH:mm');
+                lista[item].tipoRegisto = (lista[item].EmCasa == "0") ? "Consulta" : "Casa";
+            }
+            $scope.listaPesosNovos = lista;
+            document.getElementById('divLista').style.display = 'inline';
+        }
+
         if ($scope.listaRefeicoesEditadas == null && $scope.listaRefeicoesNovas == null) {
             $ionicPopup.alert({
                 title: "Aviso",

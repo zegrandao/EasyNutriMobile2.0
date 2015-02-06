@@ -164,6 +164,9 @@ easyNutri.controller('refeicaoCtrl',
                     } else if (refeicao.listaAlimentos[$i].Quantidade <= 0) {
                         mensagem += "A quantidade do alimento tem que ser superior a 0; ";
                         break;
+                    } else if (refeicao.listaAlimentos[$i].Quantidade > 99999) {
+                        mensagem += "A quantidade do alimento não pode ser superior a 99999";
+                        break;
                     }
                 }
             }
@@ -301,7 +304,7 @@ easyNutri.controller('refeicaoCtrl',
             });
         }).error(function () {
             $scope.alimentos = JSON.parse($window.localStorage.getItem('listaAlimentos'));
-        });
+            });
 
 
         //método para diferenciar a ação do botão entre editar uma refeição e guardar uma nova refeição
