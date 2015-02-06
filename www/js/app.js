@@ -29,8 +29,10 @@ easyNutri.run(function ($ionicPlatform, $window, $ionicPopup, $rootScope, WebSer
                         $ionicPopup.alert({
                             title: "Modo Offline",
                             content: "Não está ligado à rede!"
-                        });
-                        ionic.Platform.exitApp();
+                        }).then(function () {
+                                ionic.Platform.exitApp();
+                            }
+                        );
                     } else if (credencial != null) {
                         $ionicPopup.confirm({
                             title: "Modo Offline",

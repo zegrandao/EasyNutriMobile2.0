@@ -41,7 +41,7 @@ easyNutri.controller('loginCtrl', ['$scope', '$http', 'WebServiceFactory', 'moda
                 animation: 'fade-in',
                 showBackdrop: false,
                 maxWidth: 50,
-                showDelay: 0,
+                showDelay: 0
             });
         };
 
