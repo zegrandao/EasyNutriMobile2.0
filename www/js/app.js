@@ -17,10 +17,6 @@ easyNutri.run(function ($ionicPlatform, $window, $ionicPopup, $rootScope, WebSer
                 StatusBar.styleDefault();
             }
 
-//            document.addEventListener("online", function () {
-//                WebServiceFactory.sincronizarDados();
-//            }, false);
-
             var credencial = WebServiceFactory.checkCredencial();
 
             WebServiceFactory.verificarConexao().error(function (status) {

@@ -3,6 +3,7 @@ easyNutri.controller('diarioCtrl',
 
         if ($rootScope.loggedIn != true) {
             $state.go('easyNutri.home', {reload: true, inherit: false});
+            return false;
         }
 
         $scope.pesquisa = {};

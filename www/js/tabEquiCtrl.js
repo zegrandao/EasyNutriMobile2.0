@@ -1,6 +1,9 @@
-easyNutri.controller('tabEquiCtrl',
-    ['$scope', '$window',
-        function ($scope, $window) {
+easyNutri.controller('tabEquiCtrl', ['$scope', '$window', function ($scope, $window) {
+
+    if ($rootScope.loggedIn != true || $rootScope.mostrarTabela != 1) {
+        $state.go('easyNutri.home', {reload: true, inherit: false});
+        return false;
+    }
 
             $scope.largura = 100;
             $scope.altura = 100;

@@ -3,6 +3,7 @@ easyNutri.controller('dadosNaoSincCtrl', ['$scope', 'WebServiceFactory', '$filte
 
         if ($rootScope.loggedIn != true) {
             $state.go('easyNutri.home', {reload: true, inherit: false});
+            return false;
         }
 
         if ($window.localStorage.getItem('listaRefeicoesNovas') != null || $window.localStorage.getItem('listaRefeicoesRemovidas') != null ||

@@ -2,6 +2,7 @@ easyNutri.controller('notificacoesCtrl', function ($scope, $http, WebServiceFact
 
     if ($rootScope.loggedIn != true) {
         $state.go('easyNutri.home', {reload: true, inherit: false});
+        return false;
     }
 
 

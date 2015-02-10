@@ -4,6 +4,7 @@ easyNutri.controller('planoAlimentarCtrl',
 
             if ($rootScope.loggedIn != true) {
                 $state.go('easyNutri.home', {reload: true, inherit: false});
+                return false;
             }
 
             $scope.recomendacoes = "";
@@ -68,6 +69,7 @@ easyNutri.controller('planoAlimentarCtrl',
                     $scope.recomendacoes = $scope.planoAlimentar.Recomendacoes;
                     var mostrarTabela = $scope.planoAlimentar.TabelaEqui;
                     if (mostrarTabela == 1) {
+                        $rootScope.mostrarTabela = 1;
                         document.getElementById("btn_Equiv").style.display = "inline";
                     } else {
                         document.getElementById("btn_Equiv").style.display = "none";

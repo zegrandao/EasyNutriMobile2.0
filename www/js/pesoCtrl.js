@@ -3,6 +3,7 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
 
         if ($rootScope.loggedIn != true) {
             $state.go('easyNutri.home', {reload: true, inherit: false});
+            return false;
         }
 
         $scope.reg = {};
