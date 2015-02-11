@@ -153,7 +153,7 @@ easyNutri.controller('refeicaoCtrl',
                 mensagem += "Introduza uma hora entre 0 e 23";
             }
 
-            if (refeicao.Minutos > 60 || refeicao.Minutos < 0) {
+            if (refeicao.Minutos > 59 || refeicao.Minutos < 0) {
                 mensagem += "Introduza minutos entre 0 e 59; "
             }
 

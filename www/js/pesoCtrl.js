@@ -103,7 +103,7 @@ easyNutri.controller('pesoCtrl', ['$scope', '$http', 'WebServiceFactory', '$filt
             }
 
 
-            if ($scope.reg.Minutos > 60 || $scope.reg.Minutos < 0) {
+            if ($scope.reg.Minutos > 59 || $scope.reg.Minutos < 0) {
                 mensagem += "Introduza minutos entre 0 e 59; "
             }
 
